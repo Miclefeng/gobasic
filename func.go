@@ -52,6 +52,14 @@ func sumArgs(num ...int) int {
 	return sum
 }
 
+// go语言是值传递
+//func swap(a, b *int)  {
+//	*b, *a = *a, *b
+//}
+func swap(a, b int) (int, int) {
+	return b, a
+}
+
 func main() {
 	if result, err := eval(3, 4, "x"); err != nil {
 		fmt.Println("Error: ", err)
@@ -66,4 +74,7 @@ func main() {
 			return int(math.Pow(float64(i), float64(i2)))
 		}, 3, 4))
 	fmt.Println(sumArgs(1, 2, 3, 4, 5))
+	a, b := 3, 4
+	a, b = swap(a, b)
+	fmt.Println(a, b)
 }
