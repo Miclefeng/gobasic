@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 )
 
-func grade(score int)  string {
+func grade(score int) string {
 	g := ""
 	switch {
 	case score < 0 || score > 100:
@@ -19,7 +19,7 @@ func grade(score int)  string {
 	case score <= 100:
 		g = "A"
 	}
-	return g;
+	return g
 }
 
 // if的条件里可以赋值，if的条件里赋值的变量作用域就在这个if语句里

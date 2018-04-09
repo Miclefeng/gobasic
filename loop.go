@@ -1,13 +1,13 @@
 package main
 
 import (
-	"strconv"
+	"bufio"
 	"fmt"
 	"os"
-	"bufio"
+	"strconv"
 )
 
-func printFile(filename string)  {
+func printFile(filename string) {
 	file, err := os.Open(filename)
 	if err != nil {
 		panic(err)
