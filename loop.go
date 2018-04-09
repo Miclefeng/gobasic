@@ -3,7 +3,20 @@ package main
 import (
 	"strconv"
 	"fmt"
+	"os"
+	"bufio"
 )
+
+func printFile(filename string)  {
+	file, err := os.Open(filename)
+	if err != nil {
+		panic(err)
+	}
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
+}
 
 func converToBin(n int) string {
 	result := ""
@@ -15,7 +28,12 @@ func converToBin(n int) string {
 }
 
 func main() {
-	a := 5
-	a /= 2
-	fmt.Println(a)
+	fmt.Println(
+		converToBin(5),
+		converToBin(13),
+		converToBin(1024),
+		converToBin(0),
+	)
+
+	printFile("abc.txt")
 }
