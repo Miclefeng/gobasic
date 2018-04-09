@@ -60,6 +60,11 @@ func swap(a, b int) (int, int) {
 	return b, a
 }
 
+/*
+var cache Cache  <==>  func f(cache Cache)
+引用传递
+ */
+
 func main() {
 	if result, err := eval(3, 4, "x"); err != nil {
 		fmt.Println("Error: ", err)
