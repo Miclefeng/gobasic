@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // 数组是值传递
-func printArray(arr [5]int)  {
+func printArray(arr *[5]int)  {
 	arr[0] = 100
 	for i := range arr {
 		fmt.Println(arr[i])
@@ -29,9 +29,9 @@ func main() {
 		fmt.Println(v)
 	}
 	fmt.Println("printArray(arr1)")
-	printArray(arr1)
+	printArray(&arr1)
 	fmt.Println("printArray(arr3)")
-	printArray(arr3)
+	printArray(&arr3)
 	fmt.Println("arr1 and arr3")
 	fmt.Println(arr1, arr3)
 }
