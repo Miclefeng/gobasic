@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f51b1f2c-73e1-44a6-b1c8-c60030ffee32" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/loop.go" beforeDir="false" afterPath="$PROJECT_DIR$/basic/loop.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/container/sliceops.go" beforeDir="false" afterPath="$PROJECT_DIR$/container/sliceops.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,39 +13,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="loop.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/basic/loop.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
-              <folding>
-                <element signature="e#14#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nonrepeating.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/container/nonrepeating.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-              <folding>
-                <element signature="e#14#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="stringsRUNE.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="stringsRUNE.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/container/stringsRUNE.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-57">
-              <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+              <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
               <folding>
                 <element signature="e#14#47#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sliceops.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/container/sliceops.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="456">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="arrays.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/container/arrays.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-171" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maps.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/container/maps.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-285" />
           </provider>
         </entry>
       </file>
@@ -60,6 +58,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/basic/loop.go" />
+        <option value="$PROJECT_DIR$/container/sliceops.go" />
       </list>
     </option>
   </component>
@@ -107,6 +106,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="GO_FMT" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
@@ -128,7 +128,15 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build stringsRUNE.go">
+  <component name="RunManager" selected="Go Build.go build sliceops.go">
+    <configuration name="go build arrays.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="gobasic" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/container/arrays.go" />
+      <directory value="$PROJECT_DIR$/" />
+    </configuration>
     <configuration name="go build loop.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="gobasic" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -137,12 +145,20 @@
       <filePath value="$PROJECT_DIR$/basic/loop.go" />
       <directory value="$PROJECT_DIR$/" />
     </configuration>
-    <configuration name="go build nonrepeating.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build maps.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="gobasic" />
       <working_directory value="$PROJECT_DIR$/" />
       <go_parameters value="-i" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/container/nonrepeating.go" />
+      <filePath value="$PROJECT_DIR$/container/maps.go" />
+      <directory value="$PROJECT_DIR$/" />
+    </configuration>
+    <configuration name="go build sliceops.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="gobasic" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/container/sliceops.go" />
       <directory value="$PROJECT_DIR$/" />
     </configuration>
     <configuration name="go build stringsRUNE.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -155,13 +171,17 @@
     </configuration>
     <list>
       <item itemvalue="Go Build.go build loop.go" />
-      <item itemvalue="Go Build.go build nonrepeating.go" />
       <item itemvalue="Go Build.go build stringsRUNE.go" />
+      <item itemvalue="Go Build.go build sliceops.go" />
+      <item itemvalue="Go Build.go build arrays.go" />
+      <item itemvalue="Go Build.go build maps.go" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build sliceops.go" />
+        <item itemvalue="Go Build.go build maps.go" />
+        <item itemvalue="Go Build.go build arrays.go" />
         <item itemvalue="Go Build.go build stringsRUNE.go" />
-        <item itemvalue="Go Build.go build nonrepeating.go" />
         <item itemvalue="Go Build.go build loop.go" />
       </list>
     </recent_temporary>
@@ -197,16 +217,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/basic/loop.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
-          <folding>
-            <element signature="e#14#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/container/nonrepeating.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -217,13 +227,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/basic/loop.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding>
+            <element signature="e#14#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/container/stringsRUNE.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-57">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
           <folding>
             <element signature="e#14#47#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/container/arrays.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-171" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/container/maps.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-285" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/container/sliceops.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
         </state>
       </provider>
     </entry>
