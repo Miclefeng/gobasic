@@ -6,13 +6,13 @@ import (
 )
 
 func main() {
-	var root tree.TreeNode
-	root = tree.TreeNode{Value: 3}
-	root.Left = &tree.TreeNode{}
-	root.Right = &tree.TreeNode{5, nil, nil}
-	root.Right.Left = new(tree.TreeNode) // 不论地址还是结构本身，一律使用 . 来访问成员
+	var root tree.Node
+	root = tree.Node{Value: 3}
+	root.Left = &tree.Node{}
+	root.Right = &tree.Node{5, nil, nil}
+	root.Right.Left = new(tree.Node) // 不论地址还是结构本身，一律使用 . 来访问成员
 	root.Left.Right = tree.CreateNode(2)
-	//nodes := []treeNode {
+	//nodes := []Node {
 	//	{value : 3},
 	//	{},
 	//	{6, nil, &root},
@@ -35,7 +35,7 @@ func main() {
 	//pRoot.setValue(200)
 	//pRoot.print()
 	//fmt.Println()
-	//var pRoot2 *treeNode
+	//var pRoot2 *Node
 	//pRoot2.setValue(200)
 	//pRoot2 = &root
 	//pRoot2.setValue(300)
