@@ -5,6 +5,28 @@ import (
 	"fmt"
 )
 
+type myTreeNode struct {
+	node *tree.Node
+}
+
+func (myNode *myTreeNode) postOrder() {
+	if myNode == nil || myNode.node == nil {
+		return
+	}
+
+	left := myTreeNode{myNode.node.Left}
+	right := myTreeNode{myNode.node.Right}
+	left.postOrder()
+	right.postOrder()
+	myNode.node.Print()
+}
+
+/**
+ Node 树
+	   			3
+     	0				5
+			2		4
+ */
 // 为结构定义的方法必须放在同一个包内，可以是不同的文件
 func main() {
 	var root tree.Node
@@ -23,6 +45,10 @@ func main() {
 	//fmt.Println(nodes)
 	root.Right.Left.SetValue(4) // 值传递
 	root.Traverse()
+	fmt.Println()
+	myRoot := myTreeNode{&root}
+	myRoot.postOrder()
+	fmt.Println()
 	//root.right.left.print()
 	//fmt.Println()
 	//root.print()  // print是一个值接收者，copy 一份root
