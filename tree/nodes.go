@@ -24,18 +24,6 @@ func (node *Node) SetValue(value int)  {
 	node.Value = value
 }
 
-
-// nil 指针也可以调用方法
-// 中序遍历，先左再中再右遍历
-func (node *Node) Traverse() {
-	if node == nil {
-		return
-	}
-	node.Left.Traverse()
-	node.Print()
-	node.Right.Traverse()
-}
-
 // 工厂函数
 func CreateNode(value int) * Node {
 	return &Node{Value: value} // 返回局部变量的地址

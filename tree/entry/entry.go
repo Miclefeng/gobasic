@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// 为结构定义的方法必须放在同一个包内，可以是不同的文件
 func main() {
 	var root tree.Node
 	root = tree.Node{Value: 3}
