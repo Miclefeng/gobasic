@@ -16,7 +16,7 @@ func main() {
 	s1 := []int{2, 4, 6, 8}
 	printSlice(s1)
 
-	s2 := make([]int, 16)
+	s2 := make([]int, 5)
 	printSlice(s2)
 	s3 := make([]int, 10, 32) // 第3个参数为cap长度
 	printSlice(s3)
@@ -29,11 +29,12 @@ func main() {
 	fmt.Println("Poping from front")
 	front := s2[0]
 	s2 = s2[1:]
+	s2 = s2[1:] // 前面 pop 会修改 cap 的长度
 	fmt.Println(front)
 	printSlice(s2)
 	fmt.Println("Poping from back")
 	tail := s2[len(s2) - 1]
-	s2 = s2[:len(s2) - 1]
+	s2 = s2[:len(s2) - 1] // 后面 pop 不会改变 cap 的长度
 	fmt.Println(tail)
 	printSlice(s2)
 }
