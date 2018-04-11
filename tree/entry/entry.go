@@ -17,6 +17,7 @@ func main() {
 	//	{},
 	//	{6, nil, &root},
 	//}
+
 	fmt.Println(root, root.Right, root.Left.Right)
 	//fmt.Println(nodes)
 	root.Right.Left.SetValue(4) // 值传递
