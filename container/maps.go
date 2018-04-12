@@ -6,11 +6,11 @@ import "fmt"
 // 除了slice，map，function的内建类型都可以作为key
 // Struct类型不包含上述字段，也可以作为key
 func main() {
-	m := map[string]string {
-		"name" : "ccmouse",
-		"course" : "golang",
-		"site" : "imooc",
-		"quality" : "notbad",
+	m := map[string]string{
+		"name":    "ccmouse",
+		"course":  "golang",
+		"site":    "imooc",
+		"quality": "notbad",
 	}
 
 	m2 := make(map[string]int) // m2 == empty map
@@ -27,7 +27,7 @@ func main() {
 	fmt.Println("Getting values : ")
 	courseName, ok := m["course"]
 	fmt.Println(courseName, ok)
-	if caurseName, ok := m["caurse"]; ok {// Zero value
+	if caurseName, ok := m["caurse"]; ok { // Zero value
 		fmt.Println(caurseName, ok)
 	} else {
 		fmt.Println("Key does not exist")

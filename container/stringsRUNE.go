@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	s := "Yes我爱慕课网!" // utf-8
+	s := "Yes我爱慕课网!"    // utf-8
 	fmt.Println(len(s)) // len 获取字节数
 	fmt.Printf("%s\n", []byte(s))
 	fmt.Printf("%x\n", []byte(s))
@@ -28,7 +28,7 @@ func main() {
 	fmt.Println()
 	for len(bytes) > 0 {
 		ch, size := utf8.DecodeRune(bytes) // 只返回第一个字符和字符所占长度
-		bytes = bytes[size:] // 分片往后截取字符,每次去除第一个字符
+		bytes = bytes[size:]               // 分片往后截取字符,每次去除第一个字符
 		//fmt.Println(size, ch, bytes)
 		fmt.Printf("%c ", ch)
 	}

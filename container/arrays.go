@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // 数组是值传递
-func printArray(arr *[5]int)  {
+func printArray(arr *[5]int) {
 	arr[0] = 100
 	for i := range arr {
 		fmt.Println(arr[i])

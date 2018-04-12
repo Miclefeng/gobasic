@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"reflect"
 	"runtime"
-	"math"
 )
 
 func eval(a, b int, op string) (int, error) {
@@ -35,7 +35,7 @@ func div(a, b int) (q, r int) {
 func apply(op func(int, int) int, a, b int) int {
 	p := reflect.ValueOf(op).Pointer()
 	opName := runtime.FuncForPC(p).Name()
-	fmt.Printf("Calling func %s with args " + "(%d, %d)\n", opName, a, b)
+	fmt.Printf("Calling func %s with args "+"(%d, %d)\n", opName, a, b)
 	return op(a, b)
 }
 
@@ -63,7 +63,7 @@ func swap(a, b int) (int, int) {
 /*
 var cache Cache  <==>  func f(cache Cache)
 引用传递
- */
+*/
 
 func main() {
 	if result, err := eval(3, 4, "x"); err != nil {

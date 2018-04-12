@@ -6,7 +6,7 @@ import "fmt"
 // 结构过大也需要考虑使用指针接收者
 // 一致性：如有指针接收者，最好都是指针接收者
 type Node struct {
-	Value int
+	Value       int
 	Left, Right *Node
 }
 
@@ -16,7 +16,7 @@ func (node Node) Print() {
 	fmt.Print(node.Value, " ")
 }
 
-func (node *Node) SetValue(value int)  {
+func (node *Node) SetValue(value int) {
 	if node == nil {
 		fmt.Println("Setting value to nil node. Ignored.")
 		return
@@ -25,14 +25,13 @@ func (node *Node) SetValue(value int)  {
 }
 
 // 工厂函数
-func CreateNode(value int) * Node {
+func CreateNode(value int) *Node {
 	return &Node{Value: value} // 返回局部变量的地址
 }
+
 /**
  Node 树
 	   			3
      	0				5
 			2		4
- */
-
-
+*/

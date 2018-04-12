@@ -19,7 +19,7 @@ func lengthOfNonRepeatingSubStr(s string) int {
 			start = lastOccured[ch] + 1
 		}
 		//fmt.Println(lastOccured, ok, lastI, start, maxLength, i)
-		if i - start + 1 > maxLength {
+		if i-start+1 > maxLength {
 			maxLength = i - start + 1
 		}
 		lastOccured[ch] = i

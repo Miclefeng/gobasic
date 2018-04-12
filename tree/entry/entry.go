@@ -1,8 +1,8 @@
 package main
 
 import (
-	"miclefeng/learngo/tree"
 	"fmt"
+	"miclefeng/learngo/tree"
 )
 
 type myTreeNode struct {
@@ -26,7 +26,7 @@ func (myNode *myTreeNode) postOrder() {
 	   			3
      	0				5
 			2		4
- */
+*/
 // 为结构定义的方法必须放在同一个包内，可以是不同的文件
 func main() {
 	var root tree.Node

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"miclefeng/learngo/queue"
 	"fmt"
+	"miclefeng/learngo/queue"
 )
 
 func main() {
