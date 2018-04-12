@@ -54,7 +54,6 @@ func main() {
 		TimOut: time.Minute,
 	}
 	inspect(r)
-	fmt.Println()
 
 	// Type assertion
 	if mockRetriever, ok := r.(*mock.Retriever); ok {
