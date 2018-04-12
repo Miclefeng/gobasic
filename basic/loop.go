@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"io"
+	"strings"
 )
 
 func printFile(filename string) {
@@ -12,7 +14,11 @@ func printFile(filename string) {
 	if err != nil {
 		panic(err)
 	}
-	scanner := bufio.NewScanner(file)
+	printFileContents(file)
+}
+
+func printFileContents(reader io.Reader)  {
+	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() { // 相当于while]
 		fmt.Println(scanner.Text())
 	}
@@ -36,4 +42,10 @@ func main() {
 	)
 
 	printFile("abc.txt")
+	s := `abc"d"
+	kkk
+	123134
+	p
+	`
+	printFileContents(strings.NewReader(s))
 }
