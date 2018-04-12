@@ -43,9 +43,8 @@ func main() {
 
 	printFile("abc.txt")
 	s := `abc"d"
-	kkk
-	123134
-	p
-	`
+kkk
+123134
+p`
 	printFileContents(strings.NewReader(s))
 }
