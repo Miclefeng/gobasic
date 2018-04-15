@@ -4,10 +4,27 @@ import (
 	"net/http"
 	"os"
 	"io/ioutil"
+	"strings"
 )
 
+const prefix  = "/list/"
+
+type userError string
+
+func (e userError) Error() string {
+	return e.Message()
+}
+
+func (e userError) Message() string {
+	return string(e)
+}
+
 func HandleFileList(writer http.ResponseWriter, request *http.Request) error {
-	path := request.URL.Path[len("/list/"):] // /list/fib.txt, 去除 /list/
+	if strings.Index(request.URL.Path, prefix) != 0 {
+		return userError("Path must start with " + prefix)
+	}
+
+	path := request.URL.Path[len(prefix):] // /list/fib.txt, 去除 /list/
 	file, err := os.Open(path)
 	if err != nil {
 		//http.Error(writer, err.Error(), http.StatusInternalServerError)

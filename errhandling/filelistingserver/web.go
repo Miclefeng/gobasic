@@ -7,15 +7,29 @@ import (
 	"os"
 )
 
+// Type assertion
 type appHandler func(writer http.ResponseWriter, request *http.Request) error
 
-//noinspection GoUnresolvedReference
+//noinspection GoUnresolvedReference 函数式编程
 func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
+		defer func() {
+			if r := recover(); r != nil {// recover 仅在defer中调用，获取 panic 的值			log.Printf("Panic : %v", r)
+				http.Error(writer, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			}
+		}()
+
 		err := handler(writer, request)
+
 		if err != nil {
 			logger := log.New(os.Stdout, "Warn : ", log.Lshortfile)
 			logger.Printf("Error handling request: %s", err.Error());
+
+			if userErr, ok := err.(userError); ok {
+				http.Error(writer, userErr.Message(), http.StatusBadRequest)
+				return
+			}
+
 			code := http.StatusOK
 			switch {
 			case os.IsNotExist(err):
@@ -31,8 +45,13 @@ func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 	}
 }
 
+type userError interface {
+	error
+	Message() string
+}
+
 func main() {
-	http.HandleFunc("/list/", errWrapper(filelisting.HandleFileList))
+	http.HandleFunc("/", errWrapper(filelisting.HandleFileList))
 	err := http.ListenAndServe(":8888", nil)
 	if err != nil {
 		panic(err)
