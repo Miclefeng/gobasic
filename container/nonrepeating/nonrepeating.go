@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // 寻找最长不含有重复字符的子串
 // 对于每一个字母X，lastOccurred[x]不存在，或者 < start -> 无需操作
