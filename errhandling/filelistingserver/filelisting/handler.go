@@ -25,7 +25,11 @@ func HandleFileList(writer http.ResponseWriter, request *http.Request) error {
 	}
 
 	path := request.URL.Path[len(prefix):] // /list/fib.txt, 去除 /list/
+	//writer.Write([]byte(path))
+	//return nil
+
 	file, err := os.Open(path)
+
 	if err != nil {
 		//http.Error(writer, err.Error(), http.StatusInternalServerError)
 		return err
