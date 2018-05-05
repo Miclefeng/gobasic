@@ -17,7 +17,7 @@ func main() {
 	filename := os.Args[1]
 	file, err := os.Open(filename)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err, "err1")
 		return
 	}
 
@@ -30,7 +30,7 @@ func main() {
 		_, isPrefix, err := reader.ReadLine()
 
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println(err, "err2")
 			break
 		}
 
