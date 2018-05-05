@@ -8,6 +8,7 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
+		fmt.Println("Args less than 2")
 		return
 	}
 
@@ -27,6 +28,7 @@ func main() {
 		_, isPrefix, err := reader.ReadLine()
 
 		if err != nil {
+			fmt.Println(err)
 			break
 		}
 
