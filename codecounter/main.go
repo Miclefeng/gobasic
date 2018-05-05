@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
+	fmt.Println(os.Args)
+	fmt.Println()
 	if len(os.Args) < 2 {
 		fmt.Println("Args less than 2")
 		return
