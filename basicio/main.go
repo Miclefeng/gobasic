@@ -42,6 +42,6 @@ func simpleReadFile() {
 
 func main() {
 	//simpleReadFromString()
-	//simpleReadStdin()
-	simpleReadFile()
+	simpleReadStdin()
+	//simpleReadFile()
 }
