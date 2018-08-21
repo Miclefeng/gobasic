@@ -6,6 +6,35 @@ import (
 )
 
 func main() {
+	m3 := map[int]string{}
+	fmt.Println(m3)
+	// 设置、获取、删除
+	m3[1] = "Tinywan"
+	a := m3[1]
+	fmt.Println(m3) // map[1:Tinywan]
+	fmt.Println(a)  // Tinywan
+
+	// 复杂map 的操作
+	var m5 map[int]map[int]string // 定义
+	m5 = make(map[int]map[int]string) // 通过 make 初始化 最外层的 map
+
+	m5[1] = make(map[int]string) // 针对外层value 的map进行初始化
+	m5[1][1] = "OK"
+	m_a := m5[1][1]  // 取出map 的值赋予一个变量
+	fmt.Println(m_a) // OK
+
+	// 判断一个map 有没有被初始化，使用多返回值判断
+	m_b, ok := m5[2][1]
+	// 判断是否被初始化操作
+	if !ok {
+		m5[2] = make(map[int]string)
+	}
+	m5[2][1] = "OK b"
+	m_b,ok = m5[2][1]
+	fmt.Println(m_b, ok) // OK b true
+
+	delete(m3,1)  // 删除一个map
+	fmt.Println(m3) // map[]
 	// 迭代操作
 	s_map := make([]map[int]string, 5) // 以 map 为元素的slice 使用 make 创建一个切片,元素的slic
 	for _, v := range s_map {
