@@ -24,6 +24,8 @@ func countries() []string {
 
 func main() {
 	// [...]T,[n]T 为数组
+	a := [...]int{4:11} // 索引值为4的元素赋值为 11 ，其他的默认为 0
+	fmt.Println(a)
 	// cars := [...]string{"Ferrari", "Honda", "Ford"}
 	// []T，为切片
 	// 切片本身不包含任何数据。它仅仅是底层数组的一个上层表示。
@@ -67,4 +69,17 @@ func main() {
 	// 这样我们就可以使用这个新的切片，原来的数组可以被垃圾回收
 	countriesNeeded := countries()
 	fmt.Println(countriesNeeded)
+	fmt.Println()
+	// 用 range 的方式去遍历一个切片或数组，拿到的 Value 其实是切片里面的值拷贝
+	// 由于 Value 是值拷贝的，并非引用传递
+	// 所以直接改 Value 是达不到更改原切片值的目的的
+	// 需要通过 &slice[index] 获取真实的地址。
+	slice := []int{10, 20, 30, 40}
+	for i, v := range slice {
+		fmt.Printf("value = %d , value-addr = %x , slice-addr = %x\n", v, &v, &slice[i])
+	}
+	arr := [...]int{10, 20, 30, 40}
+	for i, v := range arr {
+		fmt.Printf("value = %d , value-addr = %x , array-addr = %x\n", v, &v, &arr[i])
+	}
 }
