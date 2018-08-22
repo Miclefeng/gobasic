@@ -27,6 +27,13 @@ func (r *rectangle) perimeter()  {
 	fmt.Println("Perimeter method output: ", 2 * (r.length + r.width))
 }
 
+// 非结构体类型的方法
+type myInt int
+
+func (a myInt) add (b myInt) myInt {
+	return a + b
+}
+
 func main ()  {
 	r := rectangle{10, 5}
 	area(r)
@@ -44,4 +51,9 @@ func main ()  {
 	// 这是合法的，l.perimeter() 这一行将被 Go 解析为 (&l).perimeter()
 	b.perimeter()
 	l.perimeter()
+	fmt.Println()
+	num1 := myInt(6)
+	num2 := myInt(8)
+	sum := num1.add(num2)
+	fmt.Println("Sum is ", sum)
 }
