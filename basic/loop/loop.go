@@ -28,6 +28,8 @@ func converToBin(n int) string {
 	result := ""
 	for ; n > 0; n /= 2 {
 		lsb := n % 2
+		fmt.Printf("%d\t", lsb)
+		// int 转换成 int字符串
 		result = strconv.Itoa(lsb) + result
 	}
 	return result
@@ -35,13 +37,13 @@ func converToBin(n int) string {
 
 func main() {
 	fmt.Println(
-		converToBin(5),
+		//converToBin(5),
 		converToBin(13),
-		converToBin(1024),
+		//converToBin(1024),
 		converToBin(0),
 	)
 
-	printFile("abc.txt")
+	//printFile("abc.txt")
 	s := `abc"d"
 kkk
 123134

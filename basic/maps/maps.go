@@ -15,7 +15,7 @@ func main() {
 	fmt.Println(a)  // Tinywan
 
 	// 复杂map 的操作
-	var m5 map[int]map[int]string // 定义
+	var m5 map[int]map[int]string     // 定义
 	m5 = make(map[int]map[int]string) // 通过 make 初始化 最外层的 map
 
 	m5[1] = make(map[int]string) // 针对外层value 的map进行初始化
@@ -30,10 +30,10 @@ func main() {
 		m5[2] = make(map[int]string)
 	}
 	m5[2][1] = "OK b"
-	m_b,ok = m5[2][1]
+	m_b, ok = m5[2][1]
 	fmt.Println(m_b, ok) // OK b true
 
-	delete(m3,1)  // 删除一个map
+	delete(m3, 1)   // 删除一个map
 	fmt.Println(m3) // map[]
 	// 迭代操作
 	s_map := make([]map[int]string, 5) // 以 map 为元素的slice 使用 make 创建一个切片,元素的slic
@@ -48,6 +48,7 @@ func main() {
 	// map 集合
 	map01 := map[int]string{1: "a", 2: "b", 3: "n", 4: "c", 5: "p", 6: "f"}
 	// 切片
+	// 给一个 nil map 添加元素给会导致运行时错误，因此 map 必须通过 make 来初始化
 	slice01 := make([]int, len(map01))
 	i := 0
 	for k, _ := range map01 {
