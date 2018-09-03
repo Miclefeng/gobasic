@@ -100,4 +100,8 @@ func main() {
 	consts()
 	enums()
 	bitOpeartion()
+	// 右边的这些值以相同的顺序赋值给左边的变量，称为 并行 或 同时 赋值。
+	// 交换两个变量的值，则可以简单地使用 a, b = b, a。
+	a, b, c := 5, 7, "abc"
+	fmt.Println(a, b, c)
 }
