@@ -20,10 +20,8 @@ func twoSum2(nums []int, target int) []int {
 	for i, v := range nums {
 		w := target - v
 		if j, ok := m[w]; ok {
-			fmt.Println(j, ok)
-			res[0] = j
-			res[1] = i
-			return res
+			res[0], res[1] = j, i
+			break
 		} else {
 			m[v] = i
 		}
