@@ -14,6 +14,7 @@ func lengthOfNonRepeatingSubStr(s string) int {
 	for i, ch := range []rune(s) { // 支持中文
 		lastI, ok := lastOccured[ch]
 		if ok && lastI >= start {
+			// 将位置移动到上一次开始的字符位置的下一位,(abca -> bca, start为b所在位置)
 			start = lastOccured[ch] + 1
 		}
 		//fmt.Println(lastOccured, ok, lastI, start, maxLength, i)
