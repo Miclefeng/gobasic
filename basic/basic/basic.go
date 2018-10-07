@@ -89,6 +89,10 @@ func bitOpeartion() {
 }
 
 func main() {
+	x, y := 3, 5
+	fmt.Printf("Initiate x, y = %d, %d\n", x, y)
+	x, y = y, x
+	fmt.Printf("Swap x, y = %d, %d\n", x, y)
 	fmt.Println("Hello World!")
 	variableZeroValue()
 	variableInitiaValue()
