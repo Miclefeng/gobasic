@@ -62,4 +62,9 @@ func main()  {
 	minute := all % 3600 / 60
 	fmt.Println(hours, minute)
 	fmt.Println(strconv.FormatInt(now.Unix(), 10))
+	fmt.Println()
+	timeStr, _ := time.Parse("2006-01-02", "2018-10-19")
+	fmt.Println(timeStr.Unix())
+	fmt.Println(1539907200 - 1539864000)
+	fmt.Println(1539878400 + 43200, 43200 * 2 + 1539878400)
 }
