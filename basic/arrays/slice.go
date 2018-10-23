@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	a := make([]int, 0, 1)
@@ -14,5 +17,7 @@ func main() {
 		}
 	}
 
-
+	str := "test"
+	sl := strings.Split(str, ",")
+	fmt.Println(sl[0])
 }
