@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var timeLayout string = "2006-01-02 15:04:05"
+var timeLayout = "2006-01-02 15:04:05"
 
 func watch(ctx context.Context, name string) {
 	go func(ctx context.Context, name string) {
@@ -25,9 +25,9 @@ func watch(ctx context.Context, name string) {
 
 func main()  {
 	ctx, cancel := context.WithCancel(context.Background())
-	go watch(ctx, "Task One")
-	go watch(ctx, "Task Two")
-	go watch(ctx, "Task Three")
+	go watch(ctx, "Task 1")
+	go watch(ctx, "Task 2")
+	go watch(ctx, "Task 3")
 
 	time.Sleep(10*time.Second)
 	cancel()
