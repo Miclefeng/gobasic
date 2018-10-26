@@ -34,4 +34,7 @@ func main()  {
 	target := 9
 	res := twoSum2(nums, target)
 	fmt.Println(res)
+
+	nums = []int{0, 0, 1, 1, 2, 2, 3, 4, 4}
+	fmt.Println(append(nums[0:0], nums[1:]...))
 }
