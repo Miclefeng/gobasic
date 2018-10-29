@@ -17,7 +17,7 @@ func doServerStuff(conn net.Conn)  {
 	}
 }
 
-func main()  {
+func main() {
 	fmt.Println("starting the server...")
 	listener, err := net.Listen("tcp", "0.0.0.0:50000")
 	if err != nil {
