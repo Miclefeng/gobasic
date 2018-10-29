@@ -24,8 +24,8 @@ func watchs(ctx context.Context)  {
 
 func main()  {
 	ctx, cancel := context.WithCancel(context.Background())
-	valuCtx := context.WithValue(ctx, key, "Task Monitor")
-	go watchs(valuCtx)
+	valueCtx := context.WithValue(ctx, key, "Task Monitor")
+	go watchs(valueCtx)
 
 	time.Sleep(10*time.Second)
 	cancel()
