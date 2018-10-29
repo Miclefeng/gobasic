@@ -5,7 +5,7 @@ import (
 	"net"
 )
 
-func doServerStuff(conn net.Conn)  {
+func doServerStuff(conn net.Conn) {
 	for {
 		buf := make([]byte, 512)
 		length, err := conn.Read(buf)
