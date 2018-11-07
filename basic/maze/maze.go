@@ -49,7 +49,7 @@ func (p endPoint) at(grid [][]int) (int, bool) {
 	if p.j < 0 || p.j >= len(grid[p.i]) {
 		return 0, false
 	}
-	// 返回当前坐标点的值，即当前走的最短步数
+	// 返回当前坐标点的值
 	return grid[p.i][p.j], true
 }
 
