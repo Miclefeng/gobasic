@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go.etcd.io/etcd/clientv3"
+	"go.etcd.io/etcd/mvcc/mvccpb"
 	"golang.org/x/net/context"
 	"time"
 )
@@ -17,8 +18,10 @@ func main() {
 		conf clientv3.Config
 		client *clientv3.Client
 		kv clientv3.KV
-		//putResp *clientv3.PutResponse
+		putResp *clientv3.PutResponse
 		getResp *clientv3.GetResponse
+		delResp *clientv3.DeleteResponse
+		kvpair *mvccpb.KeyValue
 		err error
 	)
 	// 客户端配置
@@ -36,18 +39,42 @@ func main() {
 	// 初始化一个读写etcd的KV
 	kv = clientv3.NewKV(client)
 
-	//if putResp, err = kv.Put(context.TODO(), "/cron/jobs/job1", "micle", clientv3.WithPrevKV()); err != nil {
-	//	fmt.Println(err)
-	//} else {
-	//	fmt.Println("Revision: ", putResp.Header.Revision)
-	//	if putResp.PrevKv != nil {
-	//		fmt.Println("PrevKv: ", string(putResp.PrevKv.Value))
-	//	}
-	//}
+	// 写入job1
+	if putResp, err = kv.Put(context.TODO(), "/cron/jobs/job1", "micle", clientv3.WithPrevKV()); err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Revision: ", putResp.Header.Revision)
+		if putResp.PrevKv != nil {
+			fmt.Println("PrevKv: ", string(putResp.PrevKv.Value))
+		}
+	}
+	// 写入job2
+	kv.Put(context.TODO(), "/cron/jobs/job2", "{...}")
 
+	// 读取job1
 	if getResp, err = kv.Get(context.TODO(), "/cron/jobs/job1"); err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(getResp.Kvs, string(getResp.Kvs[0].Value), getResp.Count)
+	}
+	// 读取所有job
+	if getResp, err = kv.Get(context.TODO(), "/cron/jobs", clientv3.WithPrefix()); err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(getResp.Kvs, getResp.Count)
+		fmt.Println(string(getResp.Kvs[0].Value))
+		fmt.Println(string(getResp.Kvs[1].Value))
+	}
+
+	// 删除job2
+	if delResp, err = kv.Delete(context.TODO(), "/cron/jobs", clientv3.WithFromKey(), clientv3.WithLimit(0)); err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(delResp.PrevKvs)
+	}
+	if len(delResp.PrevKvs) != 0 {
+		for _, kvpair = range delResp.PrevKvs {
+			fmt.Println("删除了:", string(kvpair.Key), string(kvpair.Value))
+		}
 	}
 }
