@@ -39,11 +39,12 @@ func main() {
 	// 初始化一个读写etcd的KV
 	kv = clientv3.NewKV(client)
 
-	// 写入job1
-	if putResp, err = kv.Put(context.TODO(), "/cron/jobs/job1", "micle", clientv3.WithPrevKV()); err != nil {
+	// 写入job1, withPrevKV指定写入的时候记录获取前一个value
+	if putResp, err = kv.Put(context.TODO(), "/cron/jobs/job1", "miclefeng", clientv3.WithPrevKV()); err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println("Revision: ", putResp.Header.Revision)
+		// 获取前一个value
 		if putResp.PrevKv != nil {
 			fmt.Println("PrevKv: ", string(putResp.PrevKv.Value))
 		}
@@ -66,8 +67,9 @@ func main() {
 		fmt.Println(string(getResp.Kvs[1].Value))
 	}
 
-	// 删除job2
-	if delResp, err = kv.Delete(context.TODO(), "/cron/jobs", clientv3.WithFromKey(), clientv3.WithLimit(0)); err != nil {
+	// 删除job2, withFromKey 从某个key开始向后扫描，withLimit 限制扫描的个数
+	//if delResp, err = kv.Delete(context.TODO(), "/cron/jobs/job1", clientv3.WithFromKey(), clientv3.WithLimit(1)); err != nil {
+	if delResp, err = kv.Delete(context.TODO(), "/cron/jobs/job2", clientv3.WithPrevKV()); err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(delResp.PrevKvs)
