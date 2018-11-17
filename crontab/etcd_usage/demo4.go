@@ -45,6 +45,7 @@ func main() {
 	go func() {
 		for {
 			kv.Put(context.TODO(), "/cron/jobs/job7", "I am Job7")
+			kv.Put(context.TODO(), "/cron/jobs/job7", "I am miclefeng")
 			kv.Delete(context.TODO(), "/cron/jobs/job7")
 			time.Sleep(1*time.Second)
 		}
