@@ -82,5 +82,5 @@ func main() {
 		}
 	}()
 
-	time.Sleep(50*time.Second)
+	time.Sleep(20*time.Second)
 }
