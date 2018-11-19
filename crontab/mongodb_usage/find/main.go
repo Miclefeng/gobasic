@@ -56,7 +56,7 @@ func main() {
 	// 过滤条件
 	condition = &FindByJobName{JobName: "job10"}
 	// 分页设置
-	findOption = options.Find().SetSkip(0).SetLimit(2);
+	findOption = options.Find().SetSkip(0).SetLimit(10);
 	// 获取游标
 	if cursor, err = collection.Find(context.TODO(), condition, findOption); err != nil {
 		fmt.Println(err)
