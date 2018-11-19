@@ -11,7 +11,7 @@ import (
  * Time : 2018/11/18 上午11:35
  */
 
- var Url = "http://www.zhenai.com/zhenghu"
+ var Url = "http://www.zhenai.com/zhenghun"
 
 func main() {
 	var (
