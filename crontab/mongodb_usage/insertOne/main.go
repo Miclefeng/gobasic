@@ -66,5 +66,5 @@ func main() {
 	}
 	// 获取documentID
 	docId = result.InsertedID.(objectid.ObjectID)
-	fmt.Println(docId)
+	fmt.Println(docId.Hex())
 }
