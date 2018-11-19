@@ -10,7 +10,8 @@ import (
  * Author : MicleFengzss@gmail.com
  * Time : 2018/11/18 上午11:35
  */
- var Url = "http://www.zhenai.com/zhenghun"
+
+ var Url = "http://www.zhenai.com/zhenghu"
 
 func main() {
 	var (
