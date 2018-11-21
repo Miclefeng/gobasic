@@ -55,12 +55,14 @@ func determineEncoding(r io.Reader) (e encoding.Encoding) {
 		err error
 	)
 
+	// 组装1024个字节的[]byte
 	if bytes, err = bufio.NewReader(r).Peek(1024); err != nil {
 		log.Fatalf("bufio peek err: %v\n", err);
 		e = unicode.UTF8
 		return e
 	}
 
+	// 读取1024个字节判断内容编码
 	e, _, _ = charset.DetermineEncoding(bytes, "")
 	return e
 }
