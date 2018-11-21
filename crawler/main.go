@@ -11,13 +11,14 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"regexp"
 )
 
 /**
  * Author : MicleFengzss@gmail.com
  * Time : 2018/11/18 上午11:35
  */
-
+const REGEXP = `<a[^>]+href="(http://www.zhenai.com/zhenghun/[\w]+)"[^>]*>([^<]+)</a>`
  var Url = "http://www.zhenai.com/zhenghun"
 
 func main() {
@@ -26,6 +27,8 @@ func main() {
 		resp *http.Response
 		result []byte
 		encodingReader *transform.Reader
+		re *regexp.Regexp
+		all [][][]byte
 	)
 
 	if resp, err = http.Get(Url); err != nil {
@@ -45,7 +48,13 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("%s\n", result)
+
+	re, _ = regexp.Compile(REGEXP);
+	all = re.FindAllSubmatch(result, -1)
+	for i, v := range all {
+		fmt.Println(i, " => URL: ", string(v[1]), ", City: ", string(v[2]))
+	}
+	//fmt.Printf("%s\n", result)
 }
 
  // 判断页面内容的编码格式
