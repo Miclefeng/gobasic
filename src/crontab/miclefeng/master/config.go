@@ -2,7 +2,6 @@ package master
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 )
 
@@ -27,18 +26,17 @@ import (
 func InitConfig(filename string) (err error) {
 	var (
 		content []byte
-		conf *Config
+		conf Config
 	)
 	// 读取配置
 	if content, err = ioutil.ReadFile(filename); err != nil {
-		fmt.Println(filename)
 		return
 	}
 	// 反序列化配置
-	if err = json.Unmarshal(content, conf); err != nil {
+	if err = json.Unmarshal(content, &conf); err != nil {
 		return
 	}
 	// 赋值单例
-	G_config = conf
+	G_config = &conf
 	return
 }
