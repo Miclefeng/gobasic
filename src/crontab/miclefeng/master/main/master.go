@@ -16,13 +16,13 @@ import (
  	confFile string
  )
 
-func initEnv() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
-}
-
 func initArgs() {
 	flag.StringVar(&confFile, "config", "./master.json", "init config file.")
 	flag.Parse()
+}
+
+func initEnv() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
 }
 
 func main() {
