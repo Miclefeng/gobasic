@@ -16,23 +16,18 @@ import (
  	confFile string
  )
 
-func initArgs() {
+func init() {
 	flag.StringVar(&confFile, "config", "./master.json", "init config file.")
 	flag.Parse()
-}
-
-func initEnv() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
+
 }
 
 func main() {
 	var (
 		err error
 	)
-	// 初始化命令行参数
-	initArgs()
-	// 初始化线程数
-	initEnv()
+
 	// 加载配置
 	if err = master.InitConfig(confFile); err != nil {
 		goto ERR
