@@ -21,7 +21,7 @@ Package main provides benchmark with setting flags.
 
 An example to run some benchmarks with profiling enabled:
 
-go run benchmark/benchmain/main.go -benchtime=10s -workloads=all \
+go run benchmark/benchmain/master.go -benchtime=10s -workloads=all \
   -compression=on -maxConcurrentCalls=1 -trace=off \
   -reqSizeBytes=1,1048576 -respSizeBytes=1,1048576 -networkMode=Local \
   -cpuProfile=cpuProf -memProfile=memProf -memProfileRate=10000 -resultFile=result
@@ -33,9 +33,9 @@ work, you can get the benchmark result and compare it with the base anytime.
 Assume there are two result files names as "basePerf" and "curPerf" created by adding
 -resultFile=basePerf and -resultFile=curPerf.
 	To format the curPerf, run:
-  	go run benchmark/benchresult/main.go curPerf
+  	go run benchmark/benchresult/master.go curPerf
 	To observe how the performance changes based on a base result, run:
-  	go run benchmark/benchresult/main.go basePerf curPerf
+  	go run benchmark/benchresult/master.go basePerf curPerf
 */
 package main
 

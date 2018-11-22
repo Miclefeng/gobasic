@@ -18,10 +18,10 @@
 
 /*
 To format the benchmark result:
-  go run benchmark/benchresult/main.go resultfile
+  go run benchmark/benchresult/master.go resultfile
 
 To see the performance change based on a old result:
-  go run benchmark/benchresult/main.go resultfile_old resultfile
+  go run benchmark/benchresult/master.go resultfile_old resultfile
 It will print the comparison result of intersection benchmarks between two files.
 
 */

@@ -33,7 +33,7 @@ func simpleReadStdin() {
 
 // 从文件读取
 func simpleReadFile() {
-	file, _ := os.Open("main.go")
+	file, _ := os.Open("master.go")
 	defer file.Close()
 
 	data, _ := ReadFrom(file, 12)
