@@ -116,10 +116,12 @@ func handleJobKill(w http.ResponseWriter, r *http.Request) {
 		jobName string
 		resp    []byte
 	)
+	// 解析 POST FORM
 	if err = r.ParseForm(); err != nil {
 		goto ERR
 	}
 	jobName = r.PostForm.Get("jobName")
+	// 执行 kill job
 	if err = G_jobManager.KillJob(jobName); err != nil {
 		goto ERR
 	}
