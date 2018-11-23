@@ -14,24 +14,23 @@ import (
  * Time : 2018/11/22 上午12:13
  */
 
+type ApiServer struct {
+	HttpServer *http.Server
+}
 
- type ApiServer struct {
- 	HttpServer *http.Server
- }
+var (
+	// 单例对象
+	G_ApiServer *ApiServer
+)
 
- var (
- 	// 单例对象
- 	G_ApiServer *ApiServer
- )
-
- // 保存任务接口
-func handleJobSave(w http.ResponseWriter, r *http.Request)  {
+// 保存任务接口
+func handleJobSave(w http.ResponseWriter, r *http.Request) {
 	var (
-		err error
+		err     error
 		postJob string
-		job common.Job
-		oldJob *common.Job
-		resp []byte
+		job     common.Job
+		oldJob  *common.Job
+		resp    []byte
 	)
 
 	// 解析POST form
@@ -60,26 +59,55 @@ ERR:
 	}
 }
 
+// 保存任务接口
+func handleJobDelete(w http.ResponseWriter, r *http.Request) {
+	var (
+		err     error
+		jobName string
+		oldJob  *common.Job
+		resp    []byte
+	)
+	// 解析POST FORM
+	if err = r.ParseForm(); err != nil {
+		goto ERR
+	}
+	// 获取jobName
+	jobName = r.PostForm.Get("jobName")
+	if oldJob, err = G_jobManager.DeleteJob(jobName); err != nil {
+		goto ERR
+	}
+
+	if resp, err = common.SendReponse(0, "success", oldJob); err == nil {
+		w.Write(resp)
+	}
+	return
+ERR:
+	if resp, err = common.SendReponse(-1, err.Error(), nil); err == nil {
+		w.Write(resp)
+	}
+}
+
 func InitApiServer() (err error) {
 	var (
-		mux *http.ServeMux
-		listener net.Listener
+		mux        *http.ServeMux
+		listener   net.Listener
 		httpServer *http.Server
 	)
 	// 配置路由
 	mux = http.NewServeMux()
 	mux.HandleFunc("/job/save", handleJobSave)
+	mux.HandleFunc("/job/delete", handleJobDelete)
 
 	// 启动tcp监听
-	if listener, err = net.Listen("tcp", ":" + strconv.Itoa(int(G_config.ApiPort))); err != nil {
+	if listener, err = net.Listen("tcp", ":"+strconv.Itoa(int(G_config.ApiPort))); err != nil {
 		return
 	}
 
 	// 开启http服务
 	httpServer = &http.Server{
-		ReadTimeout: time.Duration(G_config.ApiRequestTimeout) * time.Millisecond,
+		ReadTimeout:  time.Duration(G_config.ApiRequestTimeout) * time.Millisecond,
 		WriteTimeout: time.Duration(G_config.ApiWriteTimeout) * time.Millisecond,
-		Handler: mux,
+		Handler:      mux,
 	}
 
 	G_ApiServer = &ApiServer{

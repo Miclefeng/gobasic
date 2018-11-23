@@ -13,9 +13,9 @@ import (
  * Time : 2018/11/22 上午12:12
  */
 
- var (
- 	confFile string
- )
+var (
+	confFile string
+)
 
 func init() {
 	flag.StringVar(&confFile, "config", "./master.json", "init config file.")
@@ -42,9 +42,9 @@ func main() {
 	}
 
 	for {
-		time.Sleep(1*time.Second)
+		time.Sleep(1 * time.Second)
 	}
 	return
-	ERR:
+ERR:
 	fmt.Println(err)
 }

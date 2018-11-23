@@ -13,28 +13,28 @@ import (
  * Time : 2018/11/23 上午10:03
  */
 
- // 任务管理器
- type JobManager struct {
- 	Client *clientv3.Client
- 	KV clientv3.KV
- 	Lease clientv3.Lease
- }
+// 任务管理器
+type JobManager struct {
+	Client *clientv3.Client
+	KV     clientv3.KV
+	Lease  clientv3.Lease
+}
 
- // 注册单例
- var (
- 	G_jobManager *JobManager
- )
+// 注册单例
+var (
+	G_jobManager *JobManager
+)
 
 func InitJobMgr() (err error) {
 	var (
-		conf clientv3.Config
+		conf   clientv3.Config
 		client *clientv3.Client
-		kv clientv3.KV
-		lease clientv3.Lease
+		kv     clientv3.KV
+		lease  clientv3.Lease
 	)
 	// 初始化 etcd 配置
 	conf = clientv3.Config{
-		Endpoints: G_config.EtcdEndPoints,
+		Endpoints:   G_config.EtcdEndPoints,
 		DialTimeout: time.Duration(G_config.EtcdDialTimeout) * time.Millisecond,
 	}
 	// 建立client
@@ -49,19 +49,19 @@ func InitJobMgr() (err error) {
 	// 赋值单例
 	G_jobManager = &JobManager{
 		Client: client,
-		KV: kv,
-		Lease: lease,
+		KV:     kv,
+		Lease:  lease,
 	}
 
 	return
 }
 
- // 保存job
+// 保存job
 func (jobMgr *JobManager) SaveJob(job *common.Job) (oldJob *common.Job, err error) {
 	var (
-		jobKey string
+		jobKey   string
 		jobValue []byte
-		putResp *clientv3.PutResponse
+		putResp  *clientv3.PutResponse
 	)
 	// 任务key
 	jobKey = common.JOB_SAVE_DIR + job.Name
@@ -78,6 +78,28 @@ func (jobMgr *JobManager) SaveJob(job *common.Job) (oldJob *common.Job, err erro
 		// 反序列化 json 到 job struct
 		if err = json.Unmarshal(putResp.PrevKv.Value, &oldJob); err != nil {
 			err = nil
+			return
+		}
+	}
+	return
+}
+
+// 删除job
+func (jobMgr *JobManager) DeleteJob(jobName string) (oldJob *common.Job, err error) {
+	var (
+		jobKey     string
+		deleteResp *clientv3.DeleteResponse
+	)
+	// 任务key
+	jobKey = common.JOB_SAVE_DIR + jobName
+	// 删除key
+	if deleteResp, err = G_jobManager.KV.Delete(context.TODO(), jobKey, clientv3.WithPrevKV()); err != nil {
+		return
+	}
+	// 判断是否有上一版本的值
+	if len(deleteResp.PrevKvs) != 0 {
+		// 反序列化json到oldJob
+		if err = json.Unmarshal(deleteResp.PrevKvs[0].Value, &oldJob); err != nil {
 			return
 		}
 	}
