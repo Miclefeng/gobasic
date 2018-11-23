@@ -1,6 +1,8 @@
 package master
 
 import (
+	"crontab/miclefeng/common"
+	"encoding/json"
 	"net"
 	"net/http"
 	"strconv"
@@ -24,7 +26,38 @@ import (
 
  // 保存任务接口
 func handleJobSave(w http.ResponseWriter, r *http.Request)  {
-	
+	var (
+		err error
+		postJob string
+		job common.Job
+		oldJob *common.Job
+		resp []byte
+	)
+
+	// 解析POST form
+	if err = r.ParseForm(); err != nil {
+		goto ERR
+	}
+	// 获取 jobName
+	postJob = r.PostForm.Get("job")
+	// 反序列化job
+	if err = json.Unmarshal([]byte(postJob), &job); err != nil {
+		goto ERR
+	}
+	// 保存任务到etcd
+	if oldJob, err = G_jobManager.SaveJob(&job); err != nil {
+		goto ERR
+	}
+	// 返回响应信息
+	if resp, err = common.SendReponse(0, "success", oldJob); err == nil {
+		w.Write(resp)
+	}
+	return
+ERR:
+	// 返回报错响应
+	if resp, err = common.SendReponse(-1, err.Error(), nil); err == nil {
+		w.Write(resp)
+	}
 }
 
 func InitApiServer() (err error) {

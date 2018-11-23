@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"runtime"
+	"time"
 )
 
 /**
@@ -20,7 +21,6 @@ func init() {
 	flag.StringVar(&confFile, "config", "./master.json", "init config file.")
 	flag.Parse()
 	runtime.GOMAXPROCS(runtime.NumCPU())
-
 }
 
 func main() {
@@ -32,9 +32,17 @@ func main() {
 	if err = master.InitConfig(confFile); err != nil {
 		goto ERR
 	}
+	// 初始化 etcd
+	if err = master.InitJobMgr(); err != nil {
+		goto ERR
+	}
 	// 启动api http服务
 	if err = master.InitApiServer(); err != nil {
 		goto ERR
+	}
+
+	for {
+		time.Sleep(1*time.Second)
 	}
 	return
 	ERR:
