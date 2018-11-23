@@ -4,6 +4,7 @@ import (
 	"crontab/miclefeng/common"
 	"encoding/json"
 	"go.etcd.io/etcd/clientv3"
+	"go.etcd.io/etcd/mvcc/mvccpb"
 	"golang.org/x/net/context"
 	"time"
 )
@@ -102,6 +103,35 @@ func (jobMgr *JobManager) DeleteJob(jobName string) (oldJob *common.Job, err err
 		if err = json.Unmarshal(deleteResp.PrevKvs[0].Value, &oldJob); err != nil {
 			return
 		}
+	}
+	return
+}
+
+// 列出所有job
+func (jobMgr *JobManager) ListJobs() (jobs []*common.Job, err error) {
+	var (
+		dirKey  string
+		getResp *clientv3.GetResponse
+		kvPair  *mvccpb.KeyValue
+		job     *common.Job
+	)
+	// key目录
+	dirKey = common.JOB_SAVE_DIR
+	// 获取所有job
+	if getResp, err = G_jobManager.KV.Get(context.TODO(), dirKey, clientv3.WithPrefix()); err != nil {
+		return
+	}
+	// 初始化jobs
+	jobs = make([]*common.Job, 0)
+
+	// 遍历所有job，并反序列化
+	for _, kvPair = range getResp.Kvs {
+		// 初始化job
+		job = &common.Job{}
+		if err = json.Unmarshal(kvPair.Value, job); err != nil {
+			return
+		}
+		jobs = append(jobs, job)
 	}
 	return
 }
