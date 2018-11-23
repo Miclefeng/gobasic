@@ -26,6 +26,7 @@ var (
 	G_jobManager *JobManager
 )
 
+// 初始化连接信息
 func InitJobMgr() (err error) {
 	var (
 		conf   clientv3.Config
