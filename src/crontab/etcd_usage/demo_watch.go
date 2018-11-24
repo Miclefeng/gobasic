@@ -22,7 +22,7 @@ func main() {
 		getResp *clientv3.GetResponse
 		watchStart int64
 		watcher clientv3.Watcher
-		watchRespChan <-chan clientv3.WatchResponse
+		watchRespChan clientv3.WatchChan
 		watchResp clientv3.WatchResponse
 		event *clientv3.Event
 		ctx context.Context
