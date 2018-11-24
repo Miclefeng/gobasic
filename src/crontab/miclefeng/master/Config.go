@@ -17,6 +17,7 @@ type Config struct {
 	ApiWriteTimeout   int64    `json:"apiWriteTimeout"`
 	EtcdEndPoints     []string `json:"etcdEndPoints"`
 	EtcdDialTimeout   int64    `json:"etcdDialTimeout"`
+	WebRoot			  string	`json:"webroot"`
 }
 
 // 单例定义
