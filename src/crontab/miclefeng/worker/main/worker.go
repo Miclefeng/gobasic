@@ -31,6 +31,12 @@ func main() {
 	if err = worker.InitConfig(conf); err != nil {
 		goto ERR
 	}
+
+	// 启动调度器
+	if err = worker.InitScheduler(); err != nil {
+		goto ERR
+	}
+
 	// 初始化etcd服务
 	if err = worker.InitJobMgr(); err != nil {
 		goto ERR

@@ -13,30 +13,30 @@ import (
  * Time : 2018/11/24 上午10:47
  */
 
- type JobManager struct {
-	Client *clientv3.Client
-	KV clientv3.KV
-	Lease clientv3.Lease
+type JobManager struct {
+	Client  *clientv3.Client
+	KV      clientv3.KV
+	Lease   clientv3.Lease
 	Watcher clientv3.Watcher
- }
+}
 
- // 单例
- var (
- 	G_jobManager *JobManager
- )
+// 单例
+var (
+	G_jobManager *JobManager
+)
 
- // 初始化etcd服务
+// 初始化etcd服务
 func InitJobMgr() (err error) {
 	var (
-		conf clientv3.Config
-		client *clientv3.Client
-		kv clientv3.KV
-		lease clientv3.Lease
+		conf    clientv3.Config
+		client  *clientv3.Client
+		kv      clientv3.KV
+		lease   clientv3.Lease
 		watcher clientv3.Watcher
 	)
 	// 初始化配置
 	conf = clientv3.Config{
-		Endpoints: G_config.EtcdEndPoints,
+		Endpoints:   G_config.EtcdEndPoints,
 		DialTimeout: time.Duration(G_config.EtcdDialTimeout) * time.Millisecond,
 	}
 	// 初始化client
@@ -50,9 +50,9 @@ func InitJobMgr() (err error) {
 
 	// 赋值单例
 	G_jobManager = &JobManager{
-		Client: client,
-		KV: kv,
-		Lease: lease,
+		Client:  client,
+		KV:      kv,
+		Lease:   lease,
 		Watcher: watcher,
 	}
 	// 启动监听
@@ -65,15 +65,15 @@ func InitJobMgr() (err error) {
 
 func (jobMgr *JobManager) WatchJobs() (err error) {
 	var (
-		getResp *clientv3.GetResponse
-		kvPair *mvccpb.KeyValue
-		job *common.Job
-		jobEvent *common.JobEvent
+		getResp            *clientv3.GetResponse
+		kvPair             *mvccpb.KeyValue
+		job                *common.Job
+		jobEvent           *common.JobEvent
 		watchStartRevision int64
-		watchChan clientv3.WatchChan
-		watchResp clientv3.WatchResponse
-		watchEvent *clientv3.Event
-		jobName string
+		watchChan          clientv3.WatchChan
+		watchResp          clientv3.WatchResponse
+		watchEvent         *clientv3.Event
+		jobName            string
 	)
 	// 1、 get一下/cron/jobs/目录下的所有任务，并且获知当前集群的revision
 	if getResp, err = G_jobManager.KV.Get(context.TODO(), common.JOB_SAVE_DIR, clientv3.WithPrefix()); err != nil {
@@ -85,7 +85,8 @@ func (jobMgr *JobManager) WatchJobs() (err error) {
 		// 反序列化json 到 job
 		if job, err = common.UnpackJob(kvPair.Value); err == nil {
 			jobEvent = common.BuildJobEvent(common.JOB_EVENT_SAVE, job)
-			// TODO: 同步给调度协程
+			// 同步给调度协程
+			G_scheduler.PushJobEvent(jobEvent)
 		}
 	}
 
@@ -119,7 +120,8 @@ func (jobMgr *JobManager) WatchJobs() (err error) {
 					// 构建删除任务事件
 					jobEvent = common.BuildJobEvent(common.JOB_EVENT_DELETE, job)
 				}
-				// TODO: 同步给调度协程
+				// 同步给调度协程
+				G_scheduler.PushJobEvent(jobEvent)
 			}
 		}
 	}()
