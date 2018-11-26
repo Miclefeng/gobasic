@@ -63,6 +63,7 @@ func InitJobMgr() (err error) {
 	return
 }
 
+// 监听etcd中任务的变化
 func (jobMgr *JobManager) WatchJobs() (err error) {
 	var (
 		getResp            *clientv3.GetResponse

@@ -40,7 +40,7 @@ type JobSchedulePlan struct {
 
 // 任务执行状态
 type JobExecuteInfo struct {
-	Job *Job
+	Job      *Job
 	PlanTime time.Time
 	RealTime time.Time
 }
@@ -48,10 +48,10 @@ type JobExecuteInfo struct {
 // 任务执行结果
 type JobExecuteResult struct {
 	JobExecuteInfo *JobExecuteInfo
-	Error error
-	OutPut []byte
-	StartTime time.Time
-	EndTime time.Time
+	Error          error
+	OutPut         []byte
+	StartTime      time.Time
+	EndTime        time.Time
 }
 
 // api 响应请求
@@ -110,7 +110,7 @@ func BuildJobSchedulePlan(job *Job) (jobSchedulePlan *JobSchedulePlan, err error
 // 构建执行任务状态
 func BuildJobExecuteInfo(plan *JobSchedulePlan) (jobExecuteInfo *JobExecuteInfo) {
 	jobExecuteInfo = &JobExecuteInfo{
-		Job: plan.Job,
+		Job:      plan.Job,
 		PlanTime: plan.NextTime,
 		RealTime: time.Now(),
 	}

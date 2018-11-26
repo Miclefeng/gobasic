@@ -14,7 +14,7 @@ import (
 type Scheduler struct {
 	JobEventChan         chan *common.JobEvent
 	JobSchedulePlanTable map[string]*common.JobSchedulePlan
-	JobExecuteInfoTable map[string]*common.JobExecuteInfo
+	JobExecuteInfoTable  map[string]*common.JobExecuteInfo
 	JobExecuteResultChan chan *common.JobExecuteResult
 }
 
@@ -58,7 +58,7 @@ func (scheduler *Scheduler) HandleJobResult(jobExecuteResult *common.JobExecuteR
 func (scheduler *Scheduler) TryStartJob(jobSchedulePlan *common.JobSchedulePlan) {
 	var (
 		jobExecuteInfo *common.JobExecuteInfo
-		jobExecuted bool
+		jobExecuted    bool
 	)
 
 	// 执行的任务可能运行很久, 1分钟会调度60次，但是只能执行1次, 防止并发！
@@ -115,9 +115,9 @@ func (scheduler *Scheduler) TrySchedule() (scheduleAfter time.Duration) {
 // 任务事件调度协程
 func (scheduler *Scheduler) SchedulerLoop() {
 	var (
-		jobEvent      *common.JobEvent
-		scheduleAfter time.Duration
-		scheduleTimer *time.Timer
+		jobEvent         *common.JobEvent
+		scheduleAfter    time.Duration
+		scheduleTimer    *time.Timer
 		jobExecuteResult *common.JobExecuteResult
 	)
 	// 初始化任务调度间隔，并尝试执行任务
@@ -131,10 +131,10 @@ func (scheduler *Scheduler) SchedulerLoop() {
 		case jobEvent = <-scheduler.JobEventChan:
 			// 对内存中维护的列表做增删改查
 			scheduler.HandleJobEvent(jobEvent)
-		// 监听任务执行结果
+			// 监听任务执行结果
 		case jobExecuteResult = <-scheduler.JobExecuteResultChan:
 			scheduler.HandleJobResult(jobExecuteResult)
-		// 获取时间间隔， channel 阻塞形成 sleep
+			// 获取时间间隔， channel 阻塞形成 sleep
 		case <-scheduleTimer.C:
 		}
 
@@ -161,8 +161,8 @@ func InitScheduler() (err error) {
 	G_scheduler = &Scheduler{
 		JobEventChan:         make(chan *common.JobEvent, 1000),
 		JobSchedulePlanTable: make(map[string]*common.JobSchedulePlan),
-		JobExecuteInfoTable: make(map[string]*common.JobExecuteInfo),
-		JobExecuteResultChan: make(chan  *common.JobExecuteResult, 1000),
+		JobExecuteInfoTable:  make(map[string]*common.JobExecuteInfo),
+		JobExecuteResultChan: make(chan *common.JobExecuteResult, 1000),
 	}
 
 	// 启动协程

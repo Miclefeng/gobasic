@@ -13,26 +13,25 @@ import (
  * Time : 2018/11/26 上午10:03
  */
 
- type Executor struct {
+type Executor struct {
+}
 
- }
-
- var (
- 	G_executor *Executor
- )
+var (
+	G_executor *Executor
+)
 
 func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 	go func() {
 		var (
-			err error
-			cmd *exec.Cmd
-			outPut []byte
+			err           error
+			cmd           *exec.Cmd
+			outPut        []byte
 			executeResult *common.JobExecuteResult
 		)
 		// 初始化执行结果
 		executeResult = &common.JobExecuteResult{
 			JobExecuteInfo: jobExecuteInfo,
-			OutPut: make([]byte, 0),
+			OutPut:         make([]byte, 0),
 		}
 		// 任务开始执行时间
 		executeResult.StartTime = time.Now()
@@ -50,7 +49,7 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 	}()
 }
 
- // 初始化执行器
+// 初始化执行器
 func InitExecutor() (err error) {
 	G_executor = &Executor{}
 	return
