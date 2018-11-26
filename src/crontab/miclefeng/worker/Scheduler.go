@@ -133,7 +133,7 @@ func (scheduler *Scheduler) SchedulerLoop() {
 			// 监听任务执行结果
 		case jobExecuteResult = <-scheduler.JobExecuteResultChan:
 			scheduler.HandleJobResult(jobExecuteResult)
-			// 获取时间间隔， channel 阻塞形成 sleep
+			// 获取最近要执行任务的时间间隔， channel 阻塞形成 sleep
 		case <-scheduleTimer.C:
 		}
 
