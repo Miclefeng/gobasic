@@ -52,12 +52,13 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 		if err != nil {
 			executeResult.Error = err
 			executeResult.EndTime = time.Now()
+			fmt.Println("锁被占用：", err)
 		} else {
 			// 上锁成功后，重置任务开始时间
 			executeResult.StartTime = time.Now()
-
 			// 执行命令
 			cmd = exec.CommandContext(jobExecuteInfo.CancelCtx, "/bin/bash", "-c", jobExecuteInfo.Job.Command)
+			time.Sleep(1*time.Second)
 			// 捕获输出
 			outPut, err = cmd.CombinedOutput()
 			executeResult.OutPut = outPut
