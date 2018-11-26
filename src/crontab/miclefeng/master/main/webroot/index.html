@@ -188,7 +188,7 @@
                     url: '/job/delete',
                     type: 'post',
                     dataType: 'json',
-                    data: {name: jobName},
+                    data: {jobName: jobName},
                     complete: function() {
                         window.location.reload()
                     }
@@ -201,7 +201,7 @@
                     url: '/job/kill',
                     type: 'post',
                     dataType: 'json',
-                    data: {name: jobName},
+                    data: {jobName: jobName},
                     complete: function() {
                         window.location.reload()
                     }

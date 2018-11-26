@@ -14,6 +14,8 @@ import (
 type Scheduler struct {
 	JobEventChan         chan *common.JobEvent
 	JobSchedulePlanTable map[string]*common.JobSchedulePlan
+	JobExecuteInfoTable map[string]*common.JobExecuteInfo
+	JobExecuteResultChan chan *common.JobExecuteResult
 }
 
 var (
@@ -45,6 +47,36 @@ func (scheduler *Scheduler) HandleJobEvent(jobEvent *common.JobEvent) {
 	}
 }
 
+// 处理任务执行结果
+func (scheduler *Scheduler) HandleJobResult(jobExecuteResult *common.JobExecuteResult) {
+	// 从任务执行内存表中删除执行完的任务
+	fmt.Println("处理执行结果：", jobExecuteResult.JobExecuteInfo.Job.Name)
+	delete(scheduler.JobExecuteInfoTable, jobExecuteResult.JobExecuteInfo.Job.Name)
+}
+
+// 尝试执行任务
+func (scheduler *Scheduler) TryStartJob(jobSchedulePlan *common.JobSchedulePlan) {
+	var (
+		jobExecuteInfo *common.JobExecuteInfo
+		jobExecuted bool
+	)
+
+	// 执行的任务可能运行很久, 1分钟会调度60次，但是只能执行1次, 防止并发！
+	// 如果任务正在执行，跳过本次调度
+	if jobExecuteInfo, jobExecuted = scheduler.JobExecuteInfoTable[jobSchedulePlan.Job.Name]; jobExecuted {
+		return
+	}
+
+	// 构建任务执行状态信息
+	jobExecuteInfo = common.BuildJobExecuteInfo(jobSchedulePlan)
+	// 存储任务执行状态到内存表
+	scheduler.JobExecuteInfoTable[jobSchedulePlan.Job.Name] = jobExecuteInfo
+
+	// 执行任务
+	fmt.Println("执行任务：", jobExecuteInfo.Job.Name, jobExecuteInfo.PlanTime, jobExecuteInfo.RealTime)
+	G_executor.ExecuteJob(jobExecuteInfo)
+}
+
 // 计算当前调度任务的状态
 func (scheduler *Scheduler) TrySchedule() (scheduleAfter time.Duration) {
 	var (
@@ -64,8 +96,8 @@ func (scheduler *Scheduler) TrySchedule() (scheduleAfter time.Duration) {
 	for _, jobSchedulePlan = range scheduler.JobSchedulePlanTable {
 		// 执行过期的调度计划
 		if jobSchedulePlan.NextTime.Before(now) || jobSchedulePlan.NextTime.Equal(now) {
-			// TODO: 尝试执行任务
-			fmt.Println("执行任务：", jobSchedulePlan.Job.Name)
+			// 尝试执行任务
+			scheduler.TryStartJob(jobSchedulePlan)
 			// 更新下次执行任务事件
 			jobSchedulePlan.NextTime = jobSchedulePlan.CronExpr.Next(now)
 		}
@@ -86,6 +118,7 @@ func (scheduler *Scheduler) SchedulerLoop() {
 		jobEvent      *common.JobEvent
 		scheduleAfter time.Duration
 		scheduleTimer *time.Timer
+		jobExecuteResult *common.JobExecuteResult
 	)
 	// 初始化任务调度间隔，并尝试执行任务
 	scheduleAfter = scheduler.TrySchedule()
@@ -98,6 +131,9 @@ func (scheduler *Scheduler) SchedulerLoop() {
 		case jobEvent = <-scheduler.JobEventChan:
 			// 对内存中维护的列表做增删改查
 			scheduler.HandleJobEvent(jobEvent)
+		// 监听任务执行结果
+		case jobExecuteResult = <-scheduler.JobExecuteResultChan:
+			scheduler.HandleJobResult(jobExecuteResult)
 		// 获取时间间隔， channel 阻塞形成 sleep
 		case <-scheduleTimer.C:
 		}
@@ -115,11 +151,18 @@ func (scheduler *Scheduler) PushJobEvent(jobEvent *common.JobEvent) {
 	scheduler.JobEventChan <- jobEvent
 }
 
+// 推送任务执行结果
+func (scheduler *Scheduler) PushJobExecuteResult(jobExecuteResult *common.JobExecuteResult) {
+	scheduler.JobExecuteResultChan <- jobExecuteResult
+}
+
 func InitScheduler() (err error) {
 	// 初始化chan
 	G_scheduler = &Scheduler{
 		JobEventChan:         make(chan *common.JobEvent, 1000),
 		JobSchedulePlanTable: make(map[string]*common.JobSchedulePlan),
+		JobExecuteInfoTable: make(map[string]*common.JobExecuteInfo),
+		JobExecuteResultChan: make(chan  *common.JobExecuteResult, 1000),
 	}
 
 	// 启动协程

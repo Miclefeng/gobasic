@@ -102,6 +102,7 @@ func (jobMgr *JobManager) DeleteJob(jobName string) (oldJob *common.Job, err err
 	if len(deleteResp.PrevKvs) != 0 {
 		// 反序列化json到oldJob
 		if err = json.Unmarshal(deleteResp.PrevKvs[0].Value, &oldJob); err != nil {
+			err = nil
 			return
 		}
 	}
