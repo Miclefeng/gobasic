@@ -50,7 +50,6 @@ func (scheduler *Scheduler) HandleJobEvent(jobEvent *common.JobEvent) {
 // 处理任务执行结果
 func (scheduler *Scheduler) HandleJobResult(jobExecuteResult *common.JobExecuteResult) {
 	// 从任务执行内存表中删除执行完的任务
-	fmt.Println("处理执行结果：", jobExecuteResult.JobExecuteInfo.Job.Name)
 	delete(scheduler.JobExecuteInfoTable, jobExecuteResult.JobExecuteInfo.Job.Name)
 }
 
