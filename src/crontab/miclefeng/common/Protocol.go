@@ -109,12 +109,11 @@ func BuildJobSchedulePlan(job *Job) (jobSchedulePlan *JobSchedulePlan, err error
 
 // 构建执行任务状态
 func BuildJobExecuteInfo(plan *JobSchedulePlan) (jobExecuteInfo *JobExecuteInfo) {
-	jobExecuteInfo = &JobExecuteInfo{
+	return &JobExecuteInfo{
 		Job:      plan.Job,
 		PlanTime: plan.NextTime,
 		RealTime: time.Now(),
 	}
-	return
 }
 
 // 获取任务名
