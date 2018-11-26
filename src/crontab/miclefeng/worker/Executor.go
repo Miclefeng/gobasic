@@ -27,14 +27,24 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 			cmd           *exec.Cmd
 			outPut        []byte
 			executeResult *common.JobExecuteResult
+			jobLock *JobLock
 		)
 		// 初始化执行结果
 		executeResult = &common.JobExecuteResult{
 			JobExecuteInfo: jobExecuteInfo,
 			OutPut:         make([]byte, 0),
 		}
+
+		// 初始化分布式锁
+		jobLock = G_jobManager.CreateJobLock(executeResult.JobExecuteInfo.Job.Name)
+		// 尝试上锁
+		err = jobLock.TryLock()
+		// 释放锁
+		defer jobLock.UnLock()
+
 		// 任务开始执行时间
 		executeResult.StartTime = time.Now()
+
 		// 执行命令
 		cmd = exec.CommandContext(context.TODO(), "/bin/bash", "-c", jobExecuteInfo.Job.Command)
 		// 捕获输出

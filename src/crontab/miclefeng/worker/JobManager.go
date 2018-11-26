@@ -133,3 +133,8 @@ func (jobMgr *JobManager) WatchJobs() (err error) {
 func (jobMgr *JobManager) WatchKiller() (err error) {
 	return
 }
+
+// 创建分布式锁
+func (jobMgr *JobManager) CreateJobLock(jobName string) (jobLock *JobLock) {
+	return InitJobLock(jobName, jobMgr.KV, jobMgr.Lease)
+}
