@@ -3,7 +3,7 @@ package worker
 import (
 	"crontab/miclefeng/common"
 	"fmt"
-	"golang.org/x/net/context"
+	"math/rand"
 	"os/exec"
 	"time"
 )
@@ -40,6 +40,10 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 
 		// 初始化分布式锁
 		jobLock = G_jobManager.CreateJobLock(executeResult.JobExecuteInfo.Job.Name)
+
+		// 随机sleep 0-500ms,随机打散上锁的协程
+		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
+
 		// 尝试上锁
 		err = jobLock.TryLock()
 		// 释放锁
@@ -53,7 +57,7 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 			executeResult.StartTime = time.Now()
 
 			// 执行命令
-			cmd = exec.CommandContext(context.TODO(), "/bin/bash", "-c", jobExecuteInfo.Job.Command)
+			cmd = exec.CommandContext(jobExecuteInfo.CancelCtx, "/bin/bash", "-c", jobExecuteInfo.Job.Command)
 			// 捕获输出
 			outPut, err = cmd.CombinedOutput()
 			executeResult.OutPut = outPut

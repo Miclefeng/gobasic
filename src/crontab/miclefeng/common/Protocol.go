@@ -1,6 +1,7 @@
 package common
 
 import (
+	"context"
 	"encoding/json"
 	"github.com/gorhill/cronexpr"
 	"strings"
@@ -43,6 +44,8 @@ type JobExecuteInfo struct {
 	Job      *Job
 	PlanTime time.Time
 	RealTime time.Time
+	CancelCtx context.Context // 任务command的上下文
+	CancelFunc context.CancelFunc // 用于取消command执行的cancelfunc函数
 }
 
 // 任务执行结果
@@ -109,14 +112,21 @@ func BuildJobSchedulePlan(job *Job) (jobSchedulePlan *JobSchedulePlan, err error
 
 // 构建执行任务状态
 func BuildJobExecuteInfo(plan *JobSchedulePlan) (jobExecuteInfo *JobExecuteInfo) {
-	return &JobExecuteInfo{
+	jobExecuteInfo = &JobExecuteInfo{
 		Job:      plan.Job,
 		PlanTime: plan.NextTime,
 		RealTime: time.Now(),
 	}
+	jobExecuteInfo.CancelCtx, jobExecuteInfo.CancelFunc = context.WithCancel(context.TODO())
+	return
 }
 
 // 获取任务名
 func ExtraJobName(name []byte) (jobName string) {
 	return strings.TrimPrefix(string(name), JOB_SAVE_DIR)
+}
+
+// 获取killer任务名
+func ExtraKillerName(name []byte) (jobName string) {
+	return strings.TrimPrefix(string(name), JOB_KILLER_DIR)
 }

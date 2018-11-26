@@ -60,6 +60,9 @@ func InitJobMgr() (err error) {
 		return
 	}
 
+	// 启动监听killer
+	G_jobManager.WatchKiller()
+
 	return
 }
 
@@ -130,8 +133,41 @@ func (jobMgr *JobManager) WatchJobs() (err error) {
 	return
 }
 
-func (jobMgr *JobManager) WatchKiller() (err error) {
-	return
+func (jobMgr *JobManager) WatchKiller() {
+	var (
+		watchChan clientv3.WatchChan
+		watchResp clientv3.WatchResponse
+		event *clientv3.Event
+		jobName string
+		job *common.Job
+		jobEvent *common.JobEvent
+	)
+
+	go func() {
+		// 监听 /cron/killer/ 目录的变化
+		watchChan = jobMgr.Watcher.Watch(context.TODO(), common.JOB_KILLER_DIR, clientv3.WithPrefix())
+		// 获取监听返回结果
+		for watchResp = range watchChan {
+			// 处理监听任务事件
+			for _, event = range watchResp.Events {
+				switch event.Type {
+				// 杀死任务事件
+				case mvccpb.PUT:
+					// 获取任务名
+					jobName = common.ExtraKillerName(event.Kv.Key)
+					// 构建任务
+					job = &common.Job{
+						Name: jobName,
+					}
+					// 构建任务事件
+					jobEvent = common.BuildJobEvent(common.JOB_EVENT_KILL, job)
+					// 推送给scheduler
+					G_scheduler.PushJobEvent(jobEvent)
+				case mvccpb.DELETE: // killer标记过期，任务租约过期后被自动删除
+				}
+			}
+		}
+	}()
 }
 
 // 创建分布式锁
