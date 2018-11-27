@@ -2,7 +2,6 @@ package worker
 
 import (
 	"crontab/miclefeng/common"
-	"fmt"
 	"math/rand"
 	"os/exec"
 	"time"
@@ -27,7 +26,7 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 			cmd           *exec.Cmd
 			outPut        []byte
 			executeResult *common.JobExecuteResult
-			jobLock *JobLock
+			jobLock       *JobLock
 		)
 		// 初始化执行结果
 		executeResult = &common.JobExecuteResult{
@@ -52,20 +51,18 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 		if err != nil {
 			executeResult.Error = err
 			executeResult.EndTime = time.Now()
-			fmt.Println("锁被占用：", err)
 		} else {
 			// 上锁成功后，重置任务开始时间
 			executeResult.StartTime = time.Now()
 			// 执行命令
 			cmd = exec.CommandContext(jobExecuteInfo.CancelCtx, "/bin/bash", "-c", jobExecuteInfo.Job.Command)
-			time.Sleep(1*time.Second)
+			time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
 			// 捕获输出
 			outPut, err = cmd.CombinedOutput()
 			executeResult.OutPut = outPut
 			executeResult.Error = err
 			// 任务结束时间
 			executeResult.EndTime = time.Now()
-			fmt.Println("执行结果：", jobExecuteInfo.Job.Name, string(outPut), err, executeResult.EndTime)
 		}
 
 		// 任务执行完成后，把执行的结果返回给Scheduler，Scheduler会从executingTable(内存表)中删除掉执行记录

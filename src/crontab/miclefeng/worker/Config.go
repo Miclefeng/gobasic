@@ -11,8 +11,12 @@ import (
  */
 
 type Config struct {
-	EtcdEndPoints   []string `json:"etcdEndPoints"`
-	EtcdDialTimeout int64    `json:"etcdDialTimeout"`
+	EtcdEndPoints         []string `json:"etcdEndPoints"`
+	EtcdDialTimeout       int64    `json:"etcdDialTimeout"`
+	MongoUri              string   `json:"mongoUri"`
+	MongoConnectTimeout   int64    `json:"mongoConnectTimeout"`
+	LogBatchSize          int64    `json:"logBatchSize"`
+	LogBatchCommitTimeout int64    `josn:"logBatchCommitTimeout"`
 }
 
 // 设置单例

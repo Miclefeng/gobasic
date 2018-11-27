@@ -41,10 +41,10 @@ type JobSchedulePlan struct {
 
 // 任务执行状态
 type JobExecuteInfo struct {
-	Job      *Job
-	PlanTime time.Time
-	RealTime time.Time
-	CancelCtx context.Context // 任务command的上下文
+	Job        *Job
+	PlanTime   time.Time
+	RealTime   time.Time
+	CancelCtx  context.Context    // 任务command的上下文
 	CancelFunc context.CancelFunc // 用于取消command执行的cancelfunc函数
 }
 
@@ -55,6 +55,23 @@ type JobExecuteResult struct {
 	OutPut         []byte
 	StartTime      time.Time
 	EndTime        time.Time
+}
+
+// 任务执行结果保存到日志中
+type JobLog struct {
+	JobName      string `bson:"jobName"`      // 任务名
+	Command      string `bson:"command"`      // 执行命令
+	Error        string `bson:"error"`        // 错误信息
+	Output       string `bson:"output"`       // 返回执行结果
+	PlanTime     int64  `bson:"planTime"`     // 计划调度时间
+	ScheduleTime int64  `bson:"scheduleTime"` // 调度时间
+	StartTime    int64  `bson:"startTime"`    // 执行开始时间
+	EndTime      int64  `bson:"endTime"`      // 结束时间
+}
+
+// 任务日志批次
+type JobLogBatch struct {
+	JobLogs []interface{}
 }
 
 // api 响应请求

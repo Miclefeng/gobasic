@@ -28,8 +28,8 @@ func (scheduler *Scheduler) HandleJobEvent(jobEvent *common.JobEvent) {
 		err             error
 		jobSchedulePlan *common.JobSchedulePlan
 		jobExisted      bool
-		jobExecuteInfo *common.JobExecuteInfo
-		jobExecuting bool
+		jobExecuteInfo  *common.JobExecuteInfo
+		jobExecuting    bool
 	)
 	switch jobEvent.EventType {
 	// 保存任务事件
@@ -40,13 +40,13 @@ func (scheduler *Scheduler) HandleJobEvent(jobEvent *common.JobEvent) {
 		}
 		// 保存任务调度计划到任务调度计划表
 		scheduler.JobSchedulePlanTable[jobEvent.Job.Name] = jobSchedulePlan
-	// 删除任务事件
+		// 删除任务事件
 	case common.JOB_EVENT_DELETE:
 		// 在任务调度计划表 里删除 任务调度计划
 		if jobSchedulePlan, jobExisted = scheduler.JobSchedulePlanTable[jobEvent.Job.Name]; jobExisted {
 			delete(scheduler.JobSchedulePlanTable, jobEvent.Job.Name)
 		}
-	// 强杀任务事件
+		// 强杀任务事件
 	case common.JOB_EVENT_KILL:
 		// 判断任务是否在执行中
 		if jobExecuteInfo, jobExecuting = scheduler.JobExecuteInfoTable[jobEvent.Job.Name]; jobExecuting {
@@ -58,8 +58,31 @@ func (scheduler *Scheduler) HandleJobEvent(jobEvent *common.JobEvent) {
 
 // 处理任务执行结果
 func (scheduler *Scheduler) HandleJobResult(jobExecuteResult *common.JobExecuteResult) {
+	var (
+		jobLog *common.JobLog
+	)
 	// 从任务执行内存表中删除执行完的任务
 	delete(scheduler.JobExecuteInfoTable, jobExecuteResult.JobExecuteInfo.Job.Name)
+	// 生成执行日志
+	if jobExecuteResult.Error != common.ERR_LOCK_ALREADY_REQUIRED {
+		jobLog = &common.JobLog{
+			JobName:      jobExecuteResult.JobExecuteInfo.Job.Name,
+			Command:      jobExecuteResult.JobExecuteInfo.Job.Command,
+			PlanTime:     jobExecuteResult.JobExecuteInfo.PlanTime.UnixNano() / 1000 / 1000,
+			ScheduleTime: jobExecuteResult.JobExecuteInfo.RealTime.UnixNano() / 1000 / 1000,
+			StartTime:    jobExecuteResult.StartTime.UnixNano() / 1000 / 1000,
+			EndTime:      jobExecuteResult.EndTime.UnixNano() / 1000 / 1000,
+		}
+		if jobExecuteResult.Error != nil {
+			jobLog.Error = jobExecuteResult.Error.Error()
+		} else {
+			jobLog.Error = ""
+		}
+		// 推送日志到日志处理协程
+		G_logSink.PushJobLog(jobLog)
+		fmt.Println("执行结果：", jobExecuteResult.JobExecuteInfo.Job.Name, string(jobExecuteResult.OutPut), jobExecuteResult.EndTime.Unix())
+	}
+
 }
 
 // 尝试执行任务
