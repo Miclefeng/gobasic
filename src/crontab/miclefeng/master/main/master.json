@@ -1,15 +1,20 @@
 {
   "API接口服务端口": "提供任务增删改查服务",
   "apiPort": 8070,
-  "API接口请求超时": "",
+  "API接口请求超时": "毫秒",
   "apiRequestTimeout": 5000,
-  "API接口响应超时": "",
+  "API接口响应超时": "毫秒",
   "apiWriteTimeout": 5000,
 
   "Etcd集群节点列表": "",
   "etcdEndPoints": ["127.0.0.1:2379"],
-  "Etcd连接超时": "",
+  "Etcd连接超时": "毫秒",
   "etcdDialTimeout": 5000,
+
+  "mongo链接地址": "",
+  "mongoUri": "mongodb://127.0.0.1:27017",
+  "mongo连接超时时间": "毫秒",
+  "mongoConnectTimeout": 5000,
 
   "webroot网站根目录": "",
   "webroot": "./webroot"

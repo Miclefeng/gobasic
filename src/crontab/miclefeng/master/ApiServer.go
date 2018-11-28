@@ -48,13 +48,13 @@ func handleJobSave(w http.ResponseWriter, r *http.Request) {
 		goto ERR
 	}
 	// 返回响应信息
-	if resp, err = common.SendReponse(0, "success", oldJob); err == nil {
+	if resp, err = common.SendResponse(0, "success", oldJob); err == nil {
 		w.Write(resp)
 	}
 	return
 ERR:
 	// 返回报错响应
-	if resp, err = common.SendReponse(-1, err.Error(), nil); err == nil {
+	if resp, err = common.SendResponse(-1, err.Error(), nil); err == nil {
 		w.Write(resp)
 	}
 }
@@ -77,12 +77,12 @@ func handleJobDelete(w http.ResponseWriter, r *http.Request) {
 		goto ERR
 	}
 
-	if resp, err = common.SendReponse(0, "success", oldJob); err == nil {
+	if resp, err = common.SendResponse(0, "success", oldJob); err == nil {
 		w.Write(resp)
 	}
 	return
 ERR:
-	if resp, err = common.SendReponse(-1, err.Error(), nil); err == nil {
+	if resp, err = common.SendResponse(-1, err.Error(), nil); err == nil {
 		w.Write(resp)
 	}
 }
@@ -99,12 +99,12 @@ func handleJobList(w http.ResponseWriter, r *http.Request) {
 		goto ERR
 	}
 
-	if resp, err = common.SendReponse(0, "success", jobs); err == nil {
+	if resp, err = common.SendResponse(0, "success", jobs); err == nil {
 		w.Write(resp)
 	}
 	return
 ERR:
-	if resp, err = common.SendReponse(-1, err.Error(), nil); err == nil {
+	if resp, err = common.SendResponse(-1, err.Error(), nil); err == nil {
 		w.Write(resp)
 	}
 }
@@ -125,12 +125,55 @@ func handleJobKill(w http.ResponseWriter, r *http.Request) {
 	if err = G_jobManager.KillJob(jobName); err != nil {
 		goto ERR
 	}
-	if resp, err = common.SendReponse(0, "success", nil); err == nil {
+	if resp, err = common.SendResponse(0, "success", nil); err == nil {
 		w.Write(resp)
 	}
 	return
 ERR:
-	if resp, err = common.SendReponse(-1, err.Error(), nil); err == nil {
+	if resp, err = common.SendResponse(-1, err.Error(), nil); err == nil {
+		w.Write(resp)
+	}
+}
+
+// 日志列表
+func handleJobLogList(w http.ResponseWriter, r *http.Request) {
+	var (
+		err        error
+		jobName    string
+		skipParam  string
+		limitParam string
+		skip       int
+		limit      int
+		logArr     []*common.JobLog
+		resp       []byte
+	)
+	// 解析POST FORM
+	if err = r.ParseForm(); err != nil {
+		goto ERR
+	}
+
+	jobName = r.Form.Get("name")
+	skipParam = r.Form.Get("skip")
+	limitParam = r.Form.Get("limit")
+
+	if skip, err = strconv.Atoi(skipParam); err != nil {
+		skip = 0
+	}
+
+	if limit, err = strconv.Atoi(limitParam); err != nil {
+		limit = 20
+	}
+
+	if logArr, err = G_logManager.ListJob(jobName, int64(skip), int64(limit)); err != nil {
+		goto ERR
+	}
+
+	if resp, err = common.SendResponse(0, "success", logArr); err == nil {
+		w.Write(resp)
+	}
+	return
+ERR:
+	if resp, err = common.SendResponse(-1, err.Error(), nil); err == nil {
 		w.Write(resp)
 	}
 }
@@ -138,10 +181,10 @@ ERR:
 // 初始化http服务
 func InitApiServer() (err error) {
 	var (
-		mux        *http.ServeMux
-		listener   net.Listener
-		httpServer *http.Server
-		staticDir http.Dir
+		mux          *http.ServeMux
+		listener     net.Listener
+		httpServer   *http.Server
+		staticDir    http.Dir
 		staticHandle http.Handler
 	)
 	// 配置路由
@@ -150,6 +193,7 @@ func InitApiServer() (err error) {
 	mux.HandleFunc("/job/delete", handleJobDelete)
 	mux.HandleFunc("/job/list", handleJobList)
 	mux.HandleFunc("/job/kill", handleJobKill)
+	mux.HandleFunc("/job/log", handleJobLogList)
 
 	// 静态文件目录
 	staticDir = http.Dir(G_config.WebRoot)

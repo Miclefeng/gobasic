@@ -12,12 +12,14 @@ import (
 
 // 配置
 type Config struct {
-	ApiPort           int64    `json:"apiPort"`
-	ApiRequestTimeout int64    `json:"apiRequestTimeout"`
-	ApiWriteTimeout   int64    `json:"apiWriteTimeout"`
-	EtcdEndPoints     []string `json:"etcdEndPoints"`
-	EtcdDialTimeout   int64    `json:"etcdDialTimeout"`
-	WebRoot			  string	`json:"webroot"`
+	ApiPort             int64    `json:"apiPort"`
+	ApiRequestTimeout   int64    `json:"apiRequestTimeout"`
+	ApiWriteTimeout     int64    `json:"apiWriteTimeout"`
+	EtcdEndPoints       []string `json:"etcdEndPoints"`
+	EtcdDialTimeout     int64    `json:"etcdDialTimeout"`
+	MongoUri            string   `json:"mongoUri"`
+	MongoConnectTimeout int64    `json:"mongoConnectTimeout"`
+	WebRoot             string   `json:"webroot"`
 }
 
 // 单例定义

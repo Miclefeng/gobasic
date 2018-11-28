@@ -32,10 +32,17 @@ func main() {
 	if err = master.InitConfig(confFile); err != nil {
 		goto ERR
 	}
+
 	// 初始化 etcd
 	if err = master.InitJobMgr(); err != nil {
 		goto ERR
 	}
+
+	// 初始化 log服务
+	if err = master.InitLogMgr(); err != nil {
+		goto ERR
+	}
+
 	// 启动api http服务
 	if err = master.InitApiServer(); err != nil {
 		goto ERR

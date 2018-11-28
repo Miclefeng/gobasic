@@ -59,14 +59,14 @@ type JobExecuteResult struct {
 
 // 任务执行结果保存到日志中
 type JobLog struct {
-	JobName      string `bson:"jobName"`      // 任务名
-	Command      string `bson:"command"`      // 执行命令
-	Error        string `bson:"error"`        // 错误信息
-	Output       string `bson:"output"`       // 返回执行结果
-	PlanTime     int64  `bson:"planTime"`     // 计划调度时间
-	ScheduleTime int64  `bson:"scheduleTime"` // 调度时间
-	StartTime    int64  `bson:"startTime"`    // 执行开始时间
-	EndTime      int64  `bson:"endTime"`      // 结束时间
+	JobName      string `bson:"jobName" json:"jobName"`           // 任务名
+	Command      string `bson:"command" json:"command"`           // 执行命令
+	Error        string `bson:"error" json:"error"`               // 错误信息
+	Output       string `bson:"output" json:"output"`             // 返回执行结果
+	PlanTime     int64  `bson:"planTime" json:"planTime"`         // 计划调度时间
+	ScheduleTime int64  `bson:"scheduleTime" json:"scheduleTime"` // 调度时间
+	StartTime    int64  `bson:"startTime" json:"startTime"`       // 执行开始时间
+	EndTime      int64  `bson:"endTime" json:"endTime"`           // 结束时间
 }
 
 // 任务日志批次
@@ -74,8 +74,18 @@ type JobLogBatch struct {
 	JobLogs []interface{}
 }
 
+// 日志过滤条件
+type JobLogFilter struct {
+	JobName string `bson:"jobName"`
+}
+
+// 日志排序规则
+type JobLogSort struct {
+	LogSort int64 `bson:"startTime"`
+}
+
 // api 响应请求
-func SendReponse(errno int64, message string, data interface{}) (resp []byte, err error) {
+func SendResponse(errno int64, message string, data interface{}) (resp []byte, err error) {
 	var (
 		response Response
 	)
