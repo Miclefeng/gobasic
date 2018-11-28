@@ -31,7 +31,7 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 		// 初始化执行结果
 		executeResult = &common.JobExecuteResult{
 			JobExecuteInfo: jobExecuteInfo,
-			OutPut:         make([]byte, 0),
+			Output:         make([]byte, 0),
 		}
 
 		// 任务开始执行时间
@@ -59,7 +59,7 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 			time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
 			// 捕获输出
 			outPut, err = cmd.CombinedOutput()
-			executeResult.OutPut = outPut
+			executeResult.Output = outPut
 			executeResult.Error = err
 			// 任务结束时间
 			executeResult.EndTime = time.Now()

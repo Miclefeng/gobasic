@@ -52,7 +52,7 @@ type JobExecuteInfo struct {
 type JobExecuteResult struct {
 	JobExecuteInfo *JobExecuteInfo
 	Error          error
-	OutPut         []byte
+	Output         []byte
 	StartTime      time.Time
 	EndTime        time.Time
 }

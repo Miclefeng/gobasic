@@ -68,6 +68,7 @@ func (scheduler *Scheduler) HandleJobResult(jobExecuteResult *common.JobExecuteR
 		jobLog = &common.JobLog{
 			JobName:      jobExecuteResult.JobExecuteInfo.Job.Name,
 			Command:      jobExecuteResult.JobExecuteInfo.Job.Command,
+			Output:       string(jobExecuteResult.Output),
 			PlanTime:     jobExecuteResult.JobExecuteInfo.PlanTime.UnixNano() / 1000 / 1000,
 			ScheduleTime: jobExecuteResult.JobExecuteInfo.RealTime.UnixNano() / 1000 / 1000,
 			StartTime:    jobExecuteResult.StartTime.UnixNano() / 1000 / 1000,
@@ -80,7 +81,7 @@ func (scheduler *Scheduler) HandleJobResult(jobExecuteResult *common.JobExecuteR
 		}
 		// 推送日志到日志处理协程
 		G_logSink.PushJobLog(jobLog)
-		fmt.Println("执行结果：", jobExecuteResult.JobExecuteInfo.Job.Name, string(jobExecuteResult.OutPut), jobExecuteResult.EndTime.Unix())
+		fmt.Println("执行结果：", jobExecuteResult.JobExecuteInfo.Job.Name, string(jobExecuteResult.Output), jobExecuteResult.EndTime.Unix())
 	}
 
 }
