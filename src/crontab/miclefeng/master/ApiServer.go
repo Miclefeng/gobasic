@@ -201,7 +201,7 @@ func InitApiServer() (err error) {
 	mux.Handle("/", http.StripPrefix("/", staticHandle))
 
 	// 启动tcp监听
-	if listener, err = net.Listen("tcp", ":"+strconv.Itoa(int(G_config.ApiPort))); err != nil {
+	if listener, err = net.Listen("tcp", ":"+strconv.FormatInt(G_config.ApiPort, 10)); err != nil {
 		return
 	}
 

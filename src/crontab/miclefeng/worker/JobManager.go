@@ -95,7 +95,6 @@ func (jobMgr *JobManager) WatchJobs() (err error) {
 	}
 
 	// 2、 从该revision向后监听变化事件
-
 	go func() {
 		// 监听版本，从get的后续版本开始监听
 		watchStartRevision = getResp.Header.Revision + 1
