@@ -6,6 +6,7 @@ import (
 	"github.com/kataras/iris/mvc"
 	"math/rand"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -19,6 +20,7 @@ type lotteryController struct {
 }
 
 var userList []string
+var mux sync.Mutex
 
 func NewApp() *iris.Application {
 	var app *iris.Application
@@ -31,6 +33,7 @@ func main() {
 	var app *iris.Application
 	app = NewApp()
 	userList = make([]string, 0)
+	mux = sync.Mutex{}
 	app.Run(iris.Addr(":8080"))
 }
 
@@ -48,6 +51,9 @@ func (c *lotteryController) PostImport() string {
 		user     string
 		count2   int
 	)
+	// 增加线程互斥锁
+	mux.Lock()
+	defer mux.Unlock()
 	strUsers = c.Ctx.FormValue("users")
 	users = strings.Split(strUsers, ",")
 	count1 = len(userList)
@@ -68,7 +74,9 @@ func (c *lotteryController) GetLucky() string {
 		idx   int
 		user  string
 	)
-
+	// 增加线程互斥锁
+	mux.Lock()
+	defer mux.Unlock()
 	count = len(userList)
 	if count > 1 {
 		seed = time.Now().Nanosecond()
