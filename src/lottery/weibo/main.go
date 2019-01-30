@@ -62,7 +62,7 @@ func (c *lotteryController) GetSet() string {
 		i          uint64
 		randMoney  int64
 		curMoney   uint64
-		id uint32
+		id         uint32
 	)
 	uid, errUid = c.Ctx.URLParamInt("uid")
 	money, errMoney = c.Ctx.URLParamFloat64("money")
@@ -117,15 +117,15 @@ func (c *lotteryController) GetSet() string {
 // GET http://localhost:8080/get?id=1&uid=1
 func (c *lotteryController) GetGet() string {
 	var (
-		id int
-		errId error
-		uid int
+		id     int
+		errId  error
+		uid    int
 		errUid error
-		list []uint64
-		ok bool
+		list   []uint64
+		ok     bool
 		random *rand.Rand
-		i uint64
-		money uint64
+		i      uint64
+		money  uint64
 	)
 	id, errId = c.Ctx.URLParamInt("id")
 	uid, errUid = c.Ctx.URLParamInt("uid")
@@ -147,7 +147,7 @@ func (c *lotteryController) GetGet() string {
 	money = list[i]
 
 	if len(list) > 1 {
-		if int(i) == len(list) - 1 {
+		if int(i) == len(list)-1 {
 			packageList[uint32(id)] = packageList[uint32(id)][:i]
 		} else if i == 0 {
 			packageList[uint32(id)] = packageList[uint32(id)][1:]
