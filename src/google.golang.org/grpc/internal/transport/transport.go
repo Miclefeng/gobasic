@@ -250,7 +250,7 @@ func (s *Stream) waitOnHeader() error {
 	}
 }
 
-// RecvCompress returns the compression algorithm applied to the inbound
+// RecvCompress returns the compression Algorithm applied to the inbound
 // message. It is empty string if there is no compression applied.
 func (s *Stream) RecvCompress() string {
 	if err := s.waitOnHeader(); err != nil {
@@ -259,7 +259,7 @@ func (s *Stream) RecvCompress() string {
 	return s.recvCompress
 }
 
-// SetSendCompress sets the compression algorithm to the stream.
+// SetSendCompress sets the compression Algorithm to the stream.
 func (s *Stream) SetSendCompress(str string) {
 	s.sendCompress = str
 }
@@ -531,7 +531,7 @@ type CallHdr struct {
 	// Method specifies the operation to perform.
 	Method string
 
-	// SendCompress specifies the compression algorithm applied on
+	// SendCompress specifies the compression Algorithm applied on
 	// outbound message.
 	SendCompress string
 

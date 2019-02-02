@@ -417,7 +417,7 @@ func TestUTF8Decoder(t *testing.T) {
 		notEOF:  true,
 		sizeDst: 8,
 		// More bytes would fit in the buffer, but this seems to require a more
-		// complicated and slower algorithm.
+		// complicated and slower Algorithm.
 		want: "a\u0300bc", // instead of "a\u0300bc"
 		nSrc: 5,
 		err:  transform.ErrShortDst,

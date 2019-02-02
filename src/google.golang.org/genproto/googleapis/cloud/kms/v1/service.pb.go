@@ -1002,8 +1002,8 @@ type AsymmetricSignRequest struct {
 	// Required. The resource name of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to use for signing.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Required. The digest of the data to sign. The digest must be produced with
-	// the same digest algorithm as specified by the key version's
-	// [algorithm][google.cloud.kms.v1.CryptoKeyVersion.algorithm].
+	// the same digest Algorithm as specified by the key version's
+	// [Algorithm][google.cloud.kms.v1.CryptoKeyVersion.Algorithm].
 	Digest               *Digest  `protobuf:"bytes,3,opt,name=digest,proto3" json:"digest,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1796,7 +1796,7 @@ type KeyManagementServiceClient interface {
 	// Create a new [CryptoKey][google.cloud.kms.v1.CryptoKey] within a [KeyRing][google.cloud.kms.v1.KeyRing].
 	//
 	// [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] and
-	// [CryptoKey.version_template.algorithm][google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm]
+	// [CryptoKey.version_template.Algorithm][google.cloud.kms.v1.CryptoKeyVersionTemplate.Algorithm]
 	// are required.
 	CreateCryptoKey(ctx context.Context, in *CreateCryptoKeyRequest, opts ...grpc.CallOption) (*CryptoKey, error)
 	// Create a new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in a [CryptoKey][google.cloud.kms.v1.CryptoKey].
@@ -2061,7 +2061,7 @@ type KeyManagementServiceServer interface {
 	// Create a new [CryptoKey][google.cloud.kms.v1.CryptoKey] within a [KeyRing][google.cloud.kms.v1.KeyRing].
 	//
 	// [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] and
-	// [CryptoKey.version_template.algorithm][google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm]
+	// [CryptoKey.version_template.Algorithm][google.cloud.kms.v1.CryptoKeyVersionTemplate.Algorithm]
 	// are required.
 	CreateCryptoKey(context.Context, *CreateCryptoKeyRequest) (*CryptoKey, error)
 	// Create a new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in a [CryptoKey][google.cloud.kms.v1.CryptoKey].

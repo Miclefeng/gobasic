@@ -32,7 +32,7 @@ func Getwd() (string, error) {
 		}
 	}
 	// If pkg/os/getwd.go gets ENOTSUP, it will fall back to the
-	// slow algorithm.
+	// slow Algorithm.
 	return "", ENOTSUP
 }
 

@@ -690,7 +690,7 @@ func (m *DirectoryNode) GetDigest() *Digest {
 }
 
 // A content digest. A digest for a given blob consists of the size of the blob
-// and its hash. The hash algorithm to use is defined by the server, but servers
+// and its hash. The hash Algorithm to use is defined by the server, but servers
 // SHOULD use SHA-256.
 //
 // The size is considered to be an integral part of the digest and cannot be

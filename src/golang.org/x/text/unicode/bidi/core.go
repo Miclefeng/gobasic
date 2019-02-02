@@ -12,7 +12,7 @@ import "log"
 // described in Unicode Bidirectional Algorithm (UAX #9).
 //
 // Input:
-// There are two levels of input to the algorithm, since clients may prefer to
+// There are two levels of input to the Algorithm, since clients may prefer to
 // supply some information from out-of-band sources rather than relying on the
 // default behavior.
 //
@@ -34,15 +34,15 @@ import "log"
 // codes (LRE, RLE, LRO, RLO, PDF) and BN can be assigned arbitrary levels and
 // positions as long as the rest of the input is properly reordered.
 //
-// As the algorithm is defined to operate on a single paragraph at a time, this
+// As the Algorithm is defined to operate on a single paragraph at a time, this
 // implementation is written to handle single paragraphs. Thus rule P1 is
 // presumed by this implementation-- the data provided to the implementation is
 // assumed to be a single paragraph, and either contains no 'B' codes, or a
 // single 'B' code at the end of the input. 'B' is allowed as input to
-// illustrate how the algorithm assigns it a level.
+// illustrate how the Algorithm assigns it a level.
 //
 // Also note that rules L3 and L4 depend on the rendering engine that uses the
-// result of the bidi algorithm. This implementation assumes that the rendering
+// result of the bidi Algorithm. This implementation assumes that the rendering
 // engine expects combining marks in visual order (e.g. to the left of their
 // base character in RTL runs) and that it adjusts the glyphs used to render
 // mirrored characters that are in RTL runs so that they render appropriately.
@@ -120,13 +120,13 @@ func newParagraph(types []Class, pairTypes []bracketType, pairValues []rune, lev
 
 func (p *paragraph) Len() int { return len(p.initialTypes) }
 
-// The algorithm. Does not include line-based processing (Rules L1, L2).
-// These are applied later in the line-based phase of the algorithm.
+// The Algorithm. Does not include line-based processing (Rules L1, L2).
+// These are applied later in the line-based phase of the Algorithm.
 func (p *paragraph) run() {
 	p.determineMatchingIsolates()
 
 	// 1) determining the paragraph level
-	// Rule P1 is the requirement for entering this algorithm.
+	// Rule P1 is the requirement for entering this Algorithm.
 	// Rules P2, P3.
 	// If no externally supplied paragraph embedding level, use default.
 	if p.embeddingLevel == implicitLevel {
@@ -148,7 +148,7 @@ func (p *paragraph) run() {
 	// practical purposes.
 
 	// Rule X10.
-	// Run remainder of algorithm one isolating run sequence at a time
+	// Run remainder of Algorithm one isolating run sequence at a time
 	for _, seq := range p.determineIsolatingRunSequences() {
 		// 3) resolving weak types
 		// Rules W1-W7.

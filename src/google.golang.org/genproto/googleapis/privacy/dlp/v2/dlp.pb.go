@@ -441,7 +441,7 @@ func (CharsToIgnore_CommonCharsToIgnore) EnumDescriptor() ([]byte, []int) {
 }
 
 // These are commonly used subsets of the alphabet that the FFX mode
-// natively supports. In the algorithm, the alphabet is selected using
+// natively supports. In the Algorithm, the alphabet is selected using
 // the "radix". Therefore each corresponds to particular radix.
 type CryptoReplaceFfxFpeConfig_FfxCommonNativeAlphabet int32
 
@@ -7977,7 +7977,7 @@ func (m *BucketingConfig_Bucket) GetReplacementValue() *Value {
 // In the case that the identifier is the empty string, it will be skipped.
 // See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
 type CryptoReplaceFfxFpeConfig struct {
-	// The key used by the encryption algorithm. [required]
+	// The key used by the encryption Algorithm. [required]
 	CryptoKey *CryptoKey `protobuf:"bytes,1,opt,name=crypto_key,json=cryptoKey,proto3" json:"crypto_key,omitempty"`
 	// The 'tweak', a context may be used for higher security since the same
 	// identifier in two different contexts won't be given the same surrogate. If

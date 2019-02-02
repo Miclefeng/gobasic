@@ -49,7 +49,7 @@ import (
 type Compressor interface {
 	// Do compresses p into w.
 	Do(w io.Writer, p []byte) error
-	// Type returns the compression algorithm the Compressor uses.
+	// Type returns the compression Algorithm the Compressor uses.
 	Type() string
 }
 
@@ -108,7 +108,7 @@ func (c *gzipCompressor) Type() string {
 type Decompressor interface {
 	// Do reads the data from r and uncompress them.
 	Do(r io.Reader) ([]byte, error)
-	// Type returns the compression algorithm the Decompressor uses.
+	// Type returns the compression Algorithm the Decompressor uses.
 	Type() string
 }
 

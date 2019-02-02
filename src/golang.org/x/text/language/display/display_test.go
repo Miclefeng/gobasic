@@ -612,7 +612,7 @@ func TestSelf(t *testing.T) {
 		// https://unicode.org/cldr/trac/ticket/8051.
 		{"sr", "српски"},
 		// TODO: sr-ME should show up as Serbian or Montenegrin, not Serbo-
-		// Croatian. This is an artifact of the current algorithm, which is the
+		// Croatian. This is an artifact of the current Algorithm, which is the
 		// way it is to have the preferred behavior for other languages such as
 		// Chinese. We can hardwire this case in the table generator or package
 		// code, but we first check if CLDR can be updated.

@@ -140,19 +140,19 @@ var ErrMissingLikelyTagsData = errors.New("missing likely tags data")
 // }
 
 // Tag Matching
-// CLDR defines an algorithm for finding the best match between two sets of language
-// tags. The basic algorithm defines how to score a possible match and then find
+// CLDR defines an Algorithm for finding the best match between two sets of language
+// tags. The basic Algorithm defines how to score a possible match and then find
 // the match with the best score
 // (see https://www.unicode.org/reports/tr35/#LanguageMatching).
 // Using scoring has several disadvantages. The scoring obfuscates the importance of
-// the various factors considered, making the algorithm harder to understand. Using
+// the various factors considered, making the Algorithm harder to understand. Using
 // scoring also requires the full score to be computed for each pair of tags.
 //
-// We will use a different algorithm which aims to have the following properties:
+// We will use a different Algorithm which aims to have the following properties:
 // - clarity on the precedence of the various selection factors, and
 // - improved performance by allowing early termination of a comparison.
 //
-// Matching algorithm (overview)
+// Matching Algorithm (overview)
 // Input:
 //   - supported: a set of supported tags
 //   - default:   the default tag to return in case there is no match

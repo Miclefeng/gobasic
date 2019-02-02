@@ -115,7 +115,7 @@ func exclude(cm, tag, s string) bool {
 		{"title", "af nl", "'N"},
 
 		// Go terminates the final sigma check after a fixed number of
-		// ignorables have been found. This ensures that the algorithm can make
+		// ignorables have been found. This ensures that the Algorithm can make
 		// progress in a streaming scenario.
 		{"lower title", "", "\u039f\u03a3...............................a"},
 		// This also applies to upper in Greek.
@@ -130,7 +130,7 @@ func exclude(cm, tag, s string) bool {
 
 		// ICU title case seems to erroneously removes \u0307 from an upper case
 		// I unconditionally, instead of only when lowercasing. The ICU
-		// transform algorithm transforms these cases consistently with our
+		// transform Algorithm transforms these cases consistently with our
 		// implementation.
 		{"title", "az tr", "\u0307"},
 
@@ -162,7 +162,7 @@ func exclude(cm, tag, s string) bool {
 		// ICU transforms _do_ implement this transform and produces results
 		// consistent with our implementation. Note that we still prefer to use
 		// ucasemap_utf8ToUpper instead of transforms as the latter have
-		// inconsistencies in the word breaking algorithm.
+		// inconsistencies in the word breaking Algorithm.
 		{"upper", "el", "\u0386"}, // GREEK CAPITAL LETTER ALPHA WITH TONOS
 		{"upper", "el", "\u0389"}, // GREEK CAPITAL LETTER ETA WITH TONOS
 		{"upper", "el", "\u038A"}, // GREEK CAPITAL LETTER IOTA WITH TONOS

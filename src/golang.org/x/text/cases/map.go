@@ -176,7 +176,7 @@ func (t undUpperCaser) Span(src []byte, atEOF bool) (n int, err error) {
 
 // undLowerIgnoreSigmaCaser implements the Transformer interface for doing
 // a lower case mapping for the root locale (und) ignoring final sigma
-// handling. This casing algorithm is used in some performance-critical packages
+// handling. This casing Algorithm is used in some performance-critical packages
 // like secure/precis and x/net/http/idna, which warrants its special-casing.
 type undLowerIgnoreSigmaCaser struct{ transform.NopResetter }
 
@@ -227,7 +227,7 @@ func (t *simpleCaser) Span(src []byte, atEOF bool) (n int, err error) {
 
 // undLowerCaser implements the Transformer interface for doing a lower case
 // mapping for the root locale (und) ignoring final sigma handling. This casing
-// algorithm is used in some performance-critical packages like secure/precis
+// Algorithm is used in some performance-critical packages like secure/precis
 // and x/net/http/idna, which warrants its special-casing.
 type undLowerCaser struct{ transform.NopResetter }
 
@@ -325,7 +325,7 @@ type titleCaser struct {
 	rewrite func(*context)
 }
 
-// Transform implements the standard Unicode title case algorithm as defined in
+// Transform implements the standard Unicode title case Algorithm as defined in
 // Chapter 3 of The Unicode Standard:
 // toTitlecase(X): Find the word boundaries in X according to Unicode Standard
 // Annex #29, "Unicode Text Segmentation." For each word boundary, find the

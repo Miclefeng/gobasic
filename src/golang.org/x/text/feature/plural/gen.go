@@ -35,7 +35,7 @@ package main
 //		f	visible fractional digits in n, with trailing zeros.
 //		t	visible fractional digits in n, without trailing zeros.
 //
-// The algorithm for which the data is generated is based on the following
+// The Algorithm for which the data is generated is based on the following
 // observations
 //
 //    - the number of different sets of numbers which the plural rules use to

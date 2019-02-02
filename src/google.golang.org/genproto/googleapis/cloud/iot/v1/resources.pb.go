@@ -137,10 +137,10 @@ const (
 	// https://www.ietf.org/rfc/rfc5280.txt)), encoded in base64, and wrapped by
 	// `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`.
 	PublicKeyFormat_RSA_X509_PEM PublicKeyFormat = 1
-	// Public key for the ECDSA algorithm using P-256 and SHA-256, encoded in
+	// Public key for the ECDSA Algorithm using P-256 and SHA-256, encoded in
 	// base64, and wrapped by `-----BEGIN PUBLIC KEY-----` and `-----END
 	// PUBLIC KEY-----`. This can be used to verify JWT tokens with the `ES256`
-	// algorithm ([RFC7518](https://www.ietf.org/rfc/rfc7518.txt)). This curve is
+	// Algorithm ([RFC7518](https://www.ietf.org/rfc/rfc7518.txt)). This curve is
 	// defined in [OpenSSL](https://www.openssl.org/) as the `prime256v1` curve.
 	PublicKeyFormat_ES256_PEM PublicKeyFormat = 2
 	// As ES256_PEM, but wrapped in an X.509v3 certificate ([RFC5280](
@@ -811,7 +811,7 @@ type X509CertificateDetails struct {
 	StartTime *timestamp.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	// The time the certificate becomes invalid.
 	ExpiryTime *timestamp.Timestamp `protobuf:"bytes,4,opt,name=expiry_time,json=expiryTime,proto3" json:"expiry_time,omitempty"`
-	// The algorithm used to sign the certificate.
+	// The Algorithm used to sign the certificate.
 	SignatureAlgorithm string `protobuf:"bytes,5,opt,name=signature_algorithm,json=signatureAlgorithm,proto3" json:"signature_algorithm,omitempty"`
 	// The type of public key in the certificate.
 	PublicKeyType        string   `protobuf:"bytes,6,opt,name=public_key_type,json=publicKeyType,proto3" json:"public_key_type,omitempty"`

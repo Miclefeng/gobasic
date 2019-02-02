@@ -13,7 +13,7 @@ import (
 	a "golang.org/x/net/html/atom"
 )
 
-// A parser implements the HTML5 parsing algorithm:
+// A parser implements the HTML5 parsing Algorithm:
 // https://html.spec.whatwg.org/multipage/syntax.html#tree-construction
 type parser struct {
 	// tokenizer provides the tokens for the parser.
@@ -1165,10 +1165,10 @@ func inBodyIM(p *parser) bool {
 }
 
 func (p *parser) inBodyEndTagFormatting(tagAtom a.Atom) {
-	// This is the "adoption agency" algorithm, described at
+	// This is the "adoption agency" Algorithm, described at
 	// https://html.spec.whatwg.org/multipage/syntax.html#adoptionAgency
 
-	// TODO: this is a fairly literal line-by-line translation of that algorithm.
+	// TODO: this is a fairly literal line-by-line translation of that Algorithm.
 	// Once the code successfully parses the comprehensive test suite, we should
 	// refactor this code to be more idiomatic.
 
@@ -1288,7 +1288,7 @@ func (p *parser) inBodyEndTagFormatting(tagAtom a.Atom) {
 	}
 }
 
-// inBodyEndTagOther performs the "any other end tag" algorithm for inBodyIM.
+// inBodyEndTagOther performs the "any other end tag" Algorithm for inBodyIM.
 // "Any other end tag" handling from 12.2.6.5 The rules for parsing tokens in foreign content
 // https://html.spec.whatwg.org/multipage/syntax.html#parsing-main-inforeign
 func (p *parser) inBodyEndTagOther(tagAtom a.Atom) {
@@ -2216,7 +2216,7 @@ func (p *parser) parse() error {
 
 // Parse returns the parse tree for the HTML from the given Reader.
 //
-// It implements the HTML5 parsing algorithm
+// It implements the HTML5 parsing Algorithm
 // (https://html.spec.whatwg.org/multipage/syntax.html#tree-construction),
 // which is very complicated. The resultant tree can contain implicitly created
 // nodes that have no explicit <tag> listed in r's data, and nodes' parents can

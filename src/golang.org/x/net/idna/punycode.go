@@ -6,7 +6,7 @@
 
 package idna
 
-// This file implements the Punycode algorithm from RFC 3492.
+// This file implements the Punycode Algorithm from RFC 3492.
 
 import (
 	"math"

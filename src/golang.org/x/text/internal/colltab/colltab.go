@@ -12,7 +12,7 @@ import (
 	"golang.org/x/text/language"
 )
 
-// MatchLang finds the index of t in tags, using a matching algorithm used for
+// MatchLang finds the index of t in tags, using a matching Algorithm used for
 // collation and search. tags[0] must be language.Und, the remaining tags should
 // be sorted alphabetically.
 //

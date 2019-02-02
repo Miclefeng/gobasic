@@ -18,17 +18,17 @@ import (
 // of UAX#9.
 //
 // Some preprocessing is done for each rune before data is passed to this
-// algorithm:
+// Algorithm:
 //  - opening and closing brackets are identified
 //  - a bracket pair type, like '(' and ')' is assigned a unique identifier that
 //    is identical for the opening and closing bracket. It is left to do these
 //    mappings.
-//  - The BPA algorithm requires that bracket characters that are canonical
+//  - The BPA Algorithm requires that bracket characters that are canonical
 //    equivalents of each other be able to be substituted for each other.
 //    It is the responsibility of the caller to do this canonicalization.
 //
 // In implementing BD16, this implementation departs slightly from the "logical"
-// algorithm defined in UAX#9. In particular, the stack referenced there
+// Algorithm defined in UAX#9. In particular, the stack referenced there
 // supports operations that go beyond a "basic" stack. An equivalent
 // implementation based on a linked list is used here.
 
@@ -64,7 +64,7 @@ func (b bracketPairs) Len() int           { return len(b) }
 func (b bracketPairs) Swap(i, j int)      { b[i], b[j] = b[j], b[i] }
 func (b bracketPairs) Less(i, j int) bool { return b[i].opener < b[j].opener }
 
-// resolvePairedBrackets runs the paired bracket part of the UBA algorithm.
+// resolvePairedBrackets runs the paired bracket part of the UBA Algorithm.
 //
 // For each rune, it takes the indexes into the original string, the class the
 // bracket type (in pairTypes) and the bracket identifier (pairValues). It also

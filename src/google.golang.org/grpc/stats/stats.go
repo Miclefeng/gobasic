@@ -87,7 +87,7 @@ type InHeader struct {
 	RemoteAddr net.Addr
 	// LocalAddr is the local address of the corresponding connection.
 	LocalAddr net.Addr
-	// Compression is the compression algorithm used for the RPC.
+	// Compression is the compression Algorithm used for the RPC.
 	Compression string
 }
 
@@ -142,7 +142,7 @@ type OutHeader struct {
 	RemoteAddr net.Addr
 	// LocalAddr is the local address of the corresponding connection.
 	LocalAddr net.Addr
-	// Compression is the compression algorithm used for the RPC.
+	// Compression is the compression Algorithm used for the RPC.
 	Compression string
 }
 

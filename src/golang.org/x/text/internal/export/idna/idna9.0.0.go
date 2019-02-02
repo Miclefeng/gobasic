@@ -299,7 +299,7 @@ func (e runeError) Error() string {
 	return fmt.Sprintf("idna: disallowed rune %U", e)
 }
 
-// process implements the algorithm described in section 4 of UTS #46,
+// process implements the Algorithm described in section 4 of UTS #46,
 // see https://www.unicode.org/reports/tr46.
 func (p *Profile) process(s string, toASCII bool) (string, error) {
 	var err error

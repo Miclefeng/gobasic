@@ -1099,7 +1099,7 @@ const regionISO tag.Index = "" + // Size: 1308 bytes
 	"ZMMBZRARZWWEZZZZ\xff\xff\xff\xff"
 
 // altRegionISO3 holds a list of 3-letter region codes that cannot be
-// mapped to 2-letter codes using the default algorithm. This is a short list.
+// mapped to 2-letter codes using the default Algorithm. This is a short list.
 const altRegionISO3 string = "SCGQUUSGSCOMPRKCYMSPMSRBATFMYTATN"
 
 // altRegionIDs holds a list of regionIDs the positions of which match those

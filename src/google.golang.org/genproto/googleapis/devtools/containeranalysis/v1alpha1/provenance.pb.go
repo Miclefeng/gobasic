@@ -22,7 +22,7 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-// Specifies the hash algorithm, if any.
+// Specifies the hash Algorithm, if any.
 type Hash_HashType int32
 
 const (

@@ -96,7 +96,7 @@ type File struct {
 	Description string `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
 	// (Optional) digest of this file in hexadecimal-like string if known.
 	Digest string `protobuf:"bytes,9,opt,name=digest,proto3" json:"digest,omitempty"`
-	// (Optional) The algorithm corresponding to the digest if known.
+	// (Optional) The Algorithm corresponding to the digest if known.
 	HashType             File_HashType `protobuf:"varint,10,opt,name=hash_type,json=hashType,proto3,enum=google.devtools.resultstore.v2.File_HashType" json:"hash_type,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`

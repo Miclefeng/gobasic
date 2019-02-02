@@ -711,7 +711,7 @@ func (m *DirectoryMetadata) GetDigest() *Digest {
 // byte-encoded Directory message.
 type Digest struct {
 	// A string-encoded hash (eg "1a2b3c", not the byte array [0x1a, 0x2b, 0x3c])
-	// using an implementation-defined hash algorithm (eg SHA-256).
+	// using an implementation-defined hash Algorithm (eg SHA-256).
 	Hash string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
 	// The size of the contents. While this is not strictly required as part of an
 	// identifier (after all, any given hash will have exactly one canonical

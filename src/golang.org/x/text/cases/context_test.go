@@ -218,7 +218,7 @@ func TestWordBreaks(t *testing.T) {
 			want := ""
 			for _, s := range parts {
 				found := false
-				// This algorithm implements title casing given word breaks
+				// This Algorithm implements title casing given word breaks
 				// as defined in the Unicode standard 3.13 R3.
 				for _, r := range s {
 					title := unicode.ToTitle(r)

@@ -131,7 +131,7 @@ func (m *Service) GetSplit() *TrafficSplit {
 // splits define how traffic directed to the service is assigned to versions.
 type TrafficSplit struct {
 	// Mechanism used to determine which version a request is sent to.
-	// The traffic selection algorithm will
+	// The traffic selection Algorithm will
 	// be stable for either type until allocations are changed.
 	ShardBy TrafficSplit_ShardBy `protobuf:"varint,1,opt,name=shard_by,json=shardBy,proto3,enum=google.appengine.v1.TrafficSplit_ShardBy" json:"shard_by,omitempty"`
 	// Mapping from version IDs within the service to fractional

@@ -110,7 +110,7 @@ type tableIndex struct {
 type tablesIter []tableIndex
 
 // sortIter does an insertion sort using the next field of tableIndex. Insertion
-// sort is a good sorting algorithm for this case.
+// sort is a good sorting Algorithm for this case.
 func sortIter(t []tableIndex) {
 	for i := range t {
 		for j := i; j > 0 && t[j-1].next > t[j].next; j-- {

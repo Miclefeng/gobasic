@@ -38,7 +38,7 @@
 //  - "amazon.co.uk"
 // Specifically, the eTLD+1 is "amazon.co.uk", because the eTLD is "co.uk".
 //
-// There is no closed form algorithm to calculate the eTLD of a domain.
+// There is no closed form Algorithm to calculate the eTLD of a domain.
 // Instead, the calculation is data driven. This package provides a
 // pre-compiled snapshot of Mozilla's PSL (Public Suffix List) data at
 // https://publicsuffix.org/

@@ -56,7 +56,7 @@
 // For example, it is utterly confusing to substitute spelled-out numbers
 // or dates in one language in text of another language.
 // More subtly confusing is using the wrong sorting order or casing
-// algorithm for a certain language.
+// Algorithm for a certain language.
 //
 //    All the packages in x/text that provide locale-specific services
 //    (e.g. collate, cases) should be initialized with the tag that was

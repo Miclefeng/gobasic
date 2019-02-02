@@ -86,7 +86,7 @@ The region code is stored in the 9 lsb of the indexed value.`,
 fromM49 contains entries to map UN.M49 codes to regions. See m49Index for details.`,
 	`
 altRegionISO3 holds a list of 3-letter region codes that cannot be
-mapped to 2-letter codes using the default algorithm. This is a short list.`,
+mapped to 2-letter codes using the default Algorithm. This is a short list.`,
 	`
 altRegionIDs holds a list of regionIDs the positions of which match those
 of the 3-letter ISO codes in altRegionISO3.`,
@@ -1095,9 +1095,9 @@ func find(list []string, s string) int {
 // p of x, p-x is a prefix of y. This allows us to order tags based on the
 // maximum of the length of any of its prefixes.
 // TODO: it is possible to define a set of Prefix values on variants such that
-// a total order cannot be defined to the point that this algorithm breaks.
+// a total order cannot be defined to the point that this Algorithm breaks.
 // In other words, we cannot guarantee the same order of variants for the
-// future using the same algorithm or for non-compliant combinations of
+// future using the same Algorithm or for non-compliant combinations of
 // variants. For this reason, consider using simple alphabetic sorting
 // of variants and ignore Prefix restrictions altogether.
 func (b *builder) writeVariant() {

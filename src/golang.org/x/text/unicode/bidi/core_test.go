@@ -46,7 +46,7 @@ func TestBidiCore(t *testing.T) {
 		for _, s := range p.Strings(0) {
 			types = append(types, bidiClass[s])
 		}
-		// We ignore the bracketing part of the algorithm.
+		// We ignore the bracketing part of the Algorithm.
 		pairTypes := make([]bracketType, len(types))
 		pairValues := make([]rune, len(types))
 

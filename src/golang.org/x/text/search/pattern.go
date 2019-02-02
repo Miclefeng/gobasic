@@ -41,7 +41,7 @@ func isIgnorable(m *Matcher, e colltab.Elem) bool {
 	return true
 }
 
-// TODO: Use a Boyer-Moore-like algorithm (probably Sunday) for searching.
+// TODO: Use a Boyer-Moore-like Algorithm (probably Sunday) for searching.
 
 func (p *Pattern) forwardSearch(it *colltab.Iter) (start, end int) {
 	for start := 0; it.Next(); it.Reset(start) {

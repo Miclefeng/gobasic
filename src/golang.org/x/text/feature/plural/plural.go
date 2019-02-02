@@ -229,7 +229,7 @@ func matchPlural(p *Rules, index compact.ID, n, f, v int) Form {
 		case opW | opNotEqual: // w != 0
 			skip = f == 0
 
-		// Hard-wired rules that cannot be handled by our algorithm.
+		// Hard-wired rules that cannot be handled by our Algorithm.
 
 		case opBretonM:
 			skip = f != 0 || n == 0 || n%1000000 != 0

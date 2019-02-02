@@ -31,7 +31,7 @@ func TestTransform(t *testing.T) {
 		{NFD, "ö", "", true, 1, transform.ErrShortDst},
 		{NFD, "ö", "", true, 2, transform.ErrShortDst},
 
-		// As an artifact of the algorithm, only full segments are written.
+		// As an artifact of the Algorithm, only full segments are written.
 		// This is not strictly required, and some bytes could be written.
 		// In practice, for Transform to not block, the destination buffer
 		// should be at least MaxSegmentSize to work anyway and these edge

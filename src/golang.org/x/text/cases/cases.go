@@ -78,7 +78,7 @@ func Lower(t language.Tag, opts ...Option) Caser {
 }
 
 // Title returns a Caser for language-specific title casing. It uses an
-// approximation of the default Unicode Word Break algorithm.
+// approximation of the default Unicode Word Break Algorithm.
 func Title(t language.Tag, opts ...Option) Caser {
 	return Caser{makeTitle(t, getOpts(opts...))}
 }
@@ -99,7 +99,7 @@ type Option func(o options) options
 
 // TODO: consider these options to take a boolean as well, like FinalSigma.
 // The advantage of using this approach is that other providers of a lower-case
-// algorithm could set different defaults by prefixing a user-provided slice
+// Algorithm could set different defaults by prefixing a user-provided slice
 // of options with their own. This is handy, for instance, for the precis
 // package which would override the default to not handle the Greek final sigma.
 

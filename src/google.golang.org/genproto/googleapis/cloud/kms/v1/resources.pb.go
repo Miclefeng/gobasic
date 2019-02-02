@@ -127,22 +127,22 @@ func (KeyOperationAttestation_AttestationFormat) EnumDescriptor() ([]byte, []int
 	return fileDescriptor_e40e1384d35a80c5, []int{3, 0}
 }
 
-// The algorithm of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion], indicating what
+// The Algorithm of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion], indicating what
 // parameters must be used for each cryptographic operation.
 //
 // The
 // [GOOGLE_SYMMETRIC_ENCRYPTION][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm.GOOGLE_SYMMETRIC_ENCRYPTION]
-// algorithm is usable with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
+// Algorithm is usable with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
 // [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
 //
 // Algorithms beginning with "RSA_SIGN_" are usable with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
 // [ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN].
 //
 // The fields in the name after "RSA_SIGN_" correspond to the following
-// parameters: padding algorithm, modulus bit length, and digest algorithm.
+// parameters: padding Algorithm, modulus bit length, and digest Algorithm.
 //
 // For PSS, the salt length used is equal to the length of digest
-// algorithm. For example,
+// Algorithm. For example,
 // [RSA_SIGN_PSS_2048_SHA256][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm.RSA_SIGN_PSS_2048_SHA256]
 // will use PSS with a salt length of 256 bits or 32 bytes.
 //
@@ -151,13 +151,13 @@ func (KeyOperationAttestation_AttestationFormat) EnumDescriptor() ([]byte, []int
 // [ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].
 //
 // The fields in the name after "RSA_DECRYPT_" correspond to the following
-// parameters: padding algorithm, modulus bit length, and digest algorithm.
+// parameters: padding Algorithm, modulus bit length, and digest Algorithm.
 //
 // Algorithms beginning with "EC_SIGN_" are usable with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
 // [ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN].
 //
 // The fields in the name after "EC_SIGN_" correspond to the following
-// parameters: elliptic curve, digest algorithm.
+// parameters: elliptic curve, digest Algorithm.
 type CryptoKeyVersion_CryptoKeyVersionAlgorithm int32
 
 const (
@@ -587,7 +587,7 @@ type CryptoKeyVersionTemplate struct {
 	// For backwards compatibility, GOOGLE_SYMMETRIC_ENCRYPTION is implied if both
 	// this field is omitted and [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] is
 	// [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
-	Algorithm            CryptoKeyVersion_CryptoKeyVersionAlgorithm `protobuf:"varint,3,opt,name=algorithm,proto3,enum=google.cloud.kms.v1.CryptoKeyVersion_CryptoKeyVersionAlgorithm" json:"algorithm,omitempty"`
+	Algorithm            CryptoKeyVersion_CryptoKeyVersionAlgorithm `protobuf:"varint,3,opt,name=Algorithm,proto3,enum=google.cloud.kms.v1.CryptoKeyVersion_CryptoKeyVersionAlgorithm" json:"Algorithm,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                   `json:"-"`
 	XXX_unrecognized     []byte                                     `json:"-"`
 	XXX_sizecache        int32                                      `json:"-"`
@@ -704,7 +704,7 @@ type CryptoKeyVersion struct {
 	ProtectionLevel ProtectionLevel `protobuf:"varint,7,opt,name=protection_level,json=protectionLevel,proto3,enum=google.cloud.kms.v1.ProtectionLevel" json:"protection_level,omitempty"`
 	// Output only. The [CryptoKeyVersionAlgorithm][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm] that this
 	// [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] supports.
-	Algorithm CryptoKeyVersion_CryptoKeyVersionAlgorithm `protobuf:"varint,10,opt,name=algorithm,proto3,enum=google.cloud.kms.v1.CryptoKeyVersion_CryptoKeyVersionAlgorithm" json:"algorithm,omitempty"`
+	Algorithm CryptoKeyVersion_CryptoKeyVersionAlgorithm `protobuf:"varint,10,opt,name=Algorithm,proto3,enum=google.cloud.kms.v1.CryptoKeyVersion_CryptoKeyVersionAlgorithm" json:"Algorithm,omitempty"`
 	// Output only. Statement that was generated and signed by the HSM at key
 	// creation time. Use this statement to verify attributes of the key as stored
 	// on the HSM, independently of Google. Only provided for key versions with
@@ -827,7 +827,7 @@ type PublicKey struct {
 	Pem string `protobuf:"bytes,1,opt,name=pem,proto3" json:"pem,omitempty"`
 	// The [Algorithm][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm] associated
 	// with this key.
-	Algorithm            CryptoKeyVersion_CryptoKeyVersionAlgorithm `protobuf:"varint,2,opt,name=algorithm,proto3,enum=google.cloud.kms.v1.CryptoKeyVersion_CryptoKeyVersionAlgorithm" json:"algorithm,omitempty"`
+	Algorithm            CryptoKeyVersion_CryptoKeyVersionAlgorithm `protobuf:"varint,2,opt,name=Algorithm,proto3,enum=google.cloud.kms.v1.CryptoKeyVersion_CryptoKeyVersionAlgorithm" json:"Algorithm,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                   `json:"-"`
 	XXX_unrecognized     []byte                                     `json:"-"`
 	XXX_sizecache        int32                                      `json:"-"`

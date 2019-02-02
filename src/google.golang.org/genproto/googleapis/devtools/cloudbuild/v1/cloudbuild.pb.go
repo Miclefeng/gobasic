@@ -81,7 +81,7 @@ func (Build_Status) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_8a9099620ac1526a, []int{10, 0}
 }
 
-// Specifies the hash algorithm, if any.
+// Specifies the hash Algorithm, if any.
 type Hash_HashType int32
 
 const (

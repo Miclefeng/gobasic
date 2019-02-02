@@ -217,7 +217,7 @@ func (t *Table) matchContraction(w []Elem, ce Elem, suffix []byte) ([]Elem, int)
 }
 
 // TODO: unify the two implementations. This is best done after first simplifying
-// the algorithm taking into account the inclusion of both NFC and NFD forms
+// the Algorithm taking into account the inclusion of both NFC and NFD forms
 // in the table.
 func (t *Table) matchContractionString(w []Elem, ce Elem, suffix string) ([]Elem, int) {
 	index, n, offset := splitContractIndex(ce)

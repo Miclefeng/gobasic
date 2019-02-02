@@ -331,7 +331,7 @@ type RateLimits struct {
 	// many tasks are enqueued in a short period of time.
 	//
 	// The [token bucket](https://wikipedia.org/wiki/Token_Bucket)
-	// algorithm is used to control the rate of task dispatches. Each
+	// Algorithm is used to control the rate of task dispatches. Each
 	// queue has a token bucket that holds tokens, up to the maximum
 	// specified by `max_burst_size`. Each time a task is dispatched, a
 	// token is removed from the bucket. Tasks will be dispatched until

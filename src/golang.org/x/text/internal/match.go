@@ -15,7 +15,7 @@ import (
 	"golang.org/x/text/language"
 )
 
-// TODO: consider if (some of the) matching algorithm needs to be public after
+// TODO: consider if (some of the) matching Algorithm needs to be public after
 // getting some feel about what is generic and what is specific.
 
 // NewInheritanceMatcher returns a matcher that matches based on the inheritance

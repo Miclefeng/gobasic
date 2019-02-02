@@ -187,7 +187,7 @@ type SimpleRequest struct {
 	FillUsername bool `protobuf:"varint,4,opt,name=fill_username,json=fillUsername,proto3" json:"fill_username,omitempty"`
 	// Whether SimpleResponse should include OAuth scope.
 	FillOauthScope bool `protobuf:"varint,5,opt,name=fill_oauth_scope,json=fillOauthScope,proto3" json:"fill_oauth_scope,omitempty"`
-	// Compression algorithm to be used by the server for the response (stream)
+	// Compression Algorithm to be used by the server for the response (stream)
 	ResponseCompression CompressionType `protobuf:"varint,6,opt,name=response_compression,json=responseCompression,proto3,enum=grpc.testing.CompressionType" json:"response_compression,omitempty"`
 	// Whether server should return a given status
 	ResponseStatus       *EchoStatus `protobuf:"bytes,7,opt,name=response_status,json=responseStatus,proto3" json:"response_status,omitempty"`
@@ -470,7 +470,7 @@ type StreamingOutputCallRequest struct {
 	ResponseParameters []*ResponseParameters `protobuf:"bytes,2,rep,name=response_parameters,json=responseParameters,proto3" json:"response_parameters,omitempty"`
 	// Optional input payload sent along with the request.
 	Payload *Payload `protobuf:"bytes,3,opt,name=payload,proto3" json:"payload,omitempty"`
-	// Compression algorithm to be used by the server for the response (stream)
+	// Compression Algorithm to be used by the server for the response (stream)
 	ResponseCompression CompressionType `protobuf:"varint,6,opt,name=response_compression,json=responseCompression,proto3,enum=grpc.testing.CompressionType" json:"response_compression,omitempty"`
 	// Whether server should return a given status
 	ResponseStatus       *EchoStatus `protobuf:"bytes,7,opt,name=response_status,json=responseStatus,proto3" json:"response_status,omitempty"`

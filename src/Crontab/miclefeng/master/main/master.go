@@ -1,7 +1,7 @@
 package main
 
 import (
-	"crontab/miclefeng/master"
+	"Crontab/miclefeng/master"
 	"flag"
 	"fmt"
 	"runtime"

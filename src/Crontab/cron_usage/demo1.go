@@ -19,7 +19,7 @@ func main() {
 		nextTime time.Time
 	)
 
-	// linux crontab
+	// linux Crontab
 	// 秒粒度, 年配置(2018-2099)
 	// 哪一分钟（0-59），哪小时（0-23），哪天（1-31），哪月（1-12），星期几（0-6）
 

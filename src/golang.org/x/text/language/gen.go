@@ -136,9 +136,9 @@ type regionIntelligibility struct {
 
 // writeMatchData writes tables with languages and scripts for which there is
 // mutual intelligibility. The data is based on CLDR's languageMatching data.
-// Note that we use a different algorithm than the one defined by CLDR and that
+// Note that we use a different Algorithm than the one defined by CLDR and that
 // we slightly modify the data. For example, we convert scores to confidence levels.
-// We also drop all region-related data as we use a different algorithm to
+// We also drop all region-related data as we use a different Algorithm to
 // determine region equivalence.
 func (b *builder) writeMatchData() {
 	lm := b.supp.LanguageMatching.LanguageMatches

@@ -180,7 +180,7 @@ type Tokenizer struct {
 // tracking foreign-contentness is difficult to do purely in the tokenizer,
 // as opposed to the parser, due to HTML integration points: an <svg> element
 // can contain a <foreignObject> that is foreign-to-SVG but not foreign-to-
-// HTML. For strict compliance with the HTML5 tokenization algorithm, it is the
+// HTML. For strict compliance with the HTML5 tokenization Algorithm, it is the
 // responsibility of the user of a tokenizer to call AllowCDATA as appropriate.
 // In practice, if using the tokenizer without caring whether MathML or SVG
 // CDATA is text or comments, such as tokenizing HTML to find all the anchor
@@ -206,7 +206,7 @@ func (z *Tokenizer) AllowCDATA(allowCDATA bool) {
 // one cannot close the implicit element when parsing a <select>'s InnerHTML.
 // Similarly to AllowCDATA, tracking the correct moment to override raw-text-
 // ness is difficult to do purely in the tokenizer, as opposed to the parser.
-// For strict compliance with the HTML5 tokenization algorithm, it is the
+// For strict compliance with the HTML5 tokenization Algorithm, it is the
 // responsibility of the user of a tokenizer to call NextIsNotRawText as
 // appropriate. In practice, like AllowCDATA, it is acceptable to ignore this
 // responsibility for basic usage.

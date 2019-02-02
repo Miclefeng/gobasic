@@ -31,7 +31,7 @@ const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 type ServiceAccountKeyAlgorithm int32
 
 const (
-	// An unspecified key algorithm.
+	// An unspecified key Algorithm.
 	ServiceAccountKeyAlgorithm_KEY_ALG_UNSPECIFIED ServiceAccountKeyAlgorithm = 0
 	// 1k RSA Key.
 	ServiceAccountKeyAlgorithm_KEY_ALG_RSA_1024 ServiceAccountKeyAlgorithm = 1
@@ -875,7 +875,7 @@ type ServiceAccountKey struct {
 	// Google never exposes system-managed private keys, and never retains
 	// user-managed private keys.
 	PrivateKeyType ServiceAccountPrivateKeyType `protobuf:"varint,2,opt,name=private_key_type,json=privateKeyType,proto3,enum=google.iam.admin.v1.ServiceAccountPrivateKeyType" json:"private_key_type,omitempty"`
-	// Specifies the algorithm (and possibly key size) for the key.
+	// Specifies the Algorithm (and possibly key size) for the key.
 	KeyAlgorithm ServiceAccountKeyAlgorithm `protobuf:"varint,8,opt,name=key_algorithm,json=keyAlgorithm,proto3,enum=google.iam.admin.v1.ServiceAccountKeyAlgorithm" json:"key_algorithm,omitempty"`
 	// The private key data. Only provided in `CreateServiceAccountKey`
 	// responses. Make sure to keep the private key data secure because it
@@ -981,7 +981,7 @@ type CreateServiceAccountKeyRequest struct {
 	// The output format of the private key. `GOOGLE_CREDENTIALS_FILE` is the
 	// default output format.
 	PrivateKeyType ServiceAccountPrivateKeyType `protobuf:"varint,2,opt,name=private_key_type,json=privateKeyType,proto3,enum=google.iam.admin.v1.ServiceAccountPrivateKeyType" json:"private_key_type,omitempty"`
-	// Which type of key and algorithm to use for the key.
+	// Which type of key and Algorithm to use for the key.
 	// The default is currently a 2K RSA key.  However this may change in the
 	// future.
 	KeyAlgorithm         ServiceAccountKeyAlgorithm `protobuf:"varint,3,opt,name=key_algorithm,json=keyAlgorithm,proto3,enum=google.iam.admin.v1.ServiceAccountKeyAlgorithm" json:"key_algorithm,omitempty"`
