@@ -12,14 +12,14 @@ import (
  */
 
 type array struct {
-	data [10]int
+	data [10]interface{}
 	size int
 }
 
 var Array *array
 
 func init() {
-	Array = &array{[10]int{}, 0}
+	Array = &array{[10]interface{}{}, 0}
 }
 
 func main() {
@@ -53,7 +53,7 @@ func main() {
 }
 
 // 在数组第index个位置插入元素e
-func (arr *array) add(index, e int) {
+func (arr *array) add(index int, e interface{}) {
 	if arr.size == cap(arr.data) {
 		panic("array is full.")
 	}
@@ -69,22 +69,22 @@ func (arr *array) add(index, e int) {
 }
 
 // 在数组头部添加元素
-func (arr *array) addFirst(e int) {
+func (arr *array) addFirst(e interface{}) {
 	arr.add(0, e)
 }
 
 // 在数组末尾添加元素
-func (arr *array) addLast(e int) {
+func (arr *array) addLast(e interface{}) {
 	arr.add(arr.size, e)
 }
 
 // 在数组中移除index位置的元素并返回
-func (arr *array) remove(index int) int {
+func (arr *array) remove(index int) interface{} {
 	if index < 0 || index >= arr.size {
 		panic("require index >=0 and index < size")
 	}
 	res := arr.data[index]
-	oldData := make([]int, cap(arr.data))
+	oldData := make([]interface{}, cap(arr.data))
 	copy(oldData, arr.data[:])
 	for i := index + 1; i < arr.size; i++ {
 		arr.data[i-1] = oldData[i]
@@ -94,17 +94,17 @@ func (arr *array) remove(index int) int {
 }
 
 // 在数组中删除第一个元素并返回
-func (arr *array) removeFirst() int {
+func (arr *array) removeFirst() interface{} {
 	return arr.remove(0)
 }
 
 // 在数组中删除最后一个元素并返回
-func (arr *array) removeLast() int {
+func (arr *array) removeLast() interface{} {
 	return arr.remove(arr.size - 1)
 }
 
 // 在数组中删除某个元素
-func (arr *array) removeElement(e int) bool {
+func (arr *array) removeElement(e interface{}) bool {
 	res := false
 	index := arr.find(e)
 	if index >= 0 {
@@ -130,7 +130,7 @@ func (arr *array) isEmpty() bool {
 }
 
 // 是否包含某个元素
-func (arr *array) contains(e int) bool {
+func (arr *array) contains(e interface{}) bool {
 	for i := 0; i < arr.size; i++ {
 		if arr.data[i] == e {
 			return true
@@ -140,7 +140,7 @@ func (arr *array) contains(e int) bool {
 }
 
 // 查询数组中元素的索引，不存在返回-1
-func (arr *array) find(e int) int {
+func (arr *array) find(e interface{}) int {
 	for i := 0; i < arr.size; i++ {
 		if arr.data[i] == e {
 			return i
@@ -153,7 +153,14 @@ func (arr *array) print() {
 	fmt.Printf("Array: size = %d, capacity = %d\n", arr.size, cap(arr.data))
 	str := "["
 	for i := 0; i < arr.size; i++ {
-		str += strconv.Itoa(arr.data[i]) + ", "
+		switch arr.data[i].(type) {
+		case int:
+			str += strconv.Itoa(arr.data[i].(int)) + ", "
+		case float64:
+			str += strconv.FormatFloat(arr.data[i].(float64), 'E', -1, 64) + ", "
+		default:
+			str += arr.data[i].(string) + ", "
+		}
 	}
 	str = strings.TrimRight(str, ", ")
 	str += "]"
