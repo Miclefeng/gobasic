@@ -12,14 +12,15 @@ import (
  */
 
 type array struct {
-	data [10]interface{}
+	data []interface{}
 	size int
 }
 
 var Array *array
 
 func init() {
-	Array = &array{[10]interface{}{}, 0}
+	data := make([]interface{}, 10)
+	Array = &array{data, 0}
 }
 
 func main() {
@@ -35,15 +36,24 @@ func main() {
 	//for _, i := range scores {
 	//	fmt.Println(i)
 	//}
+	for i := 0 ;i < 10; i++ {
+		Array.addLast(i)
+	}
+
+	Array.print()
 	Array.addLast(1)
-	Array.addLast(2)
-	Array.addLast(3)
-	Array.addLast(4)
 	Array.print()
 	Array.add(2, 5)
 	Array.print()
 	Array.remove(2)
 	Array.print()
+	Array.removeLast()
+	Array.removeLast()
+	Array.removeLast()
+	Array.removeLast()
+	Array.removeLast()
+	Array.removeLast()
+	Array.removeLast()
 	Array.removeLast()
 	Array.print()
 	Array.removeFirst()
@@ -54,11 +64,12 @@ func main() {
 
 // 在数组第index个位置插入元素e
 func (arr *array) add(index int, e interface{}) {
-	if arr.size == cap(arr.data) {
-		panic("array is full.")
-	}
 	if index < 0 || index > arr.size {
 		panic("require index >=0 and index < size")
+	}
+	// 数组自动扩容，当前容量的两倍
+	if arr.size == cap(arr.data) {
+		arr.resize(2 * cap(arr.data))
 	}
 
 	for i := arr.size - 1; i >= index; i-- {
@@ -90,6 +101,11 @@ func (arr *array) remove(index int) interface{} {
 		arr.data[i-1] = oldData[i]
 	}
 	arr.size--
+	arr.data[arr.size] = nil
+	// 数组自动缩容，当前容量的一半
+	if arr.size == cap(arr.data) / 4 && cap(arr.data) / 2 != 0 {
+		arr.resize(cap(arr.data) / 2)
+	}
 	return res
 }
 
@@ -147,6 +163,15 @@ func (arr *array) find(e interface{}) int {
 		}
 	}
 	return -1
+}
+
+// 数组的动态缩容、扩容
+func (arr *array) resize(length int) {
+	newData := make([]interface{}, length)
+	for i := 0; i < arr.size;i++ {
+		newData[i] = arr.data[i]
+	}
+	arr.data = newData
 }
 
 func (arr *array) print() {
