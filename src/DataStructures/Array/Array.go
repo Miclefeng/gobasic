@@ -102,7 +102,7 @@ func (arr *Array) GetCapacity() int {
 }
 
 // 判断数组是否为空
-func (arr *Array) isEmpty() bool {
+func (arr *Array) IsEmpty() bool {
 	return arr.Size == 0
 }
 
@@ -124,6 +124,22 @@ func (arr *Array) Find(e interface{}) int {
 		}
 	}
 	return -1
+}
+
+// 获取第一个元素
+func (arr *Array) GetFirst() (e interface{}) {
+	e = arr.Data[0]
+	return
+}
+
+// 获取最后一个元素
+func (arr *Array) GetLast() (e interface{}) {
+	if arr.Size < 1 {
+		e = arr.Data[0]
+	} else {
+		e = arr.Data[arr.Size-1]
+	}
+	return
 }
 
 // 数组的动态缩容、扩容

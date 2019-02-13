@@ -2,6 +2,7 @@ package main
 
 import (
 	"DataStructures/Array"
+	"DataStructures/Queue"
 	"DataStructures/Stack"
 	"fmt"
 )
@@ -41,4 +42,17 @@ func main() {
 	stack.Pop()
 	stack.Print()
 	fmt.Println(stack.Top())
+
+	queue := Queue.Instance
+
+	for i :=0; i< 20;i++ {
+		queue.EnQueue(i)
+	}
+	queue.Print()
+
+	for i :=0;i < 15;i++ {
+		queue.DeQueue()
+	}
+	queue.Print()
+	fmt.Println(queue.GetFront())
 }
