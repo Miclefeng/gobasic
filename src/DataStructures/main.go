@@ -1,6 +1,7 @@
 package main
 
 import (
+	"DataStructures/Array"
 	"DataStructures/Stack"
 	"fmt"
 )
@@ -11,6 +12,22 @@ import (
  */
 
 func main() {
+	array := Array.Instance
+
+	for i :=0;i<10;i++ {
+		array.AddLast(i)
+	}
+	array.Print()
+	array.AddFirst(20)
+	array.Print()
+	array.RemoveFirst()
+	array.RemoveFirst()
+	array.RemoveFirst()
+	array.RemoveFirst()
+	array.RemoveFirst()
+	array.RemoveElement(7)
+	array.Print()
+
 	stack := Stack.Instance
 
 	for i := 0;i < 10; i++ {
