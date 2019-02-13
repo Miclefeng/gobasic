@@ -63,7 +63,7 @@ func (arr *Array) Remove(index int) interface{} {
 	}
 	arr.Size--
 	arr.Data[arr.Size] = nil
-	// 数组自动缩容，当前容量的一半
+	// 数组元素个数为当前容量的1/4自动缩容，缩容为当前容量的一半，防止复杂度震荡
 	if arr.Size == cap(arr.Data)/4 && cap(arr.Data)/2 != 0 {
 		arr.resize(cap(arr.Data) / 2)
 	}
