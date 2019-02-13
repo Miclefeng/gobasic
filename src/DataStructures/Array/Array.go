@@ -64,7 +64,7 @@ func (arr *Array) Remove(index int) interface{} {
 	arr.Size--
 	arr.Data[arr.Size] = nil
 	// 数组自动缩容，当前容量的一半
-	if arr.Size == cap(arr.Data) / 4 && cap(arr.Data) / 2 != 0 {
+	if arr.Size == cap(arr.Data)/4 && cap(arr.Data)/2 != 0 {
 		arr.resize(cap(arr.Data) / 2)
 	}
 	return res
@@ -145,7 +145,7 @@ func (arr *Array) GetLast() (e interface{}) {
 // 数组的动态缩容、扩容
 func (arr *Array) resize(length int) {
 	newData := make([]interface{}, length)
-	for i := 0; i < arr.Size;i++ {
+	for i := 0; i < arr.Size; i++ {
 		newData[i] = arr.Data[i]
 	}
 	arr.Data = newData
