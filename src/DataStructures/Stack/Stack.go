@@ -13,6 +13,13 @@ import (
 
 type Stack []interface{}
 
+// 注册单例
+var Instance *Stack
+
+func init() {
+	Instance = &Stack{}
+}
+
 // 入栈
 func (stack *Stack) Push(e interface{}) {
 	*stack = append(*stack, e)

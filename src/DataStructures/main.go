@@ -11,7 +11,7 @@ import (
  */
 
 func main() {
-	stack := &Stack.Stack{}
+	stack := Stack.Instance
 
 	for i := 0;i < 10; i++ {
 		stack.Push(i)
