@@ -19,8 +19,7 @@ type Array struct {
 var Instance *Array
 
 func init() {
-	data := make([]interface{}, 10)
-	Instance = &Array{data, 0}
+	Instance = &Array{make([]interface{}, 10), 0}
 }
 
 // 在数组第index个位置插入元素e
