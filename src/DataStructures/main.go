@@ -75,6 +75,4 @@ func main() {
 	loopQueue.EnQueue(12)
 	loopQueue.EnQueue(13)
 	loopQueue.Print()
-
-
 }
