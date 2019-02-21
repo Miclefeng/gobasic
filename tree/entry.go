@@ -1,12 +1,11 @@
-package main
+package tree
 
 import (
 	"fmt"
-	"miclefeng/learngo/tree"
 )
 
 type myTreeNode struct {
-	node *tree.Node
+	node *Node
 }
 
 func (myNode *myTreeNode) postOrder() {
@@ -29,12 +28,12 @@ func (myNode *myTreeNode) postOrder() {
 */
 // 为结构定义的方法必须放在同一个包内，可以是不同的文件
 func main() {
-	var root tree.Node
-	root = tree.Node{Value: 3}
-	root.Left = &tree.Node{}
-	root.Right = &tree.Node{5, nil, nil}
-	root.Right.Left = new(tree.Node) // 不论地址还是结构本身，一律使用 . 来访问成员
-	root.Left.Right = tree.CreateNode(2)
+	var root Node
+	root = Node{Value: 3}
+	root.Left = &Node{}
+	root.Right = &Node{5, nil, nil}
+	root.Right.Left = new(Node) // 不论地址还是结构本身，一律使用 . 来访问成员
+	root.Left.Right = CreateNode(2)
 	//nodes := []Node {
 	//	{value : 3},
 	//	{},
@@ -46,7 +45,7 @@ func main() {
 	root.Right.Left.SetValue(4) // 值传递
 	root.Traverse()
 	nodeCount := 0
-	root.TraverseFunc(func(node *tree.Node) {
+	root.TraverseFunc(func(node *Node) {
 		nodeCount++
 	})
 	fmt.Println("Node count : ", nodeCount)
