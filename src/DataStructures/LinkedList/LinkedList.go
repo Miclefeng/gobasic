@@ -105,3 +105,45 @@ func (list *LinkedList) Contains(e interface{}) bool {
 	}
 	return false
 }
+
+func (list *LinkedList) Remove(index int) (e interface{}) {
+	if (index < 0 || index > list.size) {
+		panic("Get failed. Illegal index.")
+	}
+
+	prev := list.dummyHead
+	for i := 0; i < index; i++ {
+		prev = prev.Next
+	}
+	node := prev.Next
+	prev.Next = node.Next
+	node.Next = nil
+	e = node.E
+	list.size--
+	return
+}
+
+func (list *LinkedList) RemoveFirst() (e interface{}) {
+	return list.Remove(0)
+}
+
+func (list *LinkedList) RemoveLast() (e interface{}) {
+	return list.Remove(list.size - 1)
+}
+
+func (list *LinkedList) RemoveElement(e interface{}) {
+	prev := list.dummyHead
+	for prev.Next != nil {
+		if prev.Next.E == e {
+			break
+		}
+		prev = prev.Next
+	}
+
+	if prev.Next != nil {
+		node := prev.Next
+		prev.Next = node.Next
+		node.Next = nil
+		list.size--
+	}
+}

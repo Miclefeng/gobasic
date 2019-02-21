@@ -19,7 +19,7 @@ func main() {
 
 	fmt.Println(linkedList.GetSize())
 	fmt.Println()
-	for i := 0; i < 10; i++ {
+	for i := 0; i < linkedList.GetSize(); i++ {
 		fmt.Println(linkedList.Get(i))
 	}
 
@@ -27,4 +27,12 @@ func main() {
 	fmt.Println(linkedList.Get(5))
 	fmt.Println(linkedList.Contains("a"))
 	fmt.Println(linkedList.Contains("b"))
+	fmt.Println("---------------------")
+	fmt.Println(linkedList.RemoveFirst())
+	fmt.Println(linkedList.RemoveLast())
+	linkedList.RemoveElement("a")
+	fmt.Println("---------------------")
+	for i := 0; i < linkedList.GetSize(); i++ {
+		fmt.Println(linkedList.Get(i))
+	}
 }
