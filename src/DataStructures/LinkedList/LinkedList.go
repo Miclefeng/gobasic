@@ -106,6 +106,7 @@ func (list *LinkedList) Contains(e interface{}) bool {
 	return false
 }
 
+// 移除链表index位置节点中的元素
 func (list *LinkedList) Remove(index int) (e interface{}) {
 	if (index < 0 || index > list.size) {
 		panic("Get failed. Illegal index.")
@@ -123,14 +124,17 @@ func (list *LinkedList) Remove(index int) (e interface{}) {
 	return
 }
 
+// 移除链表第一个节点中的元素
 func (list *LinkedList) RemoveFirst() (e interface{}) {
 	return list.Remove(0)
 }
 
+// 移除链表最后一个节点中的元素
 func (list *LinkedList) RemoveLast() (e interface{}) {
 	return list.Remove(list.size - 1)
 }
 
+// 移除链表中的某个元素
 func (list *LinkedList) RemoveElement(e interface{}) {
 	prev := list.dummyHead
 	for prev.Next != nil {
