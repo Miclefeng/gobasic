@@ -19,9 +19,12 @@ func main() {
 
 	fmt.Println(linkedList.GetSize())
 	fmt.Println()
-	fmt.Println(linkedList.GetFirst())
 	for i := 0; i < 10; i++ {
 		fmt.Println(linkedList.Get(i))
 	}
-	fmt.Println(linkedList.GetLast())
+
+	linkedList.Set(5, "a")
+	fmt.Println(linkedList.Get(5))
+	fmt.Println(linkedList.Contains("a"))
+	fmt.Println(linkedList.Contains("b"))
 }

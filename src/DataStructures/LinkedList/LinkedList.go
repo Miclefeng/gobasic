@@ -79,3 +79,27 @@ func (list *LinkedList) GetFirst() (e interface{}) {
 func (list *LinkedList) GetLast() (e interface{}) {
 	return list.Get(list.size - 1)
 }
+
+// 修改index位置节点中的元素
+func (list *LinkedList) Set(index int, e interface{}) {
+	if (index < 0 || index > list.size) {
+		panic("Get failed. Illegal index.")
+	}
+	curNode := list.dummyHead.Next
+	for i := 0; i < index; i++ {
+		curNode = curNode.Next
+	}
+	curNode.E = e
+}
+
+// 查看链表是否包含元素e
+func (list *LinkedList) Contains(e interface{}) bool {
+	curNode := list.dummyHead.Next
+	for curNode != nil {
+		if curNode.E == e {
+			return true
+		}
+		curNode = curNode.Next
+	}
+	return false
+}
