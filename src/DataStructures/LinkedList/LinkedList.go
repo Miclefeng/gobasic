@@ -62,6 +62,7 @@ func (list *LinkedList) Get(index int) (e interface{}) {
 	if (index < 0 || index > list.size) {
 		panic("Get failed. Illegal index.")
 	}
+
 	curNode := list.dummyHead.Next
 	for i := 0; i < index; i++ {
 		curNode = curNode.Next
@@ -85,6 +86,7 @@ func (list *LinkedList) Set(index int, e interface{}) {
 	if (index < 0 || index > list.size) {
 		panic("Get failed. Illegal index.")
 	}
+
 	curNode := list.dummyHead.Next
 	for i := 0; i < index; i++ {
 		curNode = curNode.Next
