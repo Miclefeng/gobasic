@@ -1,6 +1,7 @@
 package main
 
 import (
+	"DataStructures/LinkedList/LinkedListQueue"
 	"DataStructures/LinkedList/LinkedListStack"
 )
 
@@ -44,6 +45,16 @@ func main() {
 		if i%3 == 2 {
 			listStack.Pop()
 			listStack.Print()
+		}
+	}
+
+	listQueue := LinkedListQueue.Instance
+	for i:=0;i<10;i++{
+		listQueue.EnQueue(i)
+		listQueue.Print()
+		if i%3 == 2 {
+			listQueue.DeQueue()
+			listQueue.Print()
 		}
 	}
 }
