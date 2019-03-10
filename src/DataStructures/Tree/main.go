@@ -24,8 +24,12 @@ func main() {
 	bst.PreOrder()
 	fmt.Println()
 	fmt.Println("-------------------------")
+	bst.PreOrderNR()
+	fmt.Println()
+	fmt.Println("-------------------------")
 	bst.InOrder()
 	fmt.Println()
 	fmt.Println("-------------------------")
 	bst.PostOrder()
+
 }

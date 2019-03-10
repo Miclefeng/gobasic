@@ -1,6 +1,7 @@
 package BinarySearchTree
 
 import (
+	"DataStructures/Stack"
 	"DataStructures/Tree/Node"
 	"fmt"
 )
@@ -104,7 +105,7 @@ func (bst *BST) search(node *Node.Node, key int) bool {
 	return true
 }
 
-// 前序遍历
+// 前序遍历(递归)
 func (bst *BST) PreOrder() {
 	preOrder(bst.root)
 }
@@ -116,6 +117,26 @@ func preOrder(node *Node.Node) {
 	fmt.Printf("%s\t", node.E)
 	preOrder(node.Left)
 	preOrder(node.Right)
+}
+
+// 运用栈进行非递归实现树的前序遍历
+func (bst *BST) PreOrderNR() {
+	if nil == bst.root {
+		return
+	}
+
+	stack := &Stack.Stack{}
+	stack.Push(bst.root)
+	for !stack.IsEmpty() {
+		node := stack.Pop()
+		fmt.Printf("%s\t", node.E)
+		if node.Right != nil {
+			stack.Push(node.Right)
+		}
+		if node.Left != nil {
+			stack.Push(node.Left)
+		}
+	}
 }
 
 // 中序遍历
