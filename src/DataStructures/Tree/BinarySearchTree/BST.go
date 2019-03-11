@@ -3,6 +3,7 @@ package BinarySearchTree
 import (
 	"DataStructures/Stack"
 	"DataStructures/Tree/Node"
+	"DataStructures/Tree/NodeQueue"
 	"fmt"
 )
 
@@ -165,6 +166,92 @@ func postOrder(node *Node.Node) {
 	postOrder(node.Left)
 	postOrder(node.Right)
 	fmt.Printf("%s\t", node.E)
+}
+
+// 广度优先遍历(层序遍历)
+func (bst *BST) LevelOrder() {
+	if nil == bst.root {
+		return
+	}
+
+	queue := NodeQueue.Instance
+	queue.EnQueue(bst.root)
+	for !queue.IsEmpty() {
+		node := queue.DeQueue()
+		fmt.Printf("%s\t", node.E)
+		if node.Left != nil {
+			queue.EnQueue(node.Left)
+		}
+		if node.Right != nil {
+			queue.EnQueue(node.Right)
+		}
+	}
+}
+
+// 获取二分搜索树最小值
+func (bst *BST) Minimum() (e interface{})  {
+	if 0 == bst.size {
+		return nil
+	}
+	return minimum(bst.root);
+}
+
+func minimum(node *Node.Node) (e interface{}) {
+	if nil == node.Left {
+		return node.E
+	}
+	return minimum(node.Left)
+}
+
+// 获取二分搜索树最大值
+func (bst *BST) Maximum() (e interface{}) {
+	if 0 == bst.size {
+		return nil
+	}
+	return maximum(bst.root)
+}
+
+func maximum(node *Node.Node) (e interface{}) {
+	if nil == node.Right {
+		return node.E
+	}
+	return maximum(node.Right)
+}
+
+// 删除二分搜索树最小值
+func (bst *BST) RemoveMin() (e interface{})  {
+	e = bst.Minimum()
+	bst.root = removeMin(bst, bst.root)
+	return
+}
+// 删除掉以node为根的二分搜索树中的最小值
+// 返回删除节点后的二分搜索树的根
+func removeMin(bst *BST, node *Node.Node) (*Node.Node) {
+	if nil == node.Left {
+		nr := node.Right
+		node.Right = nil
+		bst.size--
+		return nr
+	}
+	node.Left = removeMin(bst, node.Left)
+	return node
+}
+
+func (bst *BST) RemoveMax() (e interface{}) {
+	e = bst.Maximum()
+	bst.root = removeMax(bst, bst.root)
+	return e
+}
+
+func removeMax(bst *BST, node *Node.Node) (*Node.Node)  {
+	if nil == node.Right {
+		nl := node.Left
+		node.Left = nil
+		bst.size--
+		return nl
+	}
+	node.Right = removeMax(bst, node.Right)
+	return node
 }
 
 // 获取树节点个数
