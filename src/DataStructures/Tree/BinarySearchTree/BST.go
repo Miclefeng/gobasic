@@ -189,41 +189,42 @@ func (bst *BST) LevelOrder() {
 }
 
 // 获取二分搜索树最小值
-func (bst *BST) Minimum() (e interface{})  {
+func (bst *BST) Minimum() (*Node.Node) {
 	if 0 == bst.size {
 		return nil
 	}
 	return minimum(bst.root);
 }
 
-func minimum(node *Node.Node) (e interface{}) {
+func minimum(node *Node.Node) (*Node.Node) {
 	if nil == node.Left {
-		return node.E
+		return node
 	}
 	return minimum(node.Left)
 }
 
 // 获取二分搜索树最大值
-func (bst *BST) Maximum() (e interface{}) {
+func (bst *BST) Maximum() (*Node.Node) {
 	if 0 == bst.size {
 		return nil
 	}
 	return maximum(bst.root)
 }
 
-func maximum(node *Node.Node) (e interface{}) {
+func maximum(node *Node.Node) (*Node.Node) {
 	if nil == node.Right {
-		return node.E
+		return node
 	}
 	return maximum(node.Right)
 }
 
 // 删除二分搜索树最小值
-func (bst *BST) RemoveMin() (e interface{})  {
-	e = bst.Minimum()
+func (bst *BST) RemoveMin() (*Node.Node) {
+	node := bst.Minimum()
 	bst.root = removeMin(bst, bst.root)
-	return
+	return node
 }
+
 // 删除掉以node为根的二分搜索树中的最小值
 // 返回删除节点后的二分搜索树的根
 func removeMin(bst *BST, node *Node.Node) (*Node.Node) {
@@ -237,13 +238,16 @@ func removeMin(bst *BST, node *Node.Node) (*Node.Node) {
 	return node
 }
 
-func (bst *BST) RemoveMax() (e interface{}) {
-	e = bst.Maximum()
+// 删除二分搜索树最大值
+func (bst *BST) RemoveMax() (*Node.Node) {
+	node := bst.Maximum()
 	bst.root = removeMax(bst, bst.root)
-	return e
+	return node
 }
 
-func removeMax(bst *BST, node *Node.Node) (*Node.Node)  {
+// 删除掉以node为根的二分搜索树中的最大值
+// 返回删除节点后的二分搜索树的根
+func removeMax(bst *BST, node *Node.Node) (*Node.Node) {
 	if nil == node.Right {
 		nl := node.Left
 		node.Left = nil
@@ -252,6 +256,53 @@ func removeMax(bst *BST, node *Node.Node) (*Node.Node)  {
 	}
 	node.Right = removeMax(bst, node.Right)
 	return node
+}
+
+// 从二分搜索树中删除值为key的节点
+func (bst *BST) Remove(key int) {
+	if nil == bst.root {
+		return
+	}
+	bst.root = remove(bst, bst.root, key)
+}
+
+// 删除以node为根的二分搜索树值为key的节点，递归实现
+// 返回删除节点后的二分搜索树的根
+func remove(bst *BST, node *Node.Node, key int) (*Node.Node) {
+	if nil == node {
+		return nil
+	}
+
+	if node.Key < key {
+		node.Right = remove(bst, node.Right, key)
+		return node
+	} else if node.Key > key {
+		node.Left = remove(bst,node.Left, key)
+		return node
+	} else { // node.key == key
+		if nil == node.Left {
+			nr := node.Right
+			node.Right = nil
+			bst.size--
+			return nr
+		}
+		if nil == node.Right {
+			nl := node.Left
+			node.Left = nil
+			bst.size--
+			return nl
+		}
+		// 待删除的节点左右子树都不为空
+		// 找到比待删除节点大的最小节点，即待删除节点右子树的最小节点
+		// 用这个节点顶替待删除节点的位置
+		successor := minimum(node.Right)
+		// 删除右子树的最小节点，剩下都大于最小节点，所有用右子树接收
+		successor.Right = removeMin(bst, node.Right)
+		successor.Left = node.Left
+		node.Left = nil
+		node.Right = nil
+		return successor
+	}
 }
 
 // 获取树节点个数
