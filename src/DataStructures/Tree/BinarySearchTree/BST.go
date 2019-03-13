@@ -260,9 +260,6 @@ func removeMax(bst *BST, node *Node.Node) (*Node.Node) {
 
 // 从二分搜索树中删除值为key的节点
 func (bst *BST) Remove(key int) {
-	if nil == bst.root {
-		return
-	}
 	bst.root = remove(bst, bst.root, key)
 }
 
