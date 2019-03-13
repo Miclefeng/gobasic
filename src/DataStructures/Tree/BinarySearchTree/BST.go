@@ -1,9 +1,9 @@
 package BinarySearchTree
 
 import (
-	"DataStructures/Stack"
 	"DataStructures/Tree/Node"
 	"DataStructures/Tree/NodeQueue"
+	"DataStructures/Tree/NodeStack"
 	"fmt"
 )
 
@@ -126,7 +126,7 @@ func (bst *BST) PreOrderNR() {
 		return
 	}
 
-	stack := &Stack.Stack{}
+	stack := &NodeStack.Stack{}
 	stack.Push(bst.root)
 	for !stack.IsEmpty() {
 		node := stack.Pop()
@@ -277,7 +277,7 @@ func remove(bst *BST, node *Node.Node, key int) (*Node.Node) {
 		node.Right = remove(bst, node.Right, key)
 		return node
 	} else if node.Key > key {
-		node.Left = remove(bst,node.Left, key)
+		node.Left = remove(bst, node.Left, key)
 		return node
 	} else { // node.key == key
 		if nil == node.Left {
