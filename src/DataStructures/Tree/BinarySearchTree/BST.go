@@ -5,6 +5,8 @@ import (
 	"DataStructures/Tree/NodeQueue"
 	"DataStructures/Tree/NodeStack"
 	"fmt"
+	"reflect"
+	"strconv"
 )
 
 /**
@@ -26,22 +28,22 @@ func init() {
 }
 
 // 向二分搜索树添加节点
-func (bst *BST) NewAdd(key int, e interface{}) {
-	bst.root = bst.newAdd(key, e, bst.root)
+func (bst *BST) NewAdd(e interface{}) {
+	bst.root = bst.newAdd(e, bst.root)
 }
 
 // 递归向二分搜索树添加节点
-func (bst *BST) newAdd(key int, e interface{}, node *Node.Node) *Node.Node {
+func (bst *BST) newAdd(e interface{}, node *Node.Node) *Node.Node {
 	if nil == node {
 		bst.size++
-		return &Node.Node{Key: key, E: e}
+		return &Node.Node{E: e}
 	}
 
-	if key < node.Key {
-		node.Left = bst.newAdd(key, e, node.Left)
+	if anyFormat(e) < anyFormat(node.E) {
+		node.Left = bst.newAdd(e, node.Left)
 	}
-	if key > node.Key {
-		node.Right = bst.newAdd(key, e, node.Right)
+	if anyFormat(e) > anyFormat(node.E) {
+		node.Right = bst.newAdd(e, node.Right)
 	}
 	return node
 }
@@ -88,20 +90,20 @@ func (bst *BST) add(node, newNode *Node.Node) {
 }
 
 // 在二分搜索树中查找某个元素
-func (bst *BST) Search(key int) bool {
-	return bst.search(bst.root, key)
+func (bst *BST) Search(e interface{}) bool {
+	return bst.search(bst.root, e)
 }
 
 // 递归遍历在二分搜索树中查找某个元素
-func (bst *BST) search(node *Node.Node, key int) bool {
+func (bst *BST) search(node *Node.Node, e interface{}) bool {
 	if nil == node {
 		return false
 	}
-	if key < node.Key {
-		return bst.search(node.Left, key)
+	if anyFormat(e) < anyFormat(node.E) {
+		return bst.search(node.Left, e)
 	}
-	if key > node.Key {
-		return bst.search(node.Right, key)
+	if anyFormat(e) > anyFormat(node.E) {
+		return bst.search(node.Right, e)
 	}
 	return true
 }
@@ -115,7 +117,7 @@ func preOrder(node *Node.Node) {
 	if nil == node {
 		return
 	}
-	fmt.Printf("%s\t", node.E)
+	fmt.Printf("%v\t", node.E)
 	preOrder(node.Left)
 	preOrder(node.Right)
 }
@@ -130,7 +132,7 @@ func (bst *BST) PreOrderNR() {
 	stack.Push(bst.root)
 	for !stack.IsEmpty() {
 		node := stack.Pop()
-		fmt.Printf("%s\t", node.E)
+		fmt.Printf("%v\t", node.E)
 		if node.Right != nil {
 			stack.Push(node.Right)
 		}
@@ -150,7 +152,7 @@ func inOrder(node *Node.Node) {
 		return
 	}
 	inOrder(node.Left)
-	fmt.Printf("%s\t", node.E)
+	fmt.Printf("%v\t", node.E)
 	inOrder(node.Right)
 }
 
@@ -165,7 +167,7 @@ func postOrder(node *Node.Node) {
 	}
 	postOrder(node.Left)
 	postOrder(node.Right)
-	fmt.Printf("%s\t", node.E)
+	fmt.Printf("%v\t", node.E)
 }
 
 // 广度优先遍历(层序遍历)
@@ -178,7 +180,7 @@ func (bst *BST) LevelOrder() {
 	queue.EnQueue(bst.root)
 	for !queue.IsEmpty() {
 		node := queue.DeQueue()
-		fmt.Printf("%s\t", node.E)
+		fmt.Printf("%v\t", node.E)
 		if node.Left != nil {
 			queue.EnQueue(node.Left)
 		}
@@ -258,23 +260,23 @@ func removeMax(bst *BST, node *Node.Node) (*Node.Node) {
 	return node
 }
 
-// 从二分搜索树中删除值为key的节点
-func (bst *BST) Remove(key int) {
-	bst.root = remove(bst, bst.root, key)
+// 从二分搜索树中删除值为 e 的节点
+func (bst *BST) Remove(e interface{}) {
+	bst.root = remove(bst, bst.root, e)
 }
 
 // 删除以node为根的二分搜索树值为key的节点，递归实现
 // 返回删除节点后的二分搜索树的根
-func remove(bst *BST, node *Node.Node, key int) (*Node.Node) {
+func remove(bst *BST, node *Node.Node, e interface{}) (*Node.Node) {
 	if nil == node {
 		return nil
 	}
 
-	if node.Key < key {
-		node.Right = remove(bst, node.Right, key)
+	if anyFormat(e) > anyFormat(node.E) {
+		node.Right = remove(bst, node.Right, e)
 		return node
-	} else if node.Key > key {
-		node.Left = remove(bst, node.Left, key)
+	} else if anyFormat(e) < anyFormat(node.E) {
+		node.Left = remove(bst, node.Left, e)
 		return node
 	} else { // node.key == key
 		if nil == node.Left {
@@ -310,4 +312,33 @@ func (bst *BST) GetSize() int {
 // 判断是否是空
 func (bst *BST) IsEmpty() bool {
 	return 0 == bst.size
+}
+
+// Any formats any value as a string.
+func anyFormat(value interface{}) string {
+	return formatAtom(reflect.ValueOf(value))
+}
+
+// formatAtom formats a value without inspecting its internal structure.
+func formatAtom(v reflect.Value) string {
+	switch v.Kind() {
+	case reflect.Invalid:
+		return "invalid"
+	case reflect.Int, reflect.Int8, reflect.Int16,
+		reflect.Int32, reflect.Int64:
+		return strconv.FormatInt(v.Int(), 10)
+	case reflect.Uint, reflect.Uint8, reflect.Uint16,
+		reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		return strconv.FormatUint(v.Uint(), 10)
+	case reflect.Float32:
+		return strconv.FormatFloat(v.Float(),'E',0,32)
+	case reflect.Float64:
+		return strconv.FormatFloat(v.Float(), 'E', -1, 64)
+	case reflect.Bool:
+		return strconv.FormatBool(v.Bool())
+	case reflect.String:
+		return strconv.Quote(v.String())
+	default: // reflect.Array, reflect.Struct, reflect.Interface
+		return v.Type().String()
+	}
 }
