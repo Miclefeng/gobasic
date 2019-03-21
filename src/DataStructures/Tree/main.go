@@ -13,12 +13,12 @@ import (
 func main() {
 	bst := BinarySearchTree.Instance
 
-	arr := []int{5, 3, 8, 2, 6, 4, 9}
+	arr := []interface{}{"D", "E", "A", "F", "G", "J", "C"}
 
 	for _, v := range arr {
 		bst.NewAdd(v)
 	}
-	fmt.Println(bst.Search(6))
+	fmt.Println(bst.Search("F"))
 	fmt.Println(bst.GetSize())
 	fmt.Println("-------------------------")
 	bst.PreOrder()
