@@ -14,7 +14,7 @@ import "DataStructures/Tree/Node"
  )
 
 func init() {
-	Instance = &NodeQueue{}
+	Instance = new(NodeQueue)
 }
 
 func (nq *NodeQueue) IsEmpty() bool {

@@ -17,7 +17,8 @@ type LinkedList struct {
 var Instance *LinkedList
 
 func init() {
-	Instance = &LinkedList{Node.Instance, 0}
+	Instance = new(LinkedList)
+	Instance.dummyHead = Node.Instance
 }
 
 // 获取链表中元素的个数

@@ -21,7 +21,7 @@ var (
 )
 
 func init() {
-	Instance = &LinkedListQueue{nil, nil, 0}
+	Instance = new(LinkedListQueue)
 }
 
 func (lq *LinkedListQueue) GetSize() int {

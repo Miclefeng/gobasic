@@ -18,7 +18,7 @@ var (
 )
 
 func init() {
-	Instance = &LinkedListStack{}
+	Instance = new(LinkedListStack)
 	list = LinkedList.Instance
 }
 

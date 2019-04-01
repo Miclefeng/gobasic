@@ -128,7 +128,7 @@ func (bst *BST) PreOrderNR() {
 		return
 	}
 
-	stack := &NodeStack.Stack{}
+	stack := NodeStack.Instance
 	stack.Push(bst.root)
 	for !stack.IsEmpty() {
 		node := stack.Pop()

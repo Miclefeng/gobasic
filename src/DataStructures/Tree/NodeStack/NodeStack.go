@@ -14,7 +14,7 @@ var (
 )
 
 func init() {
-	Instance = &Stack{}
+	Instance = new(Stack)
 }
 
 func (s *Stack) GetSize() int {
