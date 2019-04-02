@@ -43,5 +43,3 @@ func (lSet *LinkedListSet) Remove(e interface{}) {
 func (lSet *LinkedListSet) Contains(e interface{}) bool {
 	return lList.Contains(e)
 }
-
-
