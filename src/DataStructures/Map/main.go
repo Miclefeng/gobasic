@@ -57,7 +57,7 @@ func main()  {
 	bMap := BinarySearchTreeMap.Instance
 	uMap = bMap
 	bTime := testMap(uMap, filename)
-	fmt.Println("BinarySearchTree Set:", bTime, "s")
+	fmt.Println("BinarySearchTree Map:", bTime, "s")
 
 	fmt.Println("----------------------------------")
 

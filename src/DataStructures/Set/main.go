@@ -62,6 +62,7 @@ func main() {
 	fmt.Println("LinkedList Set:", lTime, "s")
 
 	fmt.Println("----------------------------------")
+
 	bSet := BinarySearchTreeTSet.Instance
 	set = bSet
 	bTime := testSet(set, fileName)
@@ -69,7 +70,7 @@ func main() {
 }
 
 func testSet(set Set.Set, fileName string) float64 {
-	sTime := time.Now().Unix()
+	sTime := time.Now().UnixNano()
 	fmt.Println("FileName: ", fileName)
 	words := FileOperation.ReadFile(fileName)
 	fmt.Println("Total words: ", len(words))
@@ -78,6 +79,6 @@ func testSet(set Set.Set, fileName string) float64 {
 	}
 	fmt.Println("Total different words: ", set.GetSize())
 
-	eTime := time.Now().Unix()
+	eTime := time.Now().UnixNano()
 	return (float64(eTime) - float64(sTime)) / 1000000000
 }
