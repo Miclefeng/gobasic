@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 /**
@@ -23,7 +24,7 @@ func ReadFile(file string) []string {
 	inputScanner := bufio.NewScanner(inputFile)
 	inputScanner.Split(bufio.ScanWords)
 	for inputScanner.Scan() {
-		words = append(words, inputScanner.Text())
+		words = append(words, strings.ToLower(inputScanner.Text()))
 	}
 	return words
 }
