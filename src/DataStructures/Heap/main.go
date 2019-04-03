@@ -24,4 +24,6 @@ func main()  {
 	fmt.Println("-----------------------------------")
 	maxHeap.ExtractMax()
 	maxHeap.Print()
+	maxHeap.Replace(66)
+	maxHeap.Print()
 }
