@@ -26,4 +26,8 @@ func main()  {
 	maxHeap.Print()
 	maxHeap.Replace(66)
 	maxHeap.Print()
+	fmt.Println("-----------------------------------")
+	arr := []interface{}{23, 44, 66, 33, 55, 77, 99, 88}
+	maxHeap.Heapify(arr)
+	maxHeap.Print()
 }

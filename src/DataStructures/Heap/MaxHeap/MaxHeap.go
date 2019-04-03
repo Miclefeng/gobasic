@@ -23,6 +23,14 @@ func init() {
 	Instance = new(MaxHeap)
 }
 
+// 堆化一个数组
+func (mHeap *MaxHeap) Heapify(data []interface{}) {
+	array = &Array.Array{data,  len(data)}
+	for i := mHeap.parent(len(data) - 1); i >= 0; i-- {
+		mHeap.shiftDown(i)
+	}
+}
+
 // 返回堆的大小
 func (mHeap *MaxHeap) Size() int {
 	return array.GetSize()
