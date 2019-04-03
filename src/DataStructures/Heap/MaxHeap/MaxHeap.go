@@ -65,8 +65,44 @@ func (mHeap *MaxHeap) shiftUp(index int) {
 	}
 }
 
+// 获取堆中的最大值
+func (mHeap *MaxHeap) FindMax() interface{} {
+	if mHeap.IsEmpty() {
+		panic("Can not findMax when heap is empty.")
+	}
+	return array.GetFirst()
+}
+
+// 取出堆中最大的值
+func (mHeap *MaxHeap) ExtractMax() (e interface{}) {
+	e = mHeap.FindMax()
+	array.Swap(0, array.GetSize()-1)
+	array.RemoveLast()
+	mHeap.shiftDown(0)
+	return
+}
+
+// 下沉，每次和子节点最大的值比较，交换位置
+func (mHeap *MaxHeap) shiftDown(index int) {
+	// 如果左子树的索引是否越界
+	for mHeap.leftChild(index) < mHeap.Size() {
+		// 左子树索引
+		j := mHeap.leftChild(index)
+		// 如果右子树索引没有越界，并且右子树节点的值大于左子树节点的值
+		if j+1 < mHeap.Size() && CompareTo.CompareTo(array.Get(j+1), array.Get(j)) > 0 {
+			j++
+		}
+		// j 是 leftChild 和 rightChild 中的最大节点的索引
+		if CompareTo.CompareTo(array.Get(index), array.Get(j)) >= 0 {
+			break
+		}
+		array.Swap(index, j)
+		index = j
+	}
+}
+
 func (MaxHeap *MaxHeap) Print() {
-	for _, v := range array.Data {
-		fmt.Printf("%v\t", v)
+	for i := 0; i < array.GetSize(); i ++ {
+		fmt.Printf("%v\t", array.Get(i))
 	}
 }

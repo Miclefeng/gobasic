@@ -2,6 +2,7 @@ package main
 
 import (
 	"DataStructures/Heap/MaxHeap"
+	"fmt"
 	"math/rand"
 	"time"
 )
@@ -12,11 +13,16 @@ import (
  */
 
 func main()  {
-	num := 20
+	num := 10
 	maxHeap := MaxHeap.Instance
 	for i := 0; i < num; i++ {
 		rNum := rand.New(rand.NewSource(time.Now().UnixNano())).Intn(100)
 		maxHeap.Add(rNum)
 	}
+	maxHeap.Print()
+	fmt.Println()
+	fmt.Println(maxHeap.FindMax())
+	fmt.Println("--------------")
+	maxHeap.ExtractMax()
 	maxHeap.Print()
 }
