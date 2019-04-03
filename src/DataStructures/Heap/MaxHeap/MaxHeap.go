@@ -82,6 +82,14 @@ func (mHeap *MaxHeap) ExtractMax() (e interface{}) {
 	return
 }
 
+// 取出堆中的最大元素，并且替换成元素e
+func (mHeap *MaxHeap) Replace(e interface{}) interface{} {
+	max := mHeap.FindMax()
+	array.Set(0, e)
+	mHeap.shiftDown(0)
+	return max
+}
+
 // 下沉，每次和子节点最大的值比较，交换位置
 func (mHeap *MaxHeap) shiftDown(index int) {
 	// 如果左子树的索引是否越界
