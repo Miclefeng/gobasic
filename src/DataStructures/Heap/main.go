@@ -20,9 +20,8 @@ func main()  {
 		maxHeap.Add(rNum)
 	}
 	maxHeap.Print()
-	fmt.Println()
-	fmt.Println(maxHeap.FindMax())
-	fmt.Println("--------------")
+	fmt.Println("Max:", maxHeap.FindMax())
+	fmt.Println("-----------------------------------")
 	maxHeap.ExtractMax()
 	maxHeap.Print()
 }

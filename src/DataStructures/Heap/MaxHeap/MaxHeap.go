@@ -105,4 +105,5 @@ func (MaxHeap *MaxHeap) Print() {
 	for i := 0; i < array.GetSize(); i ++ {
 		fmt.Printf("%v\t", array.Get(i))
 	}
+	fmt.Println()
 }
