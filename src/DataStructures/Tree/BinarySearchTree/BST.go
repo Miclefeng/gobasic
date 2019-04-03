@@ -1,12 +1,11 @@
 package BinarySearchTree
 
 import (
+	"DataStructures/CompareTo"
 	"DataStructures/Tree/Node"
 	"DataStructures/Tree/NodeQueue"
 	"DataStructures/Tree/NodeStack"
 	"fmt"
-	"reflect"
-	"strconv"
 )
 
 /**
@@ -39,10 +38,10 @@ func (bst *BST) newAdd(e interface{}, node *Node.Node) *Node.Node {
 		return &Node.Node{E: e}
 	}
 
-	if anyFormat(e) < anyFormat(node.E) {
+	if CompareTo.CompareTo(e, node.E) < 0 {
 		node.Left = bst.newAdd(e, node.Left)
 	}
-	if anyFormat(e) > anyFormat(node.E) {
+	if CompareTo.CompareTo(e, node.E) > 0 {
 		node.Right = bst.newAdd(e, node.Right)
 	}
 	return node
@@ -99,10 +98,10 @@ func (bst *BST) search(node *Node.Node, e interface{}) bool {
 	if nil == node {
 		return false
 	}
-	if anyFormat(e) < anyFormat(node.E) {
+	if CompareTo.CompareTo(e, node.E) < 0 {
 		return bst.search(node.Left, e)
 	}
-	if anyFormat(e) > anyFormat(node.E) {
+	if CompareTo.CompareTo(e, node.E) > 0 {
 		return bst.search(node.Right, e)
 	}
 	return true
@@ -272,10 +271,10 @@ func remove(bst *BST, node *Node.Node, e interface{}) (*Node.Node) {
 		return nil
 	}
 
-	if anyFormat(e) > anyFormat(node.E) {
+	if CompareTo.CompareTo(e, node.E) > 0 {
 		node.Right = remove(bst, node.Right, e)
 		return node
-	} else if anyFormat(e) < anyFormat(node.E) {
+	} else if CompareTo.CompareTo(e, node.E) < 0 {
 		node.Left = remove(bst, node.Left, e)
 		return node
 	} else { // node.key == key
@@ -312,33 +311,4 @@ func (bst *BST) GetSize() int {
 // 判断是否是空
 func (bst *BST) IsEmpty() bool {
 	return 0 == bst.size
-}
-
-// Any formats any value as a string.
-func anyFormat(value interface{}) string {
-	return formatAtom(reflect.ValueOf(value))
-}
-
-// formatAtom formats a value without inspecting its internal structure.
-func formatAtom(v reflect.Value) string {
-	switch v.Kind() {
-	case reflect.Invalid:
-		return "invalid"
-	case reflect.Int, reflect.Int8, reflect.Int16,
-		reflect.Int32, reflect.Int64:
-		return strconv.FormatInt(v.Int(), 10)
-	case reflect.Uint, reflect.Uint8, reflect.Uint16,
-		reflect.Uint32, reflect.Uint64, reflect.Uintptr:
-		return strconv.FormatUint(v.Uint(), 10)
-	case reflect.Float32:
-		return strconv.FormatFloat(v.Float(),'E',0,32)
-	case reflect.Float64:
-		return strconv.FormatFloat(v.Float(), 'E', -1, 64)
-	case reflect.Bool:
-		return strconv.FormatBool(v.Bool())
-	case reflect.String:
-		return strconv.Quote(v.String())
-	default: // reflect.Array, reflect.Struct, reflect.Interface
-		return v.Type().String()
-	}
 }

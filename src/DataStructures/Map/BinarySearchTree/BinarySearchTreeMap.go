@@ -1,12 +1,11 @@
 package BinarySearchTreeMap
 
 import (
+	"DataStructures/CompareTo"
 	_ "DataStructures/Map/Map"
 	"DataStructures/Map/NodeMap"
 	"fmt"
 	"github.com/kataras/iris/core/errors"
-	"reflect"
-	"strconv"
 )
 
 /**
@@ -47,10 +46,10 @@ func (bMap *BinarySearchTreeMap) add(node *MapNode.TreeMapNode, k, v interface{}
 		return &MapNode.TreeMapNode{k, v, nil, nil}
 	}
 
-	if anyFormat(k) < anyFormat(node.K) {
+	if CompareTo.CompareTo(k, node.K) < 0 {
 		node.Left = bMap.add(node.Left, k, v)
 	}
-	if anyFormat(k) > anyFormat(node.K) {
+	if CompareTo.CompareTo(k, node.K) > 0 {
 		node.Right = bMap.add(node.Right, k, v)
 	}
 	return node
@@ -66,7 +65,7 @@ func (bMap *BinarySearchTreeMap) getNode(node *MapNode.TreeMapNode, k interface{
 		return node
 	}
 
-	if anyFormat(k) < anyFormat(node.K) {
+	if CompareTo.CompareTo(k, node.K) < 0 {
 		return bMap.getNode(node.Left, k)
 	} else {
 		return bMap.getNode(node.Right, k)
@@ -132,10 +131,10 @@ func (bMap *BinarySearchTreeMap) remove(node *MapNode.TreeMapNode, k interface{}
 		return nil
 	}
 
-	if anyFormat(k) > anyFormat(node.K) {
+	if CompareTo.CompareTo(k, node.K) > 0 {
 		node.Right = bMap.remove(node.Right, k)
 		return node
-	} else if anyFormat(k) < anyFormat(node.K) {
+	} else if CompareTo.CompareTo(k, node.K) < 0 {
 		node.Left = bMap.remove(node.Left, k)
 		return node
 	} else {
@@ -165,34 +164,5 @@ func (bMap *BinarySearchTreeMap) remove(node *MapNode.TreeMapNode, k interface{}
 		node.Right =  nil
 		node.Left = nil
 		return successor
-	}
-}
-
-// Any formats any value as a string.
-func anyFormat(value interface{}) string {
-	return formatAtom(reflect.ValueOf(value))
-}
-
-// formatAtom formats a value without inspecting its internal structure.
-func formatAtom(v reflect.Value) string {
-	switch v.Kind() {
-	case reflect.Invalid:
-		return "invalid"
-	case reflect.Int, reflect.Int8, reflect.Int16,
-		reflect.Int32, reflect.Int64:
-		return strconv.FormatInt(v.Int(), 10)
-	case reflect.Uint, reflect.Uint8, reflect.Uint16,
-		reflect.Uint32, reflect.Uint64, reflect.Uintptr:
-		return strconv.FormatUint(v.Uint(), 10)
-	case reflect.Float32:
-		return strconv.FormatFloat(v.Float(), 'E', 0, 32)
-	case reflect.Float64:
-		return strconv.FormatFloat(v.Float(), 'E', -1, 64)
-	case reflect.Bool:
-		return strconv.FormatBool(v.Bool())
-	case reflect.String:
-		return strconv.Quote(v.String())
-	default: // reflect.Array, reflect.Struct, reflect.Interface
-		return v.Type().String()
 	}
 }

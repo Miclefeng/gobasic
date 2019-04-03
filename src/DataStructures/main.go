@@ -75,4 +75,8 @@ func main() {
 	loopQueue.EnQueue(12)
 	loopQueue.EnQueue(13)
 	loopQueue.Print()
+
+	arr := []interface{}{8, 5, 3, 6, 9, 7, 15}
+	arr[3], arr[4] = arr[4], arr[3]
+	fmt.Println(arr)
 }

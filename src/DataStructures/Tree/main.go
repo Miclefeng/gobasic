@@ -45,11 +45,11 @@ func main() {
 	fmt.Println("-------------------------")
 	bst.InOrder()
 	fmt.Println()
-	bst.Remove(5)
+	bst.Remove("E")
 	fmt.Println("-------------------------")
 	bst.InOrder()
 	fmt.Println()
-	bst.Remove(4)
+	bst.Remove("G")
 	fmt.Println("-------------------------")
 	bst.InOrder()
 }
