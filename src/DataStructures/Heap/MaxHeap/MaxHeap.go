@@ -44,7 +44,7 @@ func (mHeap *MaxHeap) IsEmpty() bool {
 // 返回完全二叉树的数组表示中，一个索引所表示的元素的父亲节点的索引
 func (mHeap *MaxHeap) parent(index int) int {
 	if 0 == index {
-		//panic("index-0 doesn't have parent.")
+		panic("index-0 doesn't have parent.")
 	}
 	return (index - 1) / 2
 }
