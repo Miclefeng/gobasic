@@ -18,6 +18,7 @@ var (
 	Instance *PriorityQueue
 )
 
+// 初始化
 func init() {
 	mHeap = MaxHeap.Instance
 	Instance = new(PriorityQueue)
