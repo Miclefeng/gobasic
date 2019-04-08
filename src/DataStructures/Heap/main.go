@@ -31,10 +31,10 @@ func main() {
 	//maxHeap.Heapify(arr)
 	//maxHeap.Print()
 
-	newNum := 20000
+	newNum := 50000
 	arr := make([]interface{}, newNum)
 	for i := 0; i < newNum; i++ {
-		rNum := rand.New(rand.NewSource(time.Now().UnixNano())).Intn(10000000)
+		rNum := rand.New(rand.NewSource(time.Now().UnixNano())).Intn(100000)
 		arr[i] = rNum
 	}
 
