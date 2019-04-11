@@ -31,9 +31,9 @@ func (logSink *LogSink) saveJobLogs(logBatch *common.JobLogBatch) {
 
 func (logSink *LogSink) writeLoop() {
 	var (
-		jobLog    *common.JobLog
-		logBatch  *common.JobLogBatch // 日志批次
-		logTimer  *time.Timer // 定时器
+		jobLog       *common.JobLog
+		logBatch     *common.JobLogBatch // 日志批次
+		logTimer     *time.Timer         // 定时器
 		timeOutBatch *common.JobLogBatch // 超时批次
 	)
 	for {
@@ -64,7 +64,7 @@ func (logSink *LogSink) writeLoop() {
 				// 提交后杀死定时器
 				logTimer.Stop()
 			}
-		// 处理超时的批次
+			// 处理超时的批次
 		case timeOutBatch = <-logSink.autoCommitChan:
 			// 判断超时批次是否等于当前批次
 			if timeOutBatch != logBatch {
@@ -92,9 +92,12 @@ func InitLogSink() (err error) {
 	var (
 		logClient     *mongo.Client
 		logCollection *mongo.Collection
+		//clientAuth    options.Credential
 		clientOption  *options.ClientOptions
 	)
+	//clientAuth = options.Credential{Username: G_config.MongoUser, Password: G_config.MongoPwd}
 	// 设置连接option
+	//clientOption = options.Client().SetAuth(clientAuth)
 	clientOption = options.Client().SetConnectTimeout(time.Duration(G_config.MongoConnectTimeout) * time.Millisecond)
 	// 获取客户端实例
 	if logClient, err = mongo.Connect(context.TODO(), G_config.MongoUri, clientOption); err != nil {
