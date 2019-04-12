@@ -7,10 +7,11 @@ services:
     restart: always
     ports:
       - 2379:2379
+      - 2380:2380
     volumes:
       - /data/docker/etcd:/etcd-data
     environment:
-      ETCD_NAME: node1
-      ETCD_DATA_DIR: /etcd-data/etcd1.etcd
-      ETCDCTL_API: 3
-      ETCD_DEBUG: 1
+#      ETCD_NAME: node1
+#      ETCD_DATA_DIR: /etcd-data/etcd1.etcd
+#      ETCDCTL_API: 3
+#      ETCD_DEBUG: 1
