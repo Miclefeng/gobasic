@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"go.etcd.io/etcd/clientv3"
-	"golang.org/x/net/context"
+	"context"
 	"time"
 )
 
