@@ -27,6 +27,8 @@ import (
 	"context"
 	"net"
 	"time"
+
+	"google.golang.org/grpc/metadata"
 )
 
 // RPCStats contains stats information about RPCs.
@@ -87,7 +89,7 @@ type InHeader struct {
 	RemoteAddr net.Addr
 	// LocalAddr is the local address of the corresponding connection.
 	LocalAddr net.Addr
-	// Compression is the compression Algorithm used for the RPC.
+	// Compression is the compression algorithm used for the RPC.
 	Compression string
 }
 
@@ -142,7 +144,7 @@ type OutHeader struct {
 	RemoteAddr net.Addr
 	// LocalAddr is the local address of the corresponding connection.
 	LocalAddr net.Addr
-	// Compression is the compression Algorithm used for the RPC.
+	// Compression is the compression algorithm used for the RPC.
 	Compression string
 }
 
@@ -172,6 +174,9 @@ type End struct {
 	BeginTime time.Time
 	// EndTime is the time when the RPC ends.
 	EndTime time.Time
+	// Trailer contains the trailer metadata received from the server. This
+	// field is only valid if this End is from the client side.
+	Trailer metadata.MD
 	// Error is the error the RPC ended with. It is an error generated from
 	// status.Status and can be converted back to status.Status using
 	// status.FromError if non-nil.

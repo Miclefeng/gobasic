@@ -33,10 +33,8 @@ import (
 	"strings"
 
 	"github.com/golang/protobuf/proto"
+	"google.golang.org/grpc/credentials/internal"
 )
-
-// alpnProtoStr are the specified application level protocols for gRPC.
-var alpnProtoStr = []string{"h2"}
 
 // PerRPCCredentials defines the common interface for the credentials which need to
 // attach security information to every RPC (e.g., oauth2).
@@ -138,8 +136,8 @@ func (t TLSInfo) AuthType() string {
 	return "tls"
 }
 
-// GetChannelzSecurityValue returns security info requested by channelz.
-func (t TLSInfo) GetChannelzSecurityValue() ChannelzSecurityValue {
+// GetSecurityValue returns security info requested by channelz.
+func (t TLSInfo) GetSecurityValue() ChannelzSecurityValue {
 	v := &TLSChannelzSecurityValue{
 		StandardName: cipherSuiteLookup[t.State.CipherSuite],
 	}
@@ -187,7 +185,7 @@ func (c *tlsCreds) ClientHandshake(ctx context.Context, authority string, rawCon
 	case <-ctx.Done():
 		return nil, nil, ctx.Err()
 	}
-	return tlsConn{Conn: conn, rawConn: rawConn}, TLSInfo{conn.ConnectionState()}, nil
+	return internal.WrapSyscallConn(rawConn, conn), TLSInfo{conn.ConnectionState()}, nil
 }
 
 func (c *tlsCreds) ServerHandshake(rawConn net.Conn) (net.Conn, AuthInfo, error) {
@@ -195,7 +193,7 @@ func (c *tlsCreds) ServerHandshake(rawConn net.Conn) (net.Conn, AuthInfo, error)
 	if err := conn.Handshake(); err != nil {
 		return nil, nil, err
 	}
-	return tlsConn{Conn: conn, rawConn: rawConn}, TLSInfo{conn.ConnectionState()}, nil
+	return internal.WrapSyscallConn(rawConn, conn), TLSInfo{conn.ConnectionState()}, nil
 }
 
 func (c *tlsCreds) Clone() TransportCredentials {
@@ -207,10 +205,23 @@ func (c *tlsCreds) OverrideServerName(serverNameOverride string) error {
 	return nil
 }
 
+const alpnProtoStrH2 = "h2"
+
+func appendH2ToNextProtos(ps []string) []string {
+	for _, p := range ps {
+		if p == alpnProtoStrH2 {
+			return ps
+		}
+	}
+	ret := make([]string, 0, len(ps)+1)
+	ret = append(ret, ps...)
+	return append(ret, alpnProtoStrH2)
+}
+
 // NewTLS uses c to construct a TransportCredentials based on TLS.
 func NewTLS(c *tls.Config) TransportCredentials {
 	tc := &tlsCreds{cloneTLSConfig(c)}
-	tc.config.NextProtos = alpnProtoStr
+	tc.config.NextProtos = appendH2ToNextProtos(tc.config.NextProtos)
 	return tc
 }
 
@@ -284,20 +295,6 @@ type OtherChannelzSecurityValue struct {
 }
 
 func (*OtherChannelzSecurityValue) isChannelzSecurityValue() {}
-
-// tlsConn keeps reference of rawConn to support syscall.Conn for channelz.
-// SyscallConn() (the method in interface syscall.Conn) is explicitly
-// implemented on this type,
-//
-// Interface syscall.Conn is implemented by most net.Conn implementations (e.g.
-// TCPConn, UnixConn), but is not part of net.Conn interface. So wrapper conns
-// that embed net.Conn don't implement syscall.Conn. (Side note: tls.Conn
-// doesn't embed net.Conn, so even if syscall.Conn is part of net.Conn, it won't
-// help here).
-type tlsConn struct {
-	*tls.Conn
-	rawConn net.Conn
-}
 
 var cipherSuiteLookup = map[uint16]string{
 	tls.TLS_RSA_WITH_RC4_128_SHA:                "TLS_RSA_WITH_RC4_128_SHA",
