@@ -10,8 +10,8 @@ services:
       - 2380:2380
     volumes:
       - /data/docker/etcd:/etcd-data
-#    environment:
-#      ETCD_NAME: node1
-#      ETCD_DATA_DIR: /etcd-data/etcd.etcd
-#      ETCDCTL_API: 3
-#      ETCD_DEBUG: 1
+    environment:
+      ETCD_NAME: node1
+      ETCD_DATA_DIR: /etcd-data/etcd.etcd
+      ETCDCTL_API: 3
+      ETCD_DEBUG: 1
