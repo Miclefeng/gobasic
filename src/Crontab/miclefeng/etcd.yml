@@ -2,8 +2,8 @@ version: '3.1'
 
 services:
 
-  etcd1:
-    image: quay.io/coreos/etcd:v3.0.4
+  etcd:
+    image: quay.io/coreos/etcd
     restart: always
     ports:
       - 2379:2379
@@ -12,6 +12,6 @@ services:
       - /data/docker/etcd:/etcd-data
 #    environment:
 #      ETCD_NAME: node1
-#      ETCD_DATA_DIR: /etcd-data/etcd1.etcd
+#      ETCD_DATA_DIR: /etcd-data/etcd.etcd
 #      ETCDCTL_API: 3
 #      ETCD_DEBUG: 1
