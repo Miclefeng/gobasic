@@ -7,7 +7,7 @@
   "apiWriteTimeout": 5000,
   "Etcd集群节点列表": "",
   "etcdEndPoints": [
-    "127.0.0.1:2379"
+    "http://localhost:2379"
   ],
   "Etcd连接超时": "毫秒",
   "etcdDialTimeout": 5000,
