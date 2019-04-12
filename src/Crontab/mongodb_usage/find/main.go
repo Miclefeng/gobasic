@@ -1,10 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/options"
-	"context"
 	"time"
 )
 
@@ -13,18 +13,18 @@ import (
  * Time : 2018/11/19 下午2:51
  */
 
- type TimePoint struct {
- 	StartTime int64 `bson:"startTime"`
- 	EndTime int64 `bson:"endTime"`
- }
+type TimePoint struct {
+	StartTime int64 `bson:"startTime"`
+	EndTime   int64 `bson:"endTime"`
+}
 
- type LogRecord struct {
- 	JobName string `bson:"jobName"`
- 	Command string `bson:"command"`
- 	Error string `bson:"error"`
- 	Content string `bson:"content"`
- 	TimePoint TimePoint `bson:"timePoint"`
- }
+type LogRecord struct {
+	JobName   string    `bson:"jobName"`
+	Command   string    `bson:"command"`
+	Error     string    `bson:"error"`
+	Content   string    `bson:"content"`
+	TimePoint TimePoint `bson:"timePoint"`
+}
 
 type FindByJobName struct {
 	JobName string `bson:"jobName"`
@@ -32,20 +32,22 @@ type FindByJobName struct {
 
 func main() {
 	var (
-		err error
-		uri string
+		err          error
+		uri          string
 		clientOption *options.ClientOptions
-		client *mongo.Client
-		db *mongo.Database
-		collection *mongo.Collection
-		findOption *options.FindOptions
-		cursor mongo.Cursor
-		record *LogRecord
-		condition *FindByJobName
+		clientAuth   options.Credential
+		client       *mongo.Client
+		db           *mongo.Database
+		collection   *mongo.Collection
+		findOption   *options.FindOptions
+		cursor       mongo.Cursor
+		record       *LogRecord
+		condition    *FindByJobName
 	)
 	// 建立连接
 	uri = "mongodb://127.0.0.1:27017"
-	clientOption = options.Client().SetConnectTimeout(1*time.Second)
+	clientAuth = options.Credential{Username: "root", Password: "example"}
+	clientOption = options.Client().SetAuth(clientAuth).SetConnectTimeout(5 * time.Second)
 	if client, err = mongo.Connect(context.TODO(), uri, clientOption); err != nil {
 		fmt.Println(err)
 		return

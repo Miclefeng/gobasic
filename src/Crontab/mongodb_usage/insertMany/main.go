@@ -1,11 +1,11 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/mongodb/mongo-go-driver/bson/objectid"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/options"
-	"context"
 	"time"
 )
 
@@ -14,34 +14,36 @@ import (
  * Time : 2018/11/19 下午2:35
  */
 
- type TimePoint struct {
- 	StartTime int64 `bson:"startTime"`
- 	EndTime int64 `bson:"endTime"`
- }
+type TimePoint struct {
+	StartTime int64 `bson:"startTime"`
+	EndTime   int64 `bson:"endTime"`
+}
 
- type LogRecord struct {
- 	JobName string `bson:"jobName"`
- 	Command string `bson:"command"`
- 	Error string `bson:"error"`
- 	Content string `bson:"content"`
- 	TimePoint TimePoint `bson:"timePoint"`
- }
+type LogRecord struct {
+	JobName   string    `bson:"jobName"`
+	Command   string    `bson:"command"`
+	Error     string    `bson:"error"`
+	Content   string    `bson:"content"`
+	TimePoint TimePoint `bson:"timePoint"`
+}
 
 func main() {
 	var (
-		err error
+		err          error
 		clientOption *options.ClientOptions
-		client *mongo.Client
-		db *mongo.Database
-		collection *mongo.Collection
-		record *LogRecord
-		logArr []interface{}
-		result *mongo.InsertManyResult
-		insertId interface{}
-		docId objectid.ObjectID
+		clientAuth   options.Credential
+		client       *mongo.Client
+		db           *mongo.Database
+		collection   *mongo.Collection
+		record       *LogRecord
+		logArr       []interface{}
+		result       *mongo.InsertManyResult
+		insertId     interface{}
+		docId        objectid.ObjectID
 	)
 	// 建立客户端连接
-	clientOption = options.Client().SetConnectTimeout(1*time.Second)
+	clientAuth = options.Credential{Username: "root", Password: "example"}
+	clientOption = options.Client().SetAuth(clientAuth).SetConnectTimeout(5 * time.Second)
 	if client, err = mongo.Connect(context.TODO(), "mongodb://127.0.0.1:27017", clientOption); err != nil {
 		fmt.Println(err)
 		return
@@ -53,11 +55,11 @@ func main() {
 	record = &LogRecord{
 		JobName: "",
 		Command: "",
-		Error: "",
+		Error:   "",
 		Content: "",
 		TimePoint: TimePoint{
 			StartTime: time.Now().Unix(),
-			EndTime: time.Now().Unix() + 5,
+			EndTime:   time.Now().Unix() + 5,
 		},
 	}
 
