@@ -56,7 +56,7 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 			executeResult.StartTime = time.Now()
 			// 执行命令
 			cmd = exec.CommandContext(jobExecuteInfo.CancelCtx, "/bin/bash", "-c", jobExecuteInfo.Job.Command)
-			time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
+			time.Sleep(time.Duration(rand.Intn(2)) * time.Second)
 			// 捕获输出
 			outPut, err = cmd.CombinedOutput()
 			executeResult.Output = outPut
