@@ -40,8 +40,8 @@ func (executor *Executor) ExecuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 		// 初始化分布式锁
 		jobLock = G_jobManager.CreateJobLock(executeResult.JobExecuteInfo.Job.Name)
 
-		// 随机sleep 0-500ms,随机打散上锁的协程
-		time.Sleep(time.Duration(rand.Intn(200)) * time.Millisecond)
+		// 随机sleep 0-100ms,随机打散上锁的协程
+		time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
 
 		// 尝试上锁
 		err = jobLock.TryLock()
