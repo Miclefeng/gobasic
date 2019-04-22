@@ -4,7 +4,7 @@ import (
 	"Crontab/miclefeng/common"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/options"
-	"context"
+	"golang.org/x/net/context"
 	"time"
 )
 
@@ -92,12 +92,12 @@ func InitLogSink() (err error) {
 	var (
 		logClient     *mongo.Client
 		logCollection *mongo.Collection
-		//clientAuth    options.Credential
+		clientAuth    options.Credential
 		clientOption  *options.ClientOptions
 	)
-	//clientAuth = options.Credential{Username: G_config.MongoUser, Password: G_config.MongoPwd}
+	clientAuth = options.Credential{Username: G_config.MongoUser, Password: G_config.MongoPwd}
 	// 设置连接option
-	//clientOption = options.Client().SetAuth(clientAuth)
+	clientOption = options.Client().SetAuth(clientAuth)
 	clientOption = options.Client().SetConnectTimeout(time.Duration(G_config.MongoConnectTimeout) * time.Millisecond)
 	// 获取客户端实例
 	if logClient, err = mongo.Connect(context.TODO(), G_config.MongoUri, clientOption); err != nil {

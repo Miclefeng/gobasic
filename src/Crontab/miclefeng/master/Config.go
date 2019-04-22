@@ -19,6 +19,8 @@ type Config struct {
 	EtcdDialTimeout     int64    `json:"etcdDialTimeout"`
 	MongoUri            string   `json:"mongoUri"`
 	MongoConnectTimeout int64    `json:"mongoConnectTimeout"`
+	MongoUser           string   `json:"mongoUser"`
+	MongoPwd            string   `json:"mongoPwd"`
 	WebRoot             string   `json:"webroot"`
 }
 

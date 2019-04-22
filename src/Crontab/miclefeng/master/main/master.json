@@ -7,7 +7,7 @@
   "apiWriteTimeout": 5000,
   "Etcd集群节点列表": "",
   "etcdEndPoints": [
-    "http://localhost:2379"
+    "127.0.0.1:2379"
   ],
   "Etcd连接超时": "毫秒",
   "etcdDialTimeout": 5000,
@@ -15,6 +15,10 @@
   "mongoUri": "mongodb://127.0.0.1:27017",
   "mongo连接超时时间": "毫秒",
   "mongoConnectTimeout": 5000,
+  "mongo用户": "",
+  "mongoUser": "root",
+  "mongo密码": "",
+  "mongoPwd": "example",
   "webroot网站根目录": "",
   "webroot": "./webroot"
 }

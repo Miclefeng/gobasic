@@ -61,13 +61,13 @@ func (logMgr *LogManager) ListJob(name string, skip, limit int64) (logArr []*com
 func InitLogMgr() (err error) {
 	var (
 		client       *mongo.Client
-		//clientAuth   options.Credential
+		clientAuth   options.Credential
 		clientOption *options.ClientOptions
 		collection   *mongo.Collection
 	)
 
-	//clientAuth = options.Credential{Username: G_config.MongoUser, Password: G_config.MongoPwd}
-	//clientOption = options.Client().SetAuth(clientAuth)
+	clientAuth = options.Credential{Username: G_config.MongoUser, Password: G_config.MongoPwd}
+	clientOption = options.Client().SetAuth(clientAuth)
 	clientOption = options.Client().SetConnectTimeout(time.Duration(G_config.MongoConnectTimeout) * time.Millisecond)
 	if client, err = mongo.Connect(context.TODO(), G_config.MongoUri, clientOption); err != nil {
 		return
