@@ -95,10 +95,10 @@ func InitLogSink() (err error) {
 		clientAuth    options.Credential
 		clientOption  *options.ClientOptions
 	)
+	// 设置用户密码
 	clientAuth = options.Credential{Username: G_config.MongoUser, Password: G_config.MongoPwd}
 	// 设置连接option
-	clientOption = options.Client().SetAuth(clientAuth)
-	clientOption = options.Client().SetConnectTimeout(time.Duration(G_config.MongoConnectTimeout) * time.Millisecond)
+	clientOption = options.Client().SetAuth(clientAuth).SetConnectTimeout(time.Duration(G_config.MongoConnectTimeout) * time.Millisecond)
 	// 获取客户端实例
 	if logClient, err = mongo.Connect(context.TODO(), G_config.MongoUri, clientOption); err != nil {
 		return

@@ -2,9 +2,9 @@ package master
 
 import (
 	"Crontab/miclefeng/common"
+	"context"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/options"
-	"context"
 	"time"
 )
 
@@ -65,10 +65,10 @@ func InitLogMgr() (err error) {
 		clientOption *options.ClientOptions
 		collection   *mongo.Collection
 	)
-
+	// 设置用户密码
 	clientAuth = options.Credential{Username: G_config.MongoUser, Password: G_config.MongoPwd}
-	clientOption = options.Client().SetAuth(clientAuth)
-	clientOption = options.Client().SetConnectTimeout(time.Duration(G_config.MongoConnectTimeout) * time.Millisecond)
+	// 设置option
+	clientOption = options.Client().SetAuth(clientAuth).SetConnectTimeout(time.Duration(G_config.MongoConnectTimeout) * time.Millisecond)
 	if client, err = mongo.Connect(context.TODO(), G_config.MongoUri, clientOption); err != nil {
 		return
 	}
