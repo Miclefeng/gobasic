@@ -40,7 +40,7 @@ func main() {
 	kv = clientv3.NewKV(client)
 
 	// 写入job1, withPrevKV指定写入的时候记录获取前一个value
-	if putResp, err = kv.Put(context.TODO(), "/cron/jobs/job1", "miclefeng", clientv3.WithPrevKV()); err != nil {
+	if putResp, err = kv.Put(context.TODO(), "/cron/jobs/job1", "date", clientv3.WithPrevKV()); err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println("Revision: ", putResp.Header.Revision)
