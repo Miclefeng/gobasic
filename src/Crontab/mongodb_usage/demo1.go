@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"context"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/options"
-	"context"
 	"time"
 )
 
