@@ -16,9 +16,9 @@
   "mongo连接超时时间": "毫秒",
   "mongoConnectTimeout": 5000,
   "mongo用户": "",
-  "mongoUser": "root",
+  "mongoUser": "miclefengzss",
   "mongo密码": "",
-  "mongoPwd": "example",
+  "mongoPwd": "25456585",
   "webroot网站根目录": "",
   "webroot": "./webroot"
 }
