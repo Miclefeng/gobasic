@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/mvcc/mvccpb"
+	"github.com/coreos/etcd/mvcc/mvccpb"
 	"context"
 	"time"
 )
