@@ -77,6 +77,17 @@
   revision = "3113b8401b8a98917cde58f8bbd42a1b1c03b1fd"
 
 [[projects]]
+  digest = "1:c37eccd75fe3b1bfda6ee4ede093ca9438378f39c99cd8d3c7d6f2e1e6ba3822"
+  name = "github.com/segmentio/kafka-go"
+  packages = [
+    ".",
+    "sasl",
+  ]
+  pruneopts = "UT"
+  revision = "c61692887c051e599d0e52881f2b7d79ab1f89ee"
+  version = "v0.2.4"
+
+[[projects]]
   branch = "master"
   digest = "1:3e0062766e6b0bcfe1ba1ed1d3f08a8e1e99cd5831426e2596dc9537d28f2adb"
   name = "golang.org/x/net"
@@ -90,6 +101,9 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/Shopify/sarama"]
+  input-imports = [
+    "github.com/Shopify/sarama",
+    "github.com/segmentio/kafka-go",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
