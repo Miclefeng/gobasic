@@ -85,4 +85,18 @@ func main() {
 		}
 	}
 	fmt.Println(record)
+
+	arrMapList := map[string][]string{}
+	doctor_cache := []string{
+		"ucenter.maioshou.com?doctor_id=1",
+		"maioshou.net?doctor_id=1",
+	}
+	hospital_cache := []string{
+		"ucenter.maioshou.com?doctor_id=1",
+		"maioshou.net?doctor_id=1",
+	}
+	arrMapList["doctor_cache"] = doctor_cache
+	arrMapList["hospital_cache"] = hospital_cache
+	fmt.Println(arrMapList["doctor_cache"])
+	fmt.Println("==========")
 }
