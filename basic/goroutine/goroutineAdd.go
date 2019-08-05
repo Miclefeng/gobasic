@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"runtime"
 )
 
 func Add(x, y int) {
