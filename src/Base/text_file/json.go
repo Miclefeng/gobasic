@@ -15,7 +15,7 @@ type IT struct {
 func main ()  {
 
 	// 通过结构体生成json文本
-	s := IT{"tslsmart", []string{"Go", "PHP", "Python"}, true, 666.666}
+	s := IT{"cooler", []string{"Go", "PHP", "Python"}, true, 666.666}
 
 	// 将切片转换为json文本
 	res, err := json.Marshal(s)
@@ -29,7 +29,7 @@ func main ()  {
 
 	// 通过map生成json文本
 	m := make(map[string]interface{}, 4)
-	m["company"] = "tslsmart"
+	m["company"] = "cooler"
 	m["subjects"] = []string{"Go", "PHP", "Python"}
 	m["isok"] = true
 	m["price"] = 666.666
