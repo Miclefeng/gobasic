@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"context"
+	"fmt"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/options"
 	"time"
@@ -15,14 +15,14 @@ import (
 
 func main() {
 	var (
-		err error
-		client *mongo.Client
+		err          error
+		client       *mongo.Client
 		clientOption *options.ClientOptions
-		db *mongo.Database
-		collection *mongo.Collection
+		db           *mongo.Database
+		collection   *mongo.Collection
 	)
 
-	clientOption = options.Client().SetConnectTimeout(1*time.Second)
+	clientOption = options.Client().SetConnectTimeout(1 * time.Second)
 	// 创建客户端连接
 	if client, err = mongo.Connect(context.TODO(), "mongodb://127.0.0.1:27017", clientOption); err != nil {
 		fmt.Println(err)

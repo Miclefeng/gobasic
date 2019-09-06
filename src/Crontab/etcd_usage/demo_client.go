@@ -13,14 +13,14 @@ import (
 
 func main() {
 	var (
-		conf clientv3.Config
+		conf   clientv3.Config
 		client *clientv3.Client
-		err error
+		err    error
 	)
 
 	conf = clientv3.Config{
-		Endpoints: []string{"127.0.0.1:2379"},
-		DialTimeout: 5*time.Second,
+		Endpoints:   []string{"127.0.0.1:2379"},
+		DialTimeout: 5 * time.Second,
 	}
 
 	if client, err = clientv3.New(conf); err != nil {

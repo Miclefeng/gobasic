@@ -13,9 +13,9 @@ import (
 
 func main() {
 	var (
-		expr *cronexpr.Expression
-		err error
-		now time.Time
+		expr     *cronexpr.Expression
+		err      error
+		now      time.Time
 		nextTime time.Time
 	)
 
@@ -41,5 +41,5 @@ func main() {
 		fmt.Println("被调度了：", nextTime)
 	})
 
-	time.Sleep(5*time.Second)
+	time.Sleep(5 * time.Second)
 }

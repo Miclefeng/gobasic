@@ -11,19 +11,19 @@ import (
  * Time : 2018/11/16 上午10:22
  */
 
- // 调度任务
- type CronJob struct {
- 	expr *cronexpr.Expression
- 	nextTime time.Time
- }
+// 调度任务
+type CronJob struct {
+	expr     *cronexpr.Expression
+	nextTime time.Time
+}
 
 func main() {
 	// 需要有1个调度协程, 它定时检查所有的Cron任务, 谁过期了就执行谁
 	var (
-		expr *cronexpr.Expression
-		cronJob *CronJob
-		err error
-		now time.Time
+		expr          *cronexpr.Expression
+		cronJob       *CronJob
+		err           error
+		now           time.Time
 		scheduleTable map[string]*CronJob
 	)
 
@@ -35,7 +35,7 @@ func main() {
 		fmt.Println(err)
 	}
 	cronJob = &CronJob{
-		expr: expr,
+		expr:     expr,
 		nextTime: expr.Next(now),
 	}
 	scheduleTable["job1"] = cronJob
@@ -45,14 +45,14 @@ func main() {
 		fmt.Println(err)
 	}
 	cronJob = &CronJob{
-		expr: expr,
+		expr:     expr,
 		nextTime: expr.Next(now),
 	}
 	scheduleTable["job2"] = cronJob
 
 	go func() {
 		var (
-			now time.Time
+			now     time.Time
 			jobName string
 			cronJob *CronJob
 		)
@@ -76,11 +76,11 @@ func main() {
 			// sleep 100ms
 			select {
 			// 100ms后在 C 中读出数据，(解除阻塞)
-			case <-time.NewTicker(100*time.Millisecond).C:
+			case <-time.NewTicker(100 * time.Millisecond).C:
 			}
 
 		}
 	}()
 
-	time.Sleep(20*time.Second)
+	time.Sleep(20 * time.Second)
 }

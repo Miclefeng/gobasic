@@ -1,9 +1,9 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"go.etcd.io/etcd/clientv3"
-	"context"
 	"time"
 )
 
@@ -14,26 +14,26 @@ import (
 
 func main() {
 	var (
-		err error
-		ctx context.Context
-		cancel context.CancelFunc
-		conf clientv3.Config
-		client *clientv3.Client
-		kv clientv3.KV
-		lease clientv3.Lease
+		err            error
+		ctx            context.Context
+		cancel         context.CancelFunc
+		conf           clientv3.Config
+		client         *clientv3.Client
+		kv             clientv3.KV
+		lease          clientv3.Lease
 		leaseGrantResp *clientv3.LeaseGrantResponse
-		leaseId clientv3.LeaseID
-		keepRespChan <-chan *clientv3.LeaseKeepAliveResponse
-		keepResp *clientv3.LeaseKeepAliveResponse
-		txn clientv3.Txn
-		txnResp *clientv3.TxnResponse
+		leaseId        clientv3.LeaseID
+		keepRespChan   <-chan *clientv3.LeaseKeepAliveResponse
+		keepResp       *clientv3.LeaseKeepAliveResponse
+		txn            clientv3.Txn
+		txnResp        *clientv3.TxnResponse
 	)
 
 	conf = clientv3.Config{
 		Endpoints: []string{
 			"127.0.0.1:2379",
 		},
-		DialTimeout: 5*time.Second,
+		DialTimeout: 5 * time.Second,
 	}
 	if client, err = clientv3.New(conf); err != nil {
 		fmt.Println(err)
@@ -77,7 +77,7 @@ func main() {
 				}
 			}
 		}
-		END:
+	END:
 	}()
 
 	// kv实例
@@ -102,7 +102,7 @@ func main() {
 
 	// 2, 处理业务
 	fmt.Println("任务处理中")
-	time.Sleep(10*time.Second)
+	time.Sleep(10 * time.Second)
 
 	// 3, 释放锁(取消自动续租, 释放租约)
 	// defer 会把租约释放掉, 关联的KV就被删除了

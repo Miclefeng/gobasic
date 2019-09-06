@@ -1,9 +1,9 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"go.etcd.io/etcd/clientv3"
-	"context"
 	"time"
 )
 
@@ -14,24 +14,24 @@ import (
 
 func main() {
 	var (
-		err error
-		conf clientv3.Config
-		client *clientv3.Client
-		lease clientv3.Lease
+		err            error
+		conf           clientv3.Config
+		client         *clientv3.Client
+		lease          clientv3.Lease
 		leaseGrantResp *clientv3.LeaseGrantResponse
-		leaseId clientv3.LeaseID
-		keepResp *clientv3.LeaseKeepAliveResponse
-		keepRespChan <-chan *clientv3.LeaseKeepAliveResponse
-		kv clientv3.KV
-		putResp *clientv3.PutResponse
-		getResp *clientv3.GetResponse
+		leaseId        clientv3.LeaseID
+		keepResp       *clientv3.LeaseKeepAliveResponse
+		keepRespChan   <-chan *clientv3.LeaseKeepAliveResponse
+		kv             clientv3.KV
+		putResp        *clientv3.PutResponse
+		getResp        *clientv3.GetResponse
 	)
 	// 客户端配置
 	conf = clientv3.Config{
 		Endpoints: []string{
 			"127.0.0.1:2379",
 		},
-		DialTimeout: 5*time.Second,
+		DialTimeout: 5 * time.Second,
 	}
 	// 申请一个客户端
 	if client, err = clientv3.New(conf); err != nil {
@@ -75,7 +75,7 @@ func main() {
 				}
 			}
 		}
-		END:
+	END:
 	}()
 
 	kv = clientv3.NewKV(client)
@@ -97,8 +97,8 @@ func main() {
 			break
 		}
 		fmt.Println("没过期：", string(getResp.Kvs[0].Value), getResp.Kvs, time.Now())
-		time.Sleep(2*time.Second)
+		time.Sleep(2 * time.Second)
 	}
 
-	time.Sleep(20*time.Second)
+	time.Sleep(20 * time.Second)
 }

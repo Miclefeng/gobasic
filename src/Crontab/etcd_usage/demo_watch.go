@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"go.etcd.io/etcd/clientv3"
-	"github.com/coreos/etcd/mvcc/mvccpb"
 	"context"
+	"fmt"
+	"github.com/coreos/etcd/mvcc/mvccpb"
+	"go.etcd.io/etcd/clientv3"
 	"time"
 )
 
@@ -15,25 +15,25 @@ import (
 
 func main() {
 	var (
-		err error
-		conf clientv3.Config
-		client *clientv3.Client
-		kv clientv3.KV
-		getResp *clientv3.GetResponse
-		watchStart int64
-		watcher clientv3.Watcher
+		err           error
+		conf          clientv3.Config
+		client        *clientv3.Client
+		kv            clientv3.KV
+		getResp       *clientv3.GetResponse
+		watchStart    int64
+		watcher       clientv3.Watcher
 		watchRespChan clientv3.WatchChan
-		watchResp clientv3.WatchResponse
-		event *clientv3.Event
-		ctx context.Context
-		cancel context.CancelFunc
+		watchResp     clientv3.WatchResponse
+		event         *clientv3.Event
+		ctx           context.Context
+		cancel        context.CancelFunc
 	)
 
 	conf = clientv3.Config{
 		Endpoints: []string{
 			"127.0.0.1:2379",
 		},
-		DialTimeout: 5*time.Second,
+		DialTimeout: 5 * time.Second,
 	}
 	if client, err = clientv3.New(conf); err != nil {
 		fmt.Println(err)
@@ -47,7 +47,7 @@ func main() {
 			kv.Put(context.TODO(), "/cron/jobs/job7", "I am Job7")
 			kv.Put(context.TODO(), "/cron/jobs/job7", "I am miclefeng")
 			kv.Delete(context.TODO(), "/cron/jobs/job7")
-			time.Sleep(1*time.Second)
+			time.Sleep(1 * time.Second)
 		}
 	}()
 	// 获取需要监听的值

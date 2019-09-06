@@ -1,9 +1,9 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"go.etcd.io/etcd/clientv3"
-	"context"
 	"time"
 )
 
@@ -14,19 +14,19 @@ import (
 
 func main() {
 	var (
-		err error
-		conf clientv3.Config
-		client *clientv3.Client
-		kv clientv3.KV
+		err          error
+		conf         clientv3.Config
+		client       *clientv3.Client
+		kv           clientv3.KV
 		putOp, getOp clientv3.Op
-		opResp clientv3.OpResponse
+		opResp       clientv3.OpResponse
 	)
 
 	conf = clientv3.Config{
 		Endpoints: []string{
 			"127.0.0.1:2379",
 		},
-		DialTimeout: 5*time.Second,
+		DialTimeout: 5 * time.Second,
 	}
 	// 创建客户端实例
 	if client, err = clientv3.New(conf); err != nil {

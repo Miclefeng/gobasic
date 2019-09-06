@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"go.etcd.io/etcd/clientv3"
-	"github.com/coreos/etcd/mvcc/mvccpb"
 	"context"
+	"fmt"
+	"github.com/coreos/etcd/mvcc/mvccpb"
+	"go.etcd.io/etcd/clientv3"
 	"time"
 )
 
@@ -15,21 +15,21 @@ import (
 
 func main() {
 	var (
-		conf clientv3.Config
-		client *clientv3.Client
-		kv clientv3.KV
+		conf    clientv3.Config
+		client  *clientv3.Client
+		kv      clientv3.KV
 		putResp *clientv3.PutResponse
 		getResp *clientv3.GetResponse
 		delResp *clientv3.DeleteResponse
-		kvpair *mvccpb.KeyValue
-		err error
+		kvpair  *mvccpb.KeyValue
+		err     error
 	)
 	// 客户端配置
 	conf = clientv3.Config{
 		Endpoints: []string{
 			"127.0.0.1:2379",
 		},
-		DialTimeout: 5*time.Second,
+		DialTimeout: 5 * time.Second,
 	}
 	// 建立一个客户端
 	if client, err = clientv3.New(conf); err != nil {

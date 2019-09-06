@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func addBinary(a string, b string) string {
 	length := 0
@@ -23,9 +26,12 @@ func addBinary(a string, b string) string {
 }
 
 func main() {
-	var a uint32
-	a = 1
+	//var a uint32
+	//a = 1
 	//b := "1"
 	//c := addBinary(a, b)
-	fmt.Println(a >> 1)
+	str := "3C2B8A1A952102E0";
+	int64str, err := strconv.ParseUint(str, 16, 64)
+	fmt.Println(int64str, err)
+	//fmt.Println(a >> 1)
 }
