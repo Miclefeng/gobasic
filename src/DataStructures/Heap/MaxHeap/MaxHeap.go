@@ -25,7 +25,7 @@ func init() {
 
 // 堆化一个数组
 func (mHeap *MaxHeap) Heapify(data []interface{}) {
-	array = &Array.Array{data,  len(data)}
+	array = &Array.Array{data, len(data)}
 	for i := mHeap.parent(len(data) - 1); i >= 0; i-- {
 		mHeap.shiftDown(i)
 	}

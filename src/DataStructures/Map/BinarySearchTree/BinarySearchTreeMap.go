@@ -85,7 +85,7 @@ func (bMap *BinarySearchTreeMap) Get(k interface{}) interface{} {
 	}
 }
 
-func (bMap *BinarySearchTreeMap) Set(k , v interface{}) {
+func (bMap *BinarySearchTreeMap) Set(k, v interface{}) {
 	node := bMap.getNode(bMap.root, k)
 	if nil == node {
 		errors.New(fmt.Sprintf("%v doesn't exist!", k))
@@ -161,7 +161,7 @@ func (bMap *BinarySearchTreeMap) remove(node *MapNode.TreeMapNode, k interface{}
 		// 删除节点的左子树为后继节点的左子树
 		successor.Left = node.Left
 		// 删除原节点关联关系
-		node.Right =  nil
+		node.Right = nil
 		node.Left = nil
 		return successor
 	}
