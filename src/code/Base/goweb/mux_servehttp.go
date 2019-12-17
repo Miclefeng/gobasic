@@ -1,5 +1,6 @@
-package main 
-import(
+package main
+
+import (
 	"fmt"
 	"net/http"
 )
@@ -7,20 +8,20 @@ import(
 // Go其实支持外部实现的路由器 ListenAndServe的第二个参数就是用以配置外部路由器的，它是一个Handler接口，即外部路由器只要实现了Handler接口就可以,我们可以在自己实现的路由器的ServHTTP里面实现自定义路由功能。
 type MyMux struct{}
 
-func (p *MyMux) ServeHTTP(w http.ResponseWriter,r *http.Request){
-	if r.URL.Path == "/"{
-		sayhelloName(w,r)
+func (p *MyMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "/" {
+		sayhelloName(w, r)
 		return
 	}
-	http.NotFound(w,r)
-	return 
+	http.NotFound(w, r)
+	return
 }
 
-func sayhelloName(w http.ResponseWriter,r *http.Request){
-	fmt.Fprintf(w,"Hello myroute!")
+func sayhelloName(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello myroute!")
 }
 
-func main(){
+func main() {
 	mux := &MyMux{}
-	http.ListenAndServe(":8080",mux)
+	http.ListenAndServe(":8080", mux)
 }
