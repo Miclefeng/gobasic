@@ -46,7 +46,7 @@ func main() {
 	)
 	// 建立连接
 	uri = "mongodb://127.0.0.1:27017"
-	clientAuth = options.Credential{Username: "root", Password: "example"}
+	clientAuth = options.Credential{Username: "root", Password: "useage"}
 	clientOption = options.Client().SetAuth(clientAuth).SetConnectTimeout(5 * time.Second)
 	if client, err = mongo.Connect(context.TODO(), uri, clientOption); err != nil {
 		fmt.Println(err)
@@ -58,7 +58,7 @@ func main() {
 	// 过滤条件
 	condition = &FindByJobName{JobName: "job10"}
 	// 分页设置
-	findOption = options.Find().SetSkip(0).SetLimit(10);
+	findOption = options.Find().SetSkip(0).SetLimit(10)
 	// 获取游标
 	if cursor, err = collection.Find(context.TODO(), condition, findOption); err != nil {
 		fmt.Println(err)

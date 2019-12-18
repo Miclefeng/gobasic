@@ -42,7 +42,7 @@ func main() {
 		docId        objectid.ObjectID
 	)
 	// 建立客户端连接
-	clientAuth = options.Credential{Username: "root", Password: "example"}
+	clientAuth = options.Credential{Username: "root", Password: "useage"}
 	clientOption = options.Client().SetAuth(clientAuth).SetConnectTimeout(5 * time.Second)
 	if client, err = mongo.Connect(context.TODO(), "mongodb://127.0.0.1:27017", clientOption); err != nil {
 		fmt.Println(err)

@@ -6,15 +6,15 @@ import (
 )
 
 func main() {
-	var str string = "This is an example of a string"
+	var str string = "This is an useage of a string"
 	fmt.Printf("T/F? Does the string '%s' have prefix %s? ", str, "Th")
 	fmt.Printf("%t\n", strings.HasPrefix(str, "Th"))
 
 	fmt.Printf("T/F? Does the string '%s' have suffix %s? ", str, "ing")
 	fmt.Printf("%t\n", strings.HasSuffix(str, "ing"))
 
-	fmt.Printf("T/F? Does the string '%s' have contains %s? ", str, "example")
-	fmt.Printf("%t\n", strings.Contains(str, "example"))
+	fmt.Printf("T/F? Does the string '%s' have contains %s? ", str, "useage")
+	fmt.Printf("%t\n", strings.Contains(str, "useage"))
 
 	// Index 返回字符串 str 在字符串 s 中的索引（str 的第一个字符的索引），-1 表示字符串 s 不包含字符串 str：
 	// strings.Index(s, str string) int
