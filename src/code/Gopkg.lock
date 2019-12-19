@@ -386,11 +386,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:634414cd43ed62a728aaf9b3e61fde85f012880f9b32b7d00678b6fd887ff9c1"
+  digest = "1:d2596218ce23d219199231ef6b5108ab3accc4fd1d63ba90ae465121eec44781"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "ac6580df4449443a05718fd7858c1f91ad5f8d20"
+  revision = "4a24b406529242041050cb1dec3e0e4c46a5f1b6"
 
 [[projects]]
   digest = "1:28deae5fe892797ff37a317b5bcda96d11d1c90dadd89f1337651df3bc4c586e"
@@ -450,7 +450,7 @@
     "internal/semver",
   ]
   pruneopts = "UT"
-  revision = "bbbf87ae2631aa60967a6f08a812ff7fd6859d00"
+  revision = "979b82bfef62cbd5954bf1ec69c0fec5dbf2a1e0"
 
 [[projects]]
   branch = "master"
@@ -461,10 +461,11 @@
   revision = "b31c10ee225f87dbb9f5f878ead9d64f34f5cbbb"
 
 [[projects]]
-  digest = "1:2c33ba09d46f0b488007fff985c314fbca3f857fd39660e418cb356e75ca953d"
+  digest = "1:7bc116a2ccc363ff2d7df0d4fc3211254366dc4792d14685b0b4980becbed2f5"
   name = "google.golang.org/grpc"
   packages = [
     ".",
+    "attributes",
     "backoff",
     "balancer",
     "balancer/base",
@@ -503,8 +504,8 @@
     "tap",
   ]
   pruneopts = "UT"
-  revision = "1a3960e4bd028ac0cec0a2afd27d7d8e67c11514"
-  version = "v1.25.1"
+  revision = "f5b0812e6fe574d90da76b205e9eb51f6ddb1919"
+  version = "v1.26.0"
 
 [[projects]]
   digest = "1:c902038ee2d6f964d3b9f2c718126571410c5d81251cbab9fe58abd37803513c"
