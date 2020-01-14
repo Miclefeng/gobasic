@@ -1,10 +1,10 @@
 package main
 
 import (
-	"DataStructures/Set/BinarySearchTreeTSet"
-	"DataStructures/Set/FileOperation"
-	"DataStructures/Set/LinkedListSet"
-	"DataStructures/Set/Set"
+	"code/DataStructures/Set/BinarySearchTreeTSet"
+	"code/DataStructures/Set/FileOperation"
+	"code/DataStructures/Set/LinkedListSet"
+	"code/DataStructures/Set/Set"
 	"fmt"
 	"time"
 )
@@ -59,7 +59,7 @@ func main() {
 	lSet := LinkedListSet.Instance
 	set = lSet
 	lTime := testSet(set, fileName)
-	fmt.Println("LinkedList Set:", lTime, "s")
+	fmt.Println("LinkedLists Set:", lTime, "s")
 
 	fmt.Println("----------------------------------")
 

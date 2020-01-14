@@ -1,10 +1,10 @@
 package main
 
 import (
-	"DataStructures/Map/BinarySearchTree"
-	"DataStructures/Map/LinkedListMap"
-	"DataStructures/Map/Map"
-	"DataStructures/Set/FileOperation"
+	"code/DataStructures/Map/BinarySearchTree"
+	"code/DataStructures/Map/LinkedListMap"
+	"code/DataStructures/Map/Map"
+	"code/DataStructures/Set/FileOperation"
 	"fmt"
 	"time"
 )
@@ -64,7 +64,7 @@ func main()  {
 	lMap := LinkedListMap.Instance
 	uMap = lMap
 	lTime := testMap(uMap, filename)
-	fmt.Println("LinkedList Map:", lTime, "s")
+	fmt.Println("LinkedLists Map:", lTime, "s")
 }
 
 func testMap(uMap Map.Map, filename string) float64 {

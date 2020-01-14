@@ -1,8 +1,8 @@
 package BinarySearchTreeTSet
 
 import (
-	_ "DataStructures/Set/Set"
-	"DataStructures/Tree/BinarySearchTree"
+	_ "code/DataStructures/Set/Set"
+	"code/DataStructures/Tree/BinarySearchTree"
 )
 
 /**

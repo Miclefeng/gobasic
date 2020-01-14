@@ -1,8 +1,8 @@
 package LinkedListMap
 
 import (
-	_ "DataStructures/Map/Map"
-	"DataStructures/Map/NodeMap"
+	_ "code/DataStructures/Map/Map"
+	"code/DataStructures/Map/NodeMap"
 	"fmt"
 	"github.com/kataras/iris/core/errors"
 )

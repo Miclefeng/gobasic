@@ -1,6 +1,6 @@
 package NodeQueue
 
-import "DataStructures/Tree/Node"
+import "code/DataStructures/Tree/Node"
 
 /**
  * Author : MicleFengzss@gmail.com

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"DataStructures/LinkedList/LinkedList"
+	"code/DataStructures/LinkedLists/LinkedList"
 	"fmt"
 )
 

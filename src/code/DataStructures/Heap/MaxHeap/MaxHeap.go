@@ -1,8 +1,8 @@
 package MaxHeap
 
 import (
-	"DataStructures/Array"
-	"DataStructures/CompareTo"
+	"code/DataStructures/Array"
+	"code/DataStructures/CompareTo"
 	"fmt"
 )
 

@@ -1,8 +1,8 @@
 package PriorityQueue
 
 import (
-	"DataStructures/Heap/MaxHeap"
-	_ "DataStructures/Queue"
+	"code/DataStructures/Heap/MaxHeap"
+	_ "code/DataStructures/Queue"
 )
 
 /**

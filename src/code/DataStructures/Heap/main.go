@@ -1,7 +1,7 @@
 package main
 
 import (
-	"DataStructures/Heap/MaxHeap"
+	"code/DataStructures/Heap/MaxHeap"
 	"fmt"
 	"math/rand"
 	"time"

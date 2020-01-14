@@ -1,10 +1,10 @@
 package BinarySearchTree
 
 import (
-	"DataStructures/CompareTo"
-	"DataStructures/Tree/Node"
-	"DataStructures/Tree/NodeQueue"
-	"DataStructures/Tree/NodeStack"
+	"code/DataStructures/CompareTo"
+	"code/DataStructures/Tree/Node"
+	"code/DataStructures/Tree/NodeQueue"
+	"code/DataStructures/Tree/NodeStack"
 	"fmt"
 )
 

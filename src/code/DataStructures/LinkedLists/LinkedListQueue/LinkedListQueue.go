@@ -1,7 +1,7 @@
 package LinkedListQueue
 
 import (
-	"DataStructures/LinkedList/Node"
+	"code/DataStructures/LinkedLists/Node"
 	"fmt"
 )
 

@@ -32,6 +32,7 @@ func (arr *Array) Add(index int, e interface{}) {
 		arr.reSize(2 * cap(arr.Data))
 	}
 
+	// 将添加index位置后的元素后移一位
 	for i := arr.Size - 1; i >= index; i-- {
 		arr.Data[i+1] = arr.Data[i]
 	}
@@ -57,15 +58,18 @@ func (arr *Array) Remove(index int) interface{} {
 	res := arr.Data[index]
 	oldData := make([]interface{}, cap(arr.Data))
 	copy(oldData, arr.Data[:])
+
 	for i := index + 1; i < arr.Size; i++ {
 		arr.Data[i-1] = oldData[i]
 	}
 	arr.Size--
 	arr.Data[arr.Size] = nil
+
 	// 数组元素个数为当前容量的1/4自动缩容，缩容为当前容量的一半，防止复杂度震荡
 	if arr.Size == cap(arr.Data)/4 && cap(arr.Data)/2 != 0 {
 		arr.reSize(cap(arr.Data) / 2)
 	}
+
 	return res
 }
 

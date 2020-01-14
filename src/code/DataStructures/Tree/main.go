@@ -1,7 +1,7 @@
 package main
 
 import (
-	"DataStructures/Tree/BinarySearchTree"
+	"code/DataStructures/Tree/BinarySearchTree"
 	"fmt"
 )
 

@@ -1,9 +1,9 @@
 package BinarySearchTreeMap
 
 import (
-	"DataStructures/CompareTo"
-	_ "DataStructures/Map/Map"
-	"DataStructures/Map/NodeMap"
+	"code/DataStructures/CompareTo"
+	_ "code/DataStructures/Map/Map"
+	"code/DataStructures/Map/NodeMap"
 	"fmt"
 	"github.com/kataras/iris/core/errors"
 )

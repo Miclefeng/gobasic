@@ -1,7 +1,7 @@
 package LoopQueue
 
 import (
-	_ "DataStructures/Queue"
+	_ "code/DataStructures/Queue"
 	"fmt"
 	"strconv"
 	"strings"

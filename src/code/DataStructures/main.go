@@ -1,10 +1,10 @@
 package main
 
 import (
-	"DataStructures/Array"
-	"DataStructures/Queue/ArrayQueue"
-	"DataStructures/Queue/LoopQueue"
-	"DataStructures/Stack"
+	"code/DataStructures/Array"
+	"code/DataStructures/Queue/ArrayQueue"
+	"code/DataStructures/Queue/LoopQueue"
+	"code/DataStructures/Stack"
 	"fmt"
 )
 

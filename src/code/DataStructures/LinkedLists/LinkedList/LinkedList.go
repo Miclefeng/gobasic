@@ -1,7 +1,7 @@
 package LinkedList
 
 import (
-	"DataStructures/LinkedList/Node"
+	"code/DataStructures/LinkedLists/Node"
 )
 
 /**
@@ -37,7 +37,7 @@ func (list *LinkedList) Add(index int, e interface{}) {
 		panic("Get failed. Illegal index.")
 	}
 
-	prev := list.dummyHead
+	prev := list.dummyHead // 虚拟头节点，解决链表为空时的单独处理
 	for i := 0; i < index; i++ {
 		prev = prev.Next
 	}

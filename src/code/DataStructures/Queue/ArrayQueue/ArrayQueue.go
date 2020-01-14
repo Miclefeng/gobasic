@@ -1,8 +1,8 @@
 package ArrayQueue
 
 import (
-	_ "DataStructures/Queue"
-	"DataStructures/Array"
+	_ "code/DataStructures/Queue"
+	"code/DataStructures/Array"
 	"fmt"
 	"strconv"
 	"strings"
