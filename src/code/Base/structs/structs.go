@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 )
@@ -16,6 +17,20 @@ type TagType struct {
 	answer bool   `tag:"An important answer"`
 	name string `tag:"The name of the thing"`
 	price int    `tag:"How much there are"`
+}
+
+type IT struct {
+	Company  string
+	Subjects []string
+	IsOk     bool
+	Price    float64
+}
+
+type University struct {
+	Name string `json:"-"` //大学名称
+	IsFullTime bool     `json:"isFullTime,string"` //是否全日制
+	Subjects   []string `json:"subjects"`          //主要学科
+	Tuition    float64  `json:"price, omitempty"`  //学费
 }
 
 func main ()  {
@@ -63,4 +78,18 @@ func main ()  {
 		fmt.Printf("%v\n", ixField.Tag.Get("tag"))
 	}
 
+	fmt.Println()
+	t1 := IT{"tencent", []string{"develop", "unittest", "production", "operative"}, false, 12000.0}
+	b, err := json.Marshal(t1)
+	if err != nil {
+		fmt.Println("json err:", err)
+	}
+	fmt.Println(string(b))
+	//案例2： json.MarshalIndent的使用,用缩进对输出进行格式化,效果更加json化
+	t2 := IT{"HuaWei", []string{"develop", "unittest", "production", "operative"}, false, 13000.0}
+	b2, err := json.MarshalIndent(t2, "", "   ")
+	if err != nil {
+		fmt.Println("json err:", err)
+	}
+	fmt.Println(string(b2))
 }
