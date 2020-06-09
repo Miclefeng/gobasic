@@ -51,7 +51,7 @@ func main()  {
 	//fmt.Println("Frequency of PRIDE: ", lMap.Get("pride"))
 	//fmt.Println("Frequency of PREJUDICE: ", lMap.Get("prejudice"))
 
-	filename := "src/DataStructures/Set/pride-and-prejudice.txt"
+	filename := "src/code/DataStructures/Set/pride-and-prejudice.txt"
 	var uMap Map.Map
 
 	bMap := BinarySearchTreeMap.Instance
@@ -69,6 +69,7 @@ func main()  {
 
 func testMap(uMap Map.Map, filename string) float64 {
 	sTime := time.Now().UnixNano()
+	fmt.Println("FileName: ", filename)
 	words := FileOperation.ReadFile(filename)
 	fmt.Println("Total words: ", len(words))
 	for _, v  := range words {

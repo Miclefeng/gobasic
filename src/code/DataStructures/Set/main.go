@@ -55,7 +55,7 @@ func main() {
 
 	var set Set.Set
 
-	fileName := "src/DataStructures/Set/pride-and-prejudice.txt"
+	fileName := "src/code/DataStructures/Set/pride-and-prejudice.txt"
 	lSet := LinkedListSet.Instance
 	set = lSet
 	lTime := testSet(set, fileName)

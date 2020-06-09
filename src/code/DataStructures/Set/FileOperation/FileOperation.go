@@ -17,7 +17,7 @@ func ReadFile(file string) []string {
 	defer inputFile.Close()
 
 	if inputError != nil {
-		fmt.Printf("An error occurred on opening the file :\n" + "Does the fiel exist?\n" + "Have you got acces to it?\n")
+		fmt.Printf("An error occurred on opening the file :\n" + "Does the file exist?\n" + "Have you got acces to it?\n")
 		return nil
 	}
 	words := make([]string, 0)

@@ -1,7 +1,7 @@
 package LinkedListSet
 
 import (
-	"code/DataStructures/LinkedList/LinkedList"
+	"code/DataStructures/LinkedLists/LinkedList"
 	_ "code/DataStructures/Set/Set"
 )
 
