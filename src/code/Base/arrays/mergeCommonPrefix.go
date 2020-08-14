@@ -9,7 +9,7 @@ func longestCommonPrefix(strs []string) string {
 	if len(strs) == 0 {
 		return ""
 	}
-	return mergeCommonPrefix(strs, 0, len(strs) - 1)
+	return mergeCommonPrefix(strs, 0, len(strs)-1)
 }
 
 func mergeCommonPrefix(strs []string, l, r int) string {
@@ -23,7 +23,7 @@ func mergeCommonPrefix(strs []string, l, r int) string {
 	return mergeCommon(left, right)
 }
 
-func mergeCommon(left , right string) string {
+func mergeCommon(left, right string) string {
 	min := math.Min(float64(len(left)), float64(len(right)))
 	for i := 0; i < int(min); i++ {
 		if left[i] != right[i] {
@@ -33,8 +33,8 @@ func mergeCommon(left , right string) string {
 	return left[0:int(min)]
 }
 
-func main()  {
-	arr := []string{"flower","flow","flight"}
+func main() {
+	arr := []string{"flower", "flow", "flight", "floor"}
 	str := longestCommonPrefix(arr)
 	fmt.Println(str)
 }

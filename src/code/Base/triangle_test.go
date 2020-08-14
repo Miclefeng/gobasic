@@ -1,8 +1,8 @@
 package main
 
 import (
-	"testing"
 	"math"
+	"testing"
 )
 
 func TestTriangle(t *testing.T) {

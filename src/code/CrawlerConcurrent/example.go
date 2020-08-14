@@ -19,18 +19,19 @@ import (
  * Time : 2018/11/18 上午11:35
  */
 const REGEXP = `<a[^>]+href="(http://www.zhenai.com/zhenghun/[\w]+)"[^>]*>([^<]+)</a>`
- var Url = "http://www.zhenai.com/zhenghun"
+
+var Url = "http://www.zhenai.com/zhenghun"
 
 func main() {
 	var (
-		err error
-		resp *http.Response
-		result []byte
+		err            error
+		resp           *http.Response
+		result         []byte
 		encodingReader *transform.Reader
-		re *regexp.Regexp
-		all [][][]byte
+		re             *regexp.Regexp
+		all            [][][]byte
 	)
-
+	// 获取 url response
 	if resp, err = http.Get(Url); err != nil {
 		fmt.Println(err)
 		return
@@ -49,26 +50,26 @@ func main() {
 		return
 	}
 
-	re, _ = regexp.Compile(REGEXP);
+	// 正则匹配出 url
+	re, _ = regexp.Compile(REGEXP)
 	all = re.FindAllSubmatch(result, -1)
+
 	for i, v := range all {
 		fmt.Println(i, " => URL: ", string(v[1]), ", City: ", string(v[2]))
 	}
-	//fmt.Printf("%s\n", result)
 }
 
- // 判断页面内容的编码格式
+// 自动检测页面内容的编码格式
 func determineEncoding(r io.Reader) (e encoding.Encoding) {
 	var (
 		bytes []byte
-		err error
+		err   error
 	)
 
 	// 组装1024个字节的[]byte
 	if bytes, err = bufio.NewReader(r).Peek(1024); err != nil {
-		log.Fatalf("bufio peek err: %v\n", err);
-		e = unicode.UTF8
-		return e
+		log.Fatalf("bufio peek err: %v\n", err)
+		return unicode.UTF8
 	}
 
 	// 读取1024个字节判断内容编码

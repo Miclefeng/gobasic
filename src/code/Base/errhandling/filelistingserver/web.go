@@ -1,9 +1,10 @@
 package main
 
 import (
+	"code/Base/errhandling/filelistingserver/filelisting"
+	"fmt"
 	"log"
 	"net/http"
-	"miclefeng/learngo/errhandling/filelistingserver/filelisting"
 	"os"
 )
 
@@ -14,7 +15,7 @@ type appHandler func(writer http.ResponseWriter, request *http.Request) error
 func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		defer func() {
-			if r := recover(); r != nil {// recover 仅在defer中调用，获取 panic 的值			log.Printf("Panic : %v", r)
+			if r := recover(); r != nil { // recover 仅在defer中调用，获取 panic 的值			log.Printf("Panic : %v", r)
 				http.Error(writer, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 			}
 		}()
@@ -22,8 +23,9 @@ func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 		err := handler(writer, request)
 
 		if err != nil {
+			fmt.Println(err)
 			logger := log.New(os.Stdout, "Warn : ", log.Lshortfile)
-			logger.Printf("Error handling request: %s", err.Error());
+			logger.Printf("Error handling request: %s", err.Error())
 
 			if userErr, ok := err.(userError); ok {
 				http.Error(writer, userErr.Message(), http.StatusBadRequest)

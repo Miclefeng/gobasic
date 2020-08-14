@@ -28,7 +28,7 @@ func main()  {
 	go watchs(valueCtx)
 
 	time.Sleep(10*time.Second)
-	cancel()
 	fmt.Println(time.Now().Format(timeLayouts), "监控退出...")
+	cancel()
 	time.Sleep(1*time.Second)
 }

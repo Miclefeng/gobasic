@@ -17,20 +17,20 @@ func watch(ctx context.Context, name string) {
 				return
 			default:
 				fmt.Println(time.Now().Format(timeLayout), name, "监控中...")
-				time.Sleep(2*time.Second)
+				time.Sleep(2 * time.Second)
 			}
 		}
 	}(ctx, name)
 }
 
-func main()  {
+func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	go watch(ctx, "Task 1")
 	go watch(ctx, "Task 2")
 	go watch(ctx, "Task 3")
 
-	time.Sleep(10*time.Second)
+	time.Sleep(10 * time.Second)
 	cancel()
-	time.Sleep(1*time.Second)
+	time.Sleep(1 * time.Second)
 	fmt.Println(time.Now().Format(timeLayout), "所有监控退出...")
 }

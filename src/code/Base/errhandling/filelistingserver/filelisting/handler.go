@@ -1,13 +1,14 @@
 package filelisting
 
 import (
+	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
-	"io/ioutil"
 	"strings"
 )
 
-const prefix  = "/list/"
+const prefix = "/list/"
 
 type userError string
 
@@ -20,16 +21,19 @@ func (e userError) Message() string {
 }
 
 func HandleFileList(writer http.ResponseWriter, request *http.Request) error {
+
+	fmt.Println(strings.Index(request.URL.Path, prefix))
 	if strings.Index(request.URL.Path, prefix) != 0 {
 		return userError("Path must start with " + prefix)
 	}
 
 	path := request.URL.Path[len(prefix):] // /list/fib.txt, 去除 /list/
+	//fmt.Println(path, request.URL.Path)
 	//writer.Write([]byte(path))
 	//return nil
-
-	file, err := os.Open(path)
-
+	//fmt.Println(os.Getwd())
+	file, err := os.Open("src/code/resources/" + path)
+	//fmt.Println(err)
 	if err != nil {
 		//http.Error(writer, err.Error(), http.StatusInternalServerError)
 		return err
@@ -40,6 +44,6 @@ func HandleFileList(writer http.ResponseWriter, request *http.Request) error {
 	if err != nil {
 		return err
 	}
-	writer.Write(all)
+	_, _ = writer.Write(all)
 	return nil
 }
