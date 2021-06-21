@@ -7,16 +7,29 @@ import (
 
 func main() {
 	chanDemo()
-	bufferedChannel()
+	//bufferedChannel()
+	// channel close and range
+	//channelClose()
+}
+
+func work(i int, c chan int) {
+	//for {
+	// ok 判断发送的数据是否存在，发送者 close() 之后，接收者可以继续接收数据(空数据，定义的 chan 中类型的 0 值)
+	//	n, ok := <-c
+	//	if !ok {
+	//		break
+	//	}
+	//	fmt.Printf("Worker %d reveived: %d\n", i, n)
+	//}
+
+	for n := range c {
+		fmt.Printf("Worker %d reveived: %c\n", i, n)
+	}
 }
 
 func createWorker(i int) chan<- int {
 	c := make(chan int)
-	go func(c chan int) {
-		for {
-			fmt.Printf("Worked %d receive: %c\n", i, <-c)
-		}
-	}(c)
+	go work(i, c)
 	return c
 }
 
@@ -36,21 +49,17 @@ func chanDemo() {
 	time.Sleep(time.Millisecond)
 }
 
-func work(i int, c chan int) {
-	for {
-		n, ok := <-c
-		if !ok {
-			break
-		}
-		fmt.Printf("Worker %d reveived: %c\n", i, n)
-	}
-
-	//for n := range c {
-	//	fmt.Printf("Worker %d reveived: %c\n", i, n)
-	//}
+func bufferedChannel() {
+	c := make(chan int, 3)
+	go work(0, c)
+	c <- 'a'
+	c <- 'b'
+	c <- 'c'
+	c <- 'd'
+	time.Sleep(time.Millisecond)
 }
 
-func bufferedChannel() {
+func channelClose() {
 	c := make(chan int, 3)
 	go work(0, c)
 	c <- 'a'
